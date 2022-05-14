@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Tadhkirati Validator</string>
+    <string name="profile_details_string">Profile Details</string>
+    <string name="first_name_string">First name</string>
+    <string name="last_name_string">Last name</string>
+    <string name="phone_number_string">Phone number</string>
+    <string name="profile_picture_string">Profile Picture</string>
+    <string name="upload_image_string">Upload Image</string>
+    <string name="edit_profile_string">Edit Profile</string>
+    <string name="required_string">Required</string>
+    <string name="edit_password_string">Edit Password</string>
+    <string name="current_password_string">Current password</string>
+    <string name="new_password_string">New password</string>
+    <string name="confirm_new_password_string">Confirm new password</string>
+    <string name="submit_text">Submit</string>
+    <string name="profile_string">Profile</string>
+    <string name="tadhkirati_string">Tadhkirati</string>
+    <string name="my_travels_string">My Travels</string>
+    <string name="passenger_name_string">Passenger name:</string>
+    <string name="boarding_station_string">Boarding station:</string>
+    <string name="landing_station_string">Landing station:</string>
+    <string name="validate_string">Validate</string>
 </resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container_profile_details"
+    style="@style/ProfileCardViewComponentStyle"
+    app:cardCornerRadius="15dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat style="@style/ProfileComponentRootViewStyle">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/ProfileSectionHeaderImageViewStyle"
+                android:src="@drawable/ic_profile_details" />
+
+            <TextView
+                style="@style/ProfileSectionTitleTextViewStyle"
+                android:text="@string/profile_details_string" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View style="@style/ProfileVerticalDividerViewStyle" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/image_view_profile"
+            style="@style/ProfileDetailsImageFilterViewStyle"
+            app:roundPercent="1" />
+
+        <View style="@style/ProfileVerticalDividerViewStyle" />
+
+
+        <TextView
+            style="@style/ProfilePropertyNameTextViewStyle"
+            android:text="@string/first_name_string" />
+
+        <TextView
+
+            android:id="@+id/text_view_first_name"
+            style="@style/ProfilePropertyValueTextViewStyle"
+            android:text="@string/first_name_string" />
+
+
+        <TextView
+            style="@style/ProfilePropertyNameTextViewStyle"
+            android:text="@string/last_name_string" />
+
+        <TextView
+            android:id="@+id/text_view_last_name"
+            style="@style/ProfilePropertyValueTextViewStyle"
+            android:text="@string/last_name_string" />
+
+
+        <TextView
+            style="@style/ProfilePropertyNameTextViewStyle"
+            android:text="@string/phone_number_string" />
+
+        <TextView
+            android:id="@+id/text_view_phone_number"
+            style="@style/ProfilePropertyValueTextViewStyle"
+            android:text="@string/phone_number_string" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

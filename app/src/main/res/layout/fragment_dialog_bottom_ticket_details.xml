@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/fragment_head_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_bottom_fragment_header"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/view_draggable"
+            android:layout_width="100dp"
+            android:layout_height="7dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/background_draggable_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_ticket_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text="ticket number for "
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
+        android:id="@+id/text_view_passenger_name"
+        android:text="@string/passenger_name_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_head_container" />
+
+    <TextView
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:id="@+id/text_view_passenger_name_value"
+        app:layout_constraintStart_toEndOf="@id/text_view_passenger_name"
+        app:layout_constraintTop_toTopOf="@id/text_view_passenger_name"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
+        android:text="Ilyas Benhammadi" />
+
+    <TextView
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
+        android:id="@+id/text_view_boarding_station"
+        android:text="@string/boarding_station_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_passenger_name" />
+
+    <TextView
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:id="@+id/text_view_boarding_station_value"
+        app:layout_constraintStart_toEndOf="@id/text_view_boarding_station"
+        app:layout_constraintTop_toTopOf="@id/text_view_boarding_station"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_boarding_station"
+        android:text="SOGRAL" />
+
+    <TextView
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
+        android:id="@+id/text_view_landing_station"
+        android:text="@string/landing_station_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_boarding_station" />
+
+    <TextView
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:id="@+id/text_view_landing_station_value"
+        app:layout_constraintStart_toEndOf="@id/text_view_landing_station"
+        app:layout_constraintTop_toTopOf="@id/text_view_landing_station"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_landing_station"
+        android:text="Paris" />
+
+    <Button
+        android:id="@+id/button_validate_ticket"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/validate_string"
+        style="@style/ProfileActionButtonStyle"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nunito_sans_bold"
+        app:layout_constraintTop_toBottomOf="@id/text_view_landing_station"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ProfileCardViewComponentStyle"
+    app:cardCornerRadius="15dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        style="@style/ProfileComponentRootViewStyle">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/ProfileSectionHeaderImageViewStyle"
+                android:src="@drawable/ic_edit_profile" />
+
+            <TextView
+                style="@style/ProfileSectionTitleTextViewStyle"
+                android:text="@string/edit_profile_string" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View style="@style/ProfileVerticalDividerViewStyle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/text_view_profile_picture"
+                style="@style/ProfilePropertyNameTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_picture_string"
+                app:layout_constraintBottom_toTopOf="@id/button_upload_profile_picture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_upload_profile_picture"
+                style="@style/ProfileActionButtonStyle"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:text="@string/upload_image_string"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/text_view_profile_picture"
+                app:layout_constraintTop_toBottomOf="@id/text_view_profile_picture" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/image_view_uploaded_profile_picture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/blue_action"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:roundPercent="1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <TextView
+            style="@style/ProfilePropertyNameTextViewStyle"
+            android:text="@string/first_name_string" />
+
+        <EditText
+            android:id="@+id/edit_text_first_name"
+            style="@style/ProfilePropertyValueEditTextStyle"
+            android:inputType="textPersonName"
+            android:text="@string/first_name_string" />
+
+        <TextView
+            android:id="@+id/text_view_first_name_required"
+            style="@style/ProfilePropertyRequiredTextViewStyle"
+            android:text="@string/required_string" />
+
+        <TextView
+            style="@style/ProfilePropertyNameTextViewStyle"
+            android:text="@string/last_name_string" />
+
+        <EditText
+            android:id="@+id/edit_text_last_name"
+            style="@style/ProfilePropertyValueEditTextStyle"
+            android:inputType="textPersonName"
+            android:text="@string/last_name_string" />
+
+        <TextView
+            android:id="@+id/text_view_last_name_required"
+            style="@style/ProfilePropertyRequiredTextViewStyle"
+            android:text="@string/required_string" />
+
+        <TextView
+            style="@style/ProfilePropertyNameTextViewStyle"
+            android:text="@string/phone_number_string" />
+
+        <EditText
+            android:id="@+id/edit_text_phone_number"
+            style="@style/ProfilePropertyValueEditTextStyle"
+            android:inputType="phone"
+            android:text="@string/phone_number_string" />
+
+        <TextView
+            android:id="@+id/text_view_phone_number_required"
+            style="@style/ProfilePropertyRequiredTextViewStyle"
+            android:text="@string/required_string" />
+
+        <View style="@style/ProfileVerticalDividerViewStyle" />
+
+        <Button
+            android:id="@+id/button_submit_edit_profile"
+            style="@style/ProfileActionButtonStyle"
+            android:text="@string/submit_text"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>
