@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackground">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/grey_border" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0"
+            android:src="@drawable/ic_train" />
+
+        <TextView
+            android:id="@+id/text_view_travel_item_boarding_station"
+            style="@style/ItemViewTextViewStyle"
+            android:text="Departure Station" />
+
+        <TextView
+            android:id="@+id/text_view_travel_item_boarding_station_name"
+            style="@style/ItemViewTextViewStyle"
+            android:text="Arrival station" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/grey_border" />
+</androidx.appcompat.widget.LinearLayoutCompat>

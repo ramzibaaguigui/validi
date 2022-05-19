@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     
     <color name="blue_action">#3A7BD5</color>
+    <color name="blue_action_disabled">#803A7BD5</color>
+
     <color name="grey_border">#B1B8CB</color>
     <color name="white_grey">#E6E8EF</color>
     <color name="purple">#725CFF</color>

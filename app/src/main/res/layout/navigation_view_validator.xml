@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/image_filter_view_app_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/black_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:roundPercent="1" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/image_button_close_drawer"
+        android:src="@drawable/ic_close"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_filter_view_app_icon"
+        app:layout_constraintBottom_toBottomOf="@id/image_filter_view_app_icon"
+        android:layout_marginEnd="20dp" />
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/nunito_sans_extrabold"
+        android:text="@string/tadhkirati_string"
+        android:textColor="@color/black_text"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_filter_view_app_icon"
+        app:layout_constraintStart_toEndOf="@id/image_filter_view_app_icon"
+        app:layout_constraintTop_toTopOf="@id/image_filter_view_app_icon" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:backgroundTint="@color/red"
+        android:id="@+id/container_profile_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="30dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/image_filter_view_app_icon"
+        app:layout_constraintTop_toBottomOf="@id/image_filter_view_app_icon">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_edit_profile"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/ValidatorNavigationViewSelectTextViewStyle"
+            android:text="@string/profile_string"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/container_travels_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/image_filter_view_app_icon"
+        app:layout_constraintTop_toBottomOf="@id/container_profile_select">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_travels"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/ValidatorNavigationViewSelectTextViewStyle"
+            android:text="@string/my_travels_string" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/container_code_scanner_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/image_filter_view_app_icon"
+        app:layout_constraintTop_toBottomOf="@id/container_travels_select">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_qr_code"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/ValidatorNavigationViewSelectTextViewStyle"
+            android:text="@string/qr_code_scanner_string" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

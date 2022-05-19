@@ -4,7 +4,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container_profile_details"
-    style="@style/ProfileCardViewComponentStyle"
+    style="@style/ValidatorCardViewComponentStyle"
     app:cardCornerRadius="15dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat style="@style/ProfileComponentRootViewStyle">
@@ -23,14 +23,14 @@
                 android:text="@string/profile_details_string" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <View style="@style/ProfileVerticalDividerViewStyle" />
+        <View style="@style/ValidatorVerticalDividerViewStyle" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/image_view_profile"
             style="@style/ProfileDetailsImageFilterViewStyle"
             app:roundPercent="1" />
 
-        <View style="@style/ProfileVerticalDividerViewStyle" />
+        <View style="@style/ValidatorVerticalDividerViewStyle" />
 
 
         <TextView

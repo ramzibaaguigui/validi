@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/text_view_station_travel_time"
+        android:text="8:00pm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_view_station_travel_price"
+        app:layout_constraintTop_toTopOf="@id/view_station_circle"
+        style="@style/DepartureStationItemViewTopTextViewStyle" />
+
+    <TextView
+        android:id="@+id/text_view_station_travel_price"
+        android:text="200"
+        app:layout_constraintBottom_toBottomOf="@id/view_station_circle"
+        app:layout_constraintEnd_toEndOf="@id/text_view_station_travel_time"
+        app:layout_constraintTop_toBottomOf="@id/text_view_station_travel_time"
+        style="@style/DepartureStationItemBottomTextViewStyle" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_coin"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_station_travel_price"
+        app:layout_constraintEnd_toStartOf="@id/text_view_station_travel_price"
+        app:layout_constraintTop_toTopOf="@id/text_view_station_travel_price" />
+
+    <View
+        android:layout_marginTop="2dp"
+        android:id="@+id/view_station_circle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="23dp"
+        android:background="@drawable/background_station_circle"
+        app:layout_constraintBottom_toTopOf="@id/view_linker_bottom"
+        app:layout_constraintEnd_toStartOf="@id/text_view_location_name"
+        app:layout_constraintStart_toEndOf="@id/text_view_station_travel_time"
+        app:layout_constraintTop_toBottomOf="@id/view_linker_top" />
+
+    <TextView
+        style="@style/DepartureStationItemViewTopTextViewStyle"
+        android:layout_marginStart="23dp"
+        android:id="@+id/text_view_location_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIDI BEL ABBES"
+        app:layout_constraintBottom_toTopOf="@id/text_view_station_name"
+        app:layout_constraintStart_toEndOf="@id/view_station_circle"
+        app:layout_constraintTop_toTopOf="@id/view_station_circle" />
+
+    <TextView
+        style="@style/DepartureStationItemBottomTextViewStyle"
+        android:id="@+id/text_view_station_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SOGRAL"
+        app:layout_constraintBottom_toBottomOf="@id/view_station_circle"
+        app:layout_constraintStart_toStartOf="@id/text_view_location_name"
+        app:layout_constraintTop_toBottomOf="@id/text_view_location_name" />
+
+    <View
+        android:id="@+id/view_linker_top"
+        android:layout_width="4dp"
+        android:layout_height="15dp"
+        android:background="@color/blue_action"
+        app:layout_constraintStart_toStartOf="@id/view_station_circle"
+        app:layout_constraintEnd_toEndOf="@id/view_station_circle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_marginTop="2dp"
+        android:id="@+id/view_linker_bottom"
+        android:layout_width="4dp"
+        android:layout_height="15dp"
+        android:background="@color/blue_action"
+        app:layout_constraintStart_toStartOf="@id/view_station_circle"
+        app:layout_constraintEnd_toEndOf="@id/view_station_circle"
+        app:layout_constraintTop_toBottomOf="@id/view_station_circle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

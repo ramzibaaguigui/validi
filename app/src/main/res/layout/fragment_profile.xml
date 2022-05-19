@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_grey"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <include layout="@layout/fragment_profile_details" />
+
+        <include layout="@layout/fragment_edit_profile" />
+
+        <include layout="@layout/fragment_edit_password" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
+
+

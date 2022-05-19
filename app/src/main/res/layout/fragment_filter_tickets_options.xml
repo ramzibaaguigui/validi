@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <CheckBox
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_validated_string"
+        android:textSize="18sp"
+        android:fontFamily="@font/nunito_sans_extrabold"
+        app:layout_constraintEnd_toStartOf="@id/checkbox_show_non_validated"
+        android:id="@+id/checkbox_show_validated" />
+
+    <CheckBox
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/checkbox_show_validated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_validated_string"
+        android:textSize="18sp"
+        android:fontFamily="@font/nunito_sans_extrabold"
+        android:id="@+id/checkbox_show_non_validated" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

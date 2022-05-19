@@ -34,62 +34,124 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:id="@+id/text_view_passenger_name"
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/passenger_name_string"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_head_container" />
 
     <TextView
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:id="@+id/text_view_passenger_name_value"
-        app:layout_constraintStart_toEndOf="@id/text_view_passenger_name"
-        app:layout_constraintTop_toTopOf="@id/text_view_passenger_name"
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:text="Ilyas Benhammadi"
         app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
-        android:text="Ilyas Benhammadi" />
+        app:layout_constraintStart_toEndOf="@id/text_view_passenger_name"
+        app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
 
     <TextView
+        android:id="@+id/text_view_travel_item_boarding_station"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:id="@+id/text_view_boarding_station"
         android:text="@string/boarding_station_string"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_passenger_name" />
 
     <TextView
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:id="@+id/text_view_boarding_station_value"
-        app:layout_constraintStart_toEndOf="@id/text_view_boarding_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_boarding_station"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_boarding_station"
-        android:text="SOGRAL" />
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:text="SOGRAL"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_item_boarding_station"
+        app:layout_constraintStart_toEndOf="@id/text_view_travel_item_boarding_station"
+        app:layout_constraintTop_toTopOf="@id/text_view_travel_item_boarding_station" />
 
     <TextView
+        android:id="@+id/text_view_ticket_boarding_station_name"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:id="@+id/text_view_landing_station"
         android:text="@string/landing_station_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_boarding_station" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_travel_item_boarding_station" />
 
     <TextView
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:id="@+id/text_view_landing_station_value"
-        app:layout_constraintStart_toEndOf="@id/text_view_landing_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_landing_station"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_landing_station"
-        android:text="Paris" />
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:text="Paris"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_ticket_boarding_station_name"
+        app:layout_constraintStart_toEndOf="@id/text_view_ticket_boarding_station_name"
+        app:layout_constraintTop_toTopOf="@id/text_view_ticket_boarding_station_name" />
+
+    <TextView
+        android:id="@+id/text_view_travel_class"
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
+        android:text="@string/travel_class_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_ticket_boarding_station_name" />
+
+    <TextView
+        android:id="@+id/text_view_travel_class_value"
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:text="Paris"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_class"
+        app:layout_constraintStart_toEndOf="@id/text_view_travel_class"
+        app:layout_constraintTop_toTopOf="@id/text_view_travel_class" />
+
+    <TextView
+        android:id="@+id/text_view_ticket_is_validated"
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
+        android:text="@string/Validated_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_travel_class" />
+
+    <TextView
+        android:id="@+id/text_view_ticket_is_validated_value"
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:text="Paris"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_ticket_is_validated"
+        app:layout_constraintStart_toEndOf="@id/text_view_ticket_is_validated"
+        app:layout_constraintTop_toTopOf="@id/text_view_ticket_is_validated" />
+
+
+    <TextView
+        android:id="@+id/text_view_payment_method"
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
+        android:text="@string/payment_method_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_ticket_is_validated" />
+
+    <TextView
+        android:id="@+id/text_view_payment_method_value"
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:text="Paris"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_payment_method"
+        app:layout_constraintStart_toEndOf="@id/text_view_payment_method"
+        app:layout_constraintTop_toTopOf="@id/text_view_payment_method" />
+
+
+    <TextView
+        android:id="@+id/text_view_ticket_price"
+        style="@style/TicketFragmentPropertyNameTextViewStyle"
+        android:text="@string/price_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_payment_method" />
+
+    <TextView
+        android:id="@+id/text_view_ticket_price_value"
+        style="@style/TicketFragmentPropertyValueTextViewStyle"
+        android:text="Paris"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_ticket_price"
+        app:layout_constraintStart_toEndOf="@id/text_view_ticket_price"
+        app:layout_constraintTop_toTopOf="@id/text_view_ticket_price" />
 
     <Button
         android:id="@+id/button_validate_ticket"
+        style="@style/ProfileActionButtonStyle"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:fontFamily="@font/nunito_sans_bold"
         android:text="@string/validate_string"
-        style="@style/ProfileActionButtonStyle"
         android:textSize="21sp"
         android:textStyle="bold"
-        android:fontFamily="@font/nunito_sans_bold"
-        app:layout_constraintTop_toBottomOf="@id/text_view_landing_station"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_ticket_price" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

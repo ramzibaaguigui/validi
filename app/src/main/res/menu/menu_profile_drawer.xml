@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:shownIn="navigation_view">
 
-    <item
-        android:id="@+id/menu_item_profile"
-        android:icon="@drawable/ic_edit_profile"
-        android:iconTint="@color/white"
-        android:title="@string/profile_string" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_item_profile"
+            android:icon="@drawable/ic_edit_profile"
+            android:title="@string/profile_string" />
+        <item
+            android:id="@+id/menu_item_travels"
+            android:icon="@drawable/ic_travels"
+            android:title="@string/my_travels_string" />
 
-    <item
-        android:id="@+id/menu_item_travels"
-        android:icon="@drawable/ic_travels"
-        android:title="@string/my_travels_string" />
-
-    <item
-        android:id="@+id/menu_item_qr_code"
-        android:icon="@drawable/ic_qr_code"
-        android:title="Qr Code Scanner" />
-
-
+        <item
+            android:id="@+id/menu_item_qr_code"
+            android:icon="@drawable/ic_qr_code"
+            android:title="Qr Code Scanner" />
+    </group>
 </menu>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ValidatorCardViewComponentStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view_travel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/nunito_sans_extrabold"
+            android:text="Tickets for travel"
+            android:textColor="@color/blue_action"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/image_button_search_tickets"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/background_button_search"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_travel_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_travel_title" />
+
+        <View
+            android:id="@+id/divider_top"
+            style="@style/ValidatorVerticalDividerViewStyle"
+            android:layout_height="3dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_button_search_tickets" />
+
+        <FrameLayout
+
+            android:id="@+id/filter_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider_top">
+        <include layout="@layout/fragment_filter_tickets_options" />
+
+        </FrameLayout>
+
+
+
+        <View
+            android:id="@+id/horizontal_divider_first"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:background="@color/grey_border"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
+
+        <TextView
+            android:id="@+id/text_view_passenger_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/nunito_sans_extrabold"
+            android:text="@string/passenger_name_string"
+            android:textColor="@color/black_text"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/horizontal_divider_first"
+            app:layout_constraintTop_toBottomOf="@id/filter_container" />
+
+        <View
+            android:id="@+id/horizontal_divider_second"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:background="@color/grey_border"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/horizontal_divider_first"
+            app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
+
+        <TextView
+            android:id="@+id/text_view_boarding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/nunito_sans_extrabold"
+            android:text="@string/boarding_string"
+            android:textColor="@color/black_text"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/horizontal_divider_second"
+            app:layout_constraintTop_toBottomOf="@id/filter_container" />
+
+        <View
+            android:id="@+id/divider_bottom"
+            style="@style/ValidatorVerticalDividerViewStyle"
+            android:layout_height="3dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_passenger_name" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_tickets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_bottom" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

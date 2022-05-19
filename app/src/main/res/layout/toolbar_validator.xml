@@ -10,22 +10,22 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple"
-        android:alpha="0.5"/>
+        android:alpha="0.5"
+        android:background="@color/purple" />
 
     <ImageButton
-        android:id="@+id/image_button_open_navigation"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/image_button_show_drawer"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:background="@android:color/transparent"
         android:src="@drawable/ic_drawer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/text_view_selected_fragment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -34,16 +34,15 @@
         android:textColor="@color/black_text"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image_button_open_navigation"
+        app:layout_constraintStart_toEndOf="@id/image_button_show_drawer"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:id="@+id/image_button_logout"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:background="@android:color/transparent"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

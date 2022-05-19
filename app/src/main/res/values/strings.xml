@@ -14,10 +14,34 @@
     <string name="confirm_new_password_string">Confirm new password</string>
     <string name="submit_text">Submit</string>
     <string name="profile_string">Profile</string>
-    <string name="tadhkirati_string">Tadhkirati</string>
+    <string name="tadhkirati_string">Ticketus</string>
     <string name="my_travels_string">My Travels</string>
     <string name="passenger_name_string">Passenger name:</string>
     <string name="boarding_station_string">Boarding station:</string>
     <string name="landing_station_string">Landing station:</string>
-    <string name="validate_string">Validate</string>
+    <string name="validate_string">Validate:</string>
+    <string name="travel_class_string">Travel class:</string>
+    <string name="Validated_string">Validated:</string>
+    <string name="payment_method_string">Payment method:</string>
+    <string name="price_string">Price:</string>
+    <string name="welcome_to_string">Welcome to</string>
+    <string name="show_validated_string">Show validated</string>
+    <string name="show_non_validated_string">Show non-validated</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="qr_code_scanner_string">QR Code Scanner</string>
+    <string name="boarding_string">Boarding</string>
+    <string name="password_string">Password</string>
+    <string name="string_login">Login</string>
+    <string name="validate_your_credentials_string">Make sure that the password is valid</string>
+    <string name="string_update_user_error">There has been an error while trying to update user information</string>
 </resources>

@@ -55,7 +55,7 @@
         <item name="android:textSize">21sp</item>
     </style>
 
-    <style name="ProfileVerticalDividerViewStyle">
+    <style name="ValidatorVerticalDividerViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginTop">4dp</item>
@@ -90,7 +90,7 @@
         <item name="android:foreground">?android:selectableItemBackground</item>
     </style>
 
-    <style name="ProfileCardViewComponentStyle">
+    <style name="ValidatorCardViewComponentStyle">
         <item name="background">@color/white</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -112,7 +112,10 @@
     </style>
 
     <style name="TicketFragmentPropertyNameTextViewStyle">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_marginStart">10dp</item>
+        <item name="android:textColor">@color/black_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/nunito_sans_bold</item>
@@ -127,6 +130,54 @@
         <item name="android:fontFamily">@font/nunito_sans</item>
         <item name="android:textColor">@color/purple</item>
     </style>
+
+    <style name="ItemViewTextViewStyle">
+        <item name="android:fontFamily">@font/nunito_sans_extrabold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_text</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="DepartureStationItemViewTopTextViewStyle">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/nunito_sans_extrabold</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textColor">@color/blue_action</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DepartureStationItemBottomTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/nunito_sans_extrabold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/purple</item>
+    </style>
+
+    <style name="NavigationViewItemBackgroundView">
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:scaleX">1.2</item>
+        <item name="android:scaleY">1.5</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:alpha">0.2</item>
+    </style>
+
+    <style name="ValidatorNavigationViewSelectTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:fontFamily">@font/nunito_sans_extrabold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
 
 
 </resources>

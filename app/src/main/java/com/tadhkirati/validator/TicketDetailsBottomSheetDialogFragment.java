@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class TicketBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     private View draggableView;
     private TextView ticketInformationTextView;
