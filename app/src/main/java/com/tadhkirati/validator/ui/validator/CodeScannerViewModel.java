@@ -2,7 +2,6 @@ package com.tadhkirati.validator.ui.validator;
 
 import android.app.Application;
 import android.os.CountDownTimer;
-import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -15,35 +14,32 @@ import com.tadhkirati.validator.api.retrofit.ResponseHandler;
 import com.tadhkirati.validator.api.retrofit.TicketApiRepository;
 import com.tadhkirati.validator.models.Ticket;
 
-import java.util.logging.Handler;
-
 public class CodeScannerViewModel extends AndroidViewModel {
     public static final int STATE_INITIAL = 0;
     public static final int STATE_VALIDATION_IN_PROGRESS = 1;
     public static final int STATE_VALIDATION_SUCCESS = 2;
     public static final int STATE_VALIDATION_ERROR = 3;
     public static final int STATE_CONNECTIVITY_ERROR = 4;
-
-    public CodeScannerViewModel(@NonNull Application application) {
-        super(application);
-    }
-
     private final MutableLiveData<Integer> currentState = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isCameraPermissionAccepted = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> canScanCode = new MutableLiveData<>(true);
     private final MutableLiveData<String> ticketToken = new MutableLiveData<>();
     private final MutableLiveData<Ticket> validatedTicket = new MutableLiveData<>();
 
+    public CodeScannerViewModel(@NonNull Application application) {
+        super(application);
+    }
+
     public boolean getCanScanCode() {
         return canScanCode.getValue();
     }
 
-    public Ticket getValidatedTicket() {
-        return this.validatedTicket.getValue();
-    }
-
     public void setCanScanCode(boolean canScan) {
         this.canScanCode.setValue(canScan);
+    }
+
+    public Ticket getValidatedTicket() {
+        return this.validatedTicket.getValue();
     }
 
     public void enableScanningAfterTwoSeconds() {
@@ -61,15 +57,9 @@ public class CodeScannerViewModel extends AndroidViewModel {
         timer.start();
     }
 
-    public void observeState(LifecycleOwner owner, Observer<Integer> observer) {
-        currentState.observe(owner, observer);
-    }
-
-
     public void observeCameraPermissionState(LifecycleOwner owner, Observer<Boolean> observer) {
         isCameraPermissionAccepted.observe(owner, observer);
     }
-
 
     public boolean isCameraPermissionAccepted() {
         return Boolean.TRUE.equals(this.isCameraPermissionAccepted.getValue());
@@ -89,7 +79,6 @@ public class CodeScannerViewModel extends AndroidViewModel {
                     public void handleSuccess(ApiResponse<Ticket> response) {
                         if (response == null) {
                             enableScanningAfterTwoSeconds();
-                            // setCanScanCode(true);
                             currentState.setValue(STATE_CONNECTIVITY_ERROR);
                             return;
                         }

@@ -51,7 +51,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/nunito_sans_black"
             android:hint="@string/password_string"
-            android:inputType="textPassword"
+            android:inputType="numberPassword"
             android:textColor="@color/black_text"
             android:textSize="22sp" />
 

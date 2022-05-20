@@ -3,6 +3,7 @@ package com.tadhkirati.validator.ui.validator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class ValidatorActivity extends AppCompatActivity {
 
     ViewPager2 viewPager;
     ValidatorViewPagerFragmentStateAdapter viewPagerAdapter;
+    private TextView selectedFragmentTitleTextView;
 
     private ProfileViewModel profileViewModel;
     private TravelsViewModel travelsViewModel;
@@ -59,6 +61,8 @@ public class ValidatorActivity extends AppCompatActivity {
         selectProfileContainer = findViewById(R.id.container_profile_select);
         selectTravelsContainer = findViewById(R.id.container_travels_select);
         selectCodeScannerContainer = findViewById(R.id.container_code_scanner_select);
+
+        selectedFragmentTitleTextView = findViewById(R.id.text_view_selected_fragment_title);
 
     }
 
@@ -115,17 +119,19 @@ public class ValidatorActivity extends AppCompatActivity {
     private void selectProfile() {
         Toast.makeText(this, "selecting profile", Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_PROFILE);
+        selectedFragmentTitleTextView.setText(R.string.profile_string);
     }
 
     private void selectTravels() {
         Toast.makeText(this, "selecting travels", Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_TRAVELS);
+        selectedFragmentTitleTextView.setText(R.string.my_travels_string);
     }
 
     private void selectCodeScanner() {
-
         Toast.makeText(this, "selecting code scanner", Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_CODE_SCANNER);
+        selectedFragmentTitleTextView.setText(R.string.qr_code_scanner_string);
     }
 
     private void extractLoggedUser() {
