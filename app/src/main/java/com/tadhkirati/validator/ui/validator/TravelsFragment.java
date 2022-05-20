@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.tadhkirati.validator.R;
+import com.tadhkirati.validator.TravelDetailsBottomSheetDialogFragment;
+import com.tadhkirati.validator.models.Travel;
 
 public class TravelsFragment extends Fragment {
 
@@ -34,5 +36,13 @@ public class TravelsFragment extends Fragment {
     }
     private void initViews(View view) {
 
+    }
+
+    private void initRecyclerView() {
+
+    }
+
+    private void displayTravelDetailsBottomSheetFragment(Travel travel) {
+        TravelDetailsBottomSheetDialogFragment fragment = new TravelDetailsBottomSheetDialogFragment();
     }
 }

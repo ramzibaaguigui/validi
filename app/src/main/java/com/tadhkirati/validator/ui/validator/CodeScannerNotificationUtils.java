@@ -16,7 +16,7 @@ public class CodeScannerNotificationUtils {
     }
 
     public static void displayValidationError(Context context, ViewGroup parent) {
-        constructTicketValidationToast(context, false, parent)
+        constructTicketValidationToast(context, true, parent)
                 .show();
     }
 

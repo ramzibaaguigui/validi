@@ -1,6 +1,8 @@
 package com.tadhkirati.validator.ui.validator;
 
 import android.app.Application;
+import android.os.CountDownTimer;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,6 +14,8 @@ import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
 import com.tadhkirati.validator.api.retrofit.TicketApiRepository;
 import com.tadhkirati.validator.models.Ticket;
+
+import java.util.logging.Handler;
 
 public class CodeScannerViewModel extends AndroidViewModel {
     public static final int STATE_INITIAL = 0;
@@ -42,6 +46,21 @@ public class CodeScannerViewModel extends AndroidViewModel {
         this.canScanCode.setValue(canScan);
     }
 
+    public void enableScanningAfterTwoSeconds() {
+        CountDownTimer timer = new CountDownTimer(2000, 500) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                canScanCode.postValue(true);
+            }
+        };
+        timer.start();
+    }
+
     public void observeState(LifecycleOwner owner, Observer<Integer> observer) {
         currentState.observe(owner, observer);
     }
@@ -69,14 +88,16 @@ public class CodeScannerViewModel extends AndroidViewModel {
                     @Override
                     public void handleSuccess(ApiResponse<Ticket> response) {
                         if (response == null) {
-                            setCanScanCode(true);
+                            enableScanningAfterTwoSeconds();
+                            // setCanScanCode(true);
                             currentState.setValue(STATE_CONNECTIVITY_ERROR);
                             return;
                         }
                         if (response.isSuccessful()) {
                             currentState.setValue(STATE_VALIDATION_SUCCESS);
                             validatedTicket.setValue(response.getData());
-                            setCanScanCode(true);
+                            enableScanningAfterTwoSeconds();
+                            // setCanScanCode(true);
                             return;
                         }
 
@@ -95,7 +116,7 @@ public class CodeScannerViewModel extends AndroidViewModel {
     }
 
     public void setTicketToken(String ticketToken) {
-        this.ticketToken.setValue(ticketToken);
+        this.ticketToken.postValue(ticketToken);
     }
 
 

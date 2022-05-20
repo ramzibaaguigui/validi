@@ -30,6 +30,7 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private Button loadTicketsButton;
 
+    private OnTravelActionClickListener listener;
 
     @Nullable
     @Override
@@ -47,5 +48,18 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private void initViews(View view) {
 
+    }
+
+    public static TravelDetailsBottomSheetDialogFragment createInstance() {
+        return new TravelDetailsBottomSheetDialogFragment();
+    }
+
+    public void setOnTravelActionClickListener(OnTravelActionClickListener listener) {
+        this.listener = listener;
+    }
+
+    interface OnTravelActionClickListener {
+        // TODO: add here the action methods that are goint obe available
+        // for the user
     }
 }

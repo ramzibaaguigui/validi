@@ -11,11 +11,12 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @POST("/api/validator/login/")
+    @POST("/api/login/")
     Call<ApiResponse<LoginResponse>> login(@Body LoginRequest loginRequest);
 
 
@@ -23,7 +24,7 @@ public interface ApiService {
     Call<ApiResponse<User>> updateUserInfo(User user,@Header("Authorization ") String token);
 
     @POST("/api/validator/validate_ticket")
-    Call<ApiResponse<Ticket>> validateTicket(TicketValidationPayload validationPayload, String authHeader);
+    Call<ApiResponse<Ticket>> validateTicket(@Body TicketValidationPayload validationPayload, @Header("Authorization") String authHeader);
 
 
 }
