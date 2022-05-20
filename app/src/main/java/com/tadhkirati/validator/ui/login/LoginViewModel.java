@@ -11,9 +11,8 @@ import androidx.lifecycle.Observer;
 import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.payload.LoginRequest;
 import com.tadhkirati.validator.api.payload.LoginResponse;
-import com.tadhkirati.validator.api.retrofit.ApiService;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
-import com.tadhkirati.validator.api.retrofit.UserAuthRepository;
+import com.tadhkirati.validator.api.retrofit.UserAuthApiRepository;
 import com.tadhkirati.validator.models.User;
 
 public class LoginViewModel extends AndroidViewModel {
@@ -59,7 +58,7 @@ public class LoginViewModel extends AndroidViewModel {
                 .withPhone(getPhoneNumber())
                 .withPassword(getPassword());
 
-        UserAuthRepository.login(loginRequest, new ResponseHandler<>() {
+        UserAuthApiRepository.login(loginRequest, new ResponseHandler<>() {
             @Override
             public void handleSuccess(ApiResponse<LoginResponse> response) {
                 if (response == null) {

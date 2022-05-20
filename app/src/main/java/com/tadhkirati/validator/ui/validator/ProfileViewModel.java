@@ -1,7 +1,6 @@
 package com.tadhkirati.validator.ui.validator;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -11,7 +10,7 @@ import androidx.lifecycle.Observer;
 
 import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
-import com.tadhkirati.validator.api.retrofit.UpdateUserRepository;
+import com.tadhkirati.validator.api.retrofit.UpdateUserApiRepository;
 import com.tadhkirati.validator.models.User;
 
 public class ProfileViewModel extends AndroidViewModel {
@@ -96,7 +95,7 @@ public class ProfileViewModel extends AndroidViewModel {
                 .withFirstName(enteredFirstName.getValue())
                 .withLastName(enteredLastName.getValue())
                 .withPhoneNumber(enteredPhoneNumber.getValue());
-        UpdateUserRepository.updateUser(newUser, accessToken, new ResponseHandler<User>() {
+        UpdateUserApiRepository.updateUser(newUser, accessToken, new ResponseHandler<User>() {
             @Override
             public void handleSuccess(ApiResponse<User> response) {
                 if (response == null) {
@@ -104,7 +103,7 @@ public class ProfileViewModel extends AndroidViewModel {
                     return;
                 }
                 if (response.isSuccessful()) {
-
+                    // TODO; there is still something to finish here
                 }
                 handleUpdateError();
             }

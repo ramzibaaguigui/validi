@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateUserRepository {
+public class UpdateUserApiRepository {
 
     public static void updateUser(User user, String accessToken, ResponseHandler<User> handler) {
         RetrofitClient.apiService.updateUserInfo(user, accessToken)

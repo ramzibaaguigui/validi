@@ -8,8 +8,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserAuthRepository {
-
+public class UserAuthApiRepository {
 
     public static void login(LoginRequest loginRequest,
                              ResponseHandler<LoginResponse> handler) {

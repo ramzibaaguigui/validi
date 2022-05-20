@@ -38,7 +38,7 @@ public class LoginUtils {
 
     }
 
-    public static String fromTokenHeader(Context context) {
+    public static String formTokenHeader(Context context) {
         return BEARER.concat(UserLoginSharedPreferences.retrieveStoredAccessToken(context));
     }
 }

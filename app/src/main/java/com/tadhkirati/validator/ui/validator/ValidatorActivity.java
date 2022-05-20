@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
@@ -34,6 +35,7 @@ public class ValidatorActivity extends AppCompatActivity {
 
     private ProfileViewModel profileViewModel;
     private TravelsViewModel travelsViewModel;
+    private CodeScannerViewModel codeScannerViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,6 +123,7 @@ public class ValidatorActivity extends AppCompatActivity {
     }
 
     private void selectCodeScanner() {
+
         Toast.makeText(this, "selecting code scanner", Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_CODE_SCANNER);
     }
@@ -137,6 +140,9 @@ public class ValidatorActivity extends AppCompatActivity {
 
         travelsViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
                 .create(TravelsViewModel.class);
+
+        codeScannerViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
+                .create(CodeScannerViewModel.class);
     }
 
     public ProfileViewModel getProfileViewModel() {
@@ -147,4 +153,17 @@ public class ValidatorActivity extends AppCompatActivity {
         return this.travelsViewModel;
     }
 
+    public CodeScannerViewModel getCodeScannerViewModel() {
+        return this.codeScannerViewModel;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CodeScannerFragment.CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length == 1) {
+                codeScannerViewModel.setCameraPermissionAccepted(true);
+            }
+        }
+    }
 }

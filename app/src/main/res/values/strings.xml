@@ -44,4 +44,5 @@
     <string name="string_login">Login</string>
     <string name="validate_your_credentials_string">Make sure that the password is valid</string>
     <string name="string_update_user_error">There has been an error while trying to update user information</string>
+    <string name="scan_instruction_string">Scan the ticket QR Code for a fast validation</string>
 </resources>

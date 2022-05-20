@@ -1,5 +1,7 @@
 package com.tadhkirati.validator.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.math.BigDecimal;
 
 public class Ticket {
@@ -15,10 +17,17 @@ public class Ticket {
     Station landingStation;
     BigDecimal price;
 
+    @SerializedName("qrcode_token")
+    String qrCodeToken;
+
     public String getPassengerName() {
         return this.passengerName;
     }
     public String getBoardingStationName() {
         return this.boardingStation.getName();
+    }
+
+    public String getToken() {
+        return this.qrCodeToken;
     }
 }

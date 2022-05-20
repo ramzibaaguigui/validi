@@ -1,6 +1,7 @@
 package com.tadhkirati.validator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,5 +54,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,
                     UserLoginSharedPreferences.retrieveLoggedUser(this).toString(), Toast.LENGTH_SHORT).show();
         });
+
+
     }
+
+    private void requestPermission() {
+        // Verify that the user is already having the permission
+
+    }
+
 }
