@@ -24,5 +24,12 @@ public class Travel {
     @SerializedName("status")
     TravelStatus status;
 
+    public String getArrivalStation() {
+        return this.arrivalStation;
+    }
+
+    public String getDepartureStation() {
+        return this.departureStation;
+    }
 
 }

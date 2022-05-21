@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground"
+    android:id="@+id/container"
+    android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
@@ -19,19 +21,21 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="0"
             android:src="@drawable/ic_train" />
 
         <TextView
-            android:id="@+id/text_view_travel_item_boarding_station"
+            android:id="@+id/text_view_travel_item_arrival_station"
             style="@style/ItemViewTextViewStyle"
-            android:text="Departure Station" />
+            tools:text="Departure Station" />
 
         <TextView
             android:id="@+id/text_view_travel_item_boarding_station_name"
             style="@style/ItemViewTextViewStyle"
-            android:text="Arrival station" />
+            tools:text="Arrival station" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -32,9 +32,15 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private OnTravelActionClickListener listener;
 
+    public static TravelDetailsBottomSheetDialogFragment createInstance() {
+        return new TravelDetailsBottomSheetDialogFragment();
+    }
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dialog_bottom_travel_details, container, false);
         initViews(root);
         return root;
@@ -48,10 +54,6 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private void initViews(View view) {
 
-    }
-
-    public static TravelDetailsBottomSheetDialogFragment createInstance() {
-        return new TravelDetailsBottomSheetDialogFragment();
     }
 
     public void setOnTravelActionClickListener(OnTravelActionClickListener listener) {

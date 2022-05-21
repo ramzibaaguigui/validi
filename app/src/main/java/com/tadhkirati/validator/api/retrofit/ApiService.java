@@ -5,7 +5,10 @@ import com.tadhkirati.validator.api.payload.LoginRequest;
 import com.tadhkirati.validator.api.payload.LoginResponse;
 import com.tadhkirati.validator.api.payload.TicketValidationPayload;
 import com.tadhkirati.validator.models.Ticket;
+import com.tadhkirati.validator.models.Travel;
 import com.tadhkirati.validator.models.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,5 +29,9 @@ public interface ApiService {
     @POST("/api/validator/validate_ticket")
     Call<ApiResponse<Ticket>> validateTicket(@Body TicketValidationPayload validationPayload, @Header("Authorization") String authHeader);
 
+
+    @GET
+    Call<ApiResponse<List<Travel>>> getTravels();
+    // TODO: WE STILL NEED TO ADD METHOD PARAMETERS HERE
 
 }

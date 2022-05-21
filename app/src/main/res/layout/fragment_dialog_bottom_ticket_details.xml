@@ -49,7 +49,7 @@
         app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
 
     <TextView
-        android:id="@+id/text_view_travel_item_boarding_station"
+        android:id="@+id/text_view_travel_item_arrival_station"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/boarding_station_string"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,16 +59,16 @@
         android:id="@+id/text_view_boarding_station_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:text="SOGRAL"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_item_boarding_station"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_item_boarding_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_item_boarding_station" />
+        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_item_arrival_station"
+        app:layout_constraintStart_toEndOf="@id/text_view_travel_item_arrival_station"
+        app:layout_constraintTop_toTopOf="@id/text_view_travel_item_arrival_station" />
 
     <TextView
         android:id="@+id/text_view_ticket_boarding_station_name"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/landing_station_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_item_boarding_station" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_travel_item_arrival_station" />
 
     <TextView
         android:id="@+id/text_view_landing_station_value"
