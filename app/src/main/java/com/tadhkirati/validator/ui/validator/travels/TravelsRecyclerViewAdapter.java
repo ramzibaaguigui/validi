@@ -1,4 +1,4 @@
-package com.tadhkirati.validator;
+package com.tadhkirati.validator.ui.validator.travels;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Travel;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public class TravelsRecyclerViewAdapter extends RecyclerView.Adapter<TravelsRecy
 
     private List<Travel> travels;
     private OnTravelActionListener listener;
+
+    public TravelsRecyclerViewAdapter(List<Travel> travels) {
+        this.travels = travels;
+    }
 
     @NonNull
     @Override
@@ -48,7 +53,7 @@ public class TravelsRecyclerViewAdapter extends RecyclerView.Adapter<TravelsRecy
         this.listener = listener;
     }
 
-    interface OnTravelActionListener {
+    public interface OnTravelActionListener {
         void onClickTravel(Travel travel);
     }
 

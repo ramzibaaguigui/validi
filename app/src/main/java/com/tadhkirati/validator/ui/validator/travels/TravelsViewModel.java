@@ -1,4 +1,4 @@
-package com.tadhkirati.validator.ui.validator;
+package com.tadhkirati.validator.ui.validator.travels;
 
 import android.app.Application;
 

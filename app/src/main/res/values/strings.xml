@@ -47,4 +47,13 @@
     <string name="scan_instruction_string">Scan the ticket QR Code for a fast validation</string>
     <string name="departure_string">Departure</string>
     <string name="arrival_string">Arrival</string>
+    <string name="status_string">Status</string>
+    <string name="pending_string">Pending</string>
+    <string name="departure_station_string">Departure station</string>
+    <string name="arrival_station_string">Arrival station</string>
+    <string name="departure_time_string">Departure time</string>
+    <string name="arrival_time_string">Arrival time</string>
+    <string name="duration_string">Duration</string>
+    <string name="distance_string">Distance</string>
+    <string name="load_tickets_string">Load Tickets</string>
 </resources>

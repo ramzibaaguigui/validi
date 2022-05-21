@@ -2,9 +2,10 @@ package com.tadhkirati.validator.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Travel {
+public class Travel implements Serializable {
 
     @SerializedName("departure_station")
     String departureStation;
@@ -30,6 +31,20 @@ public class Travel {
 
     public String getDepartureStation() {
         return this.departureStation;
+    }
+
+    public static Travel createTravel() {
+        return new Travel();
+    }
+
+    public Travel withDepartureStation(String departureStation) {
+        this.departureStation = departureStation;
+        return this;
+    }
+
+    public Travel withArrivalStation(String arrivalStation) {
+        this.arrivalStation = arrivalStation;
+        return this;
     }
 
 }

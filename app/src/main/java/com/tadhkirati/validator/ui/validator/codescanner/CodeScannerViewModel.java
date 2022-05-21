@@ -1,4 +1,4 @@
-package com.tadhkirati.validator.ui.validator;
+package com.tadhkirati.validator.ui.validator.codescanner;
 
 import android.app.Application;
 import android.os.CountDownTimer;

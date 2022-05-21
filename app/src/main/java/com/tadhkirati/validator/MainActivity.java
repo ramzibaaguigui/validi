@@ -1,7 +1,6 @@
 package com.tadhkirati.validator;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.widget.Toast;
 
 import com.tadhkirati.validator.ui.login.LoginActivity;
 import com.tadhkirati.validator.ui.login.UserLoginSharedPreferences;
+import com.tadhkirati.validator.ui.traveldetails.TravelDetailsActivity;
 import com.tadhkirati.validator.ui.validator.ValidatorActivity;
 
 public class MainActivity extends AppCompatActivity {

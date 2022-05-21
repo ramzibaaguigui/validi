@@ -1,4 +1,4 @@
-package com.tadhkirati.validator;
+package com.tadhkirati.validator.ui.traveldetails;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Ticket;
 
 import java.util.List;

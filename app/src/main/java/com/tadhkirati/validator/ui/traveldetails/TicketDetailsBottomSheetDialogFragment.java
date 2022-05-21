@@ -1,4 +1,4 @@
-package com.tadhkirati.validator;
+package com.tadhkirati.validator.ui.traveldetails;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.tadhkirati.validator.R;
 
 public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -36,14 +37,14 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private void initViews(View view) {
         draggableView = view.findViewById(R.id.view_draggable);
-        ticketInformationTextView = view.findViewById(R.id.text_view_ticket_information);
-        passengerNameTextView = view.findViewById(R.id.text_view_passenger_name_value);
-        boardingStationTextView = view.findViewById(R.id.text_view_boarding_station_value);
-        landingStationTextView = view.findViewById(R.id.text_view_landing_station_value);
-        validateButton = view.findViewById(R.id.button_validate_ticket);
+        ticketInformationTextView = view.findViewById(R.id.text_view_travel_information);
+        passengerNameTextView = view.findViewById(R.id.text_view_travel_status_value);
+        boardingStationTextView = view.findViewById(R.id.text_view_travel_departure_station_value);
+        landingStationTextView = view.findViewById(R.id.text_view_travel_arrival_station_value);
+        validateButton = view.findViewById(R.id.button_load_travel_tickets);
     }
 
-    static interface OnValidateClickListener {
+    public interface OnValidateClickListener {
         void onValidate();
     }
 }

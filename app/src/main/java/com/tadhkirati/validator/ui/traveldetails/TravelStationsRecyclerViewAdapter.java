@@ -1,4 +1,4 @@
-package com.tadhkirati.validator;
+package com.tadhkirati.validator.ui.traveldetails;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.tadhkirati.validator.R;
 
 public class TravelStationsRecyclerViewAdapter extends RecyclerView.Adapter<TravelStationsRecyclerViewAdapter.TravelViewHolder> {
     private static final int VIEW_TYPE_FIRST = 0;

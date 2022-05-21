@@ -1,4 +1,4 @@
-package com.tadhkirati.validator.ui.validator;
+package com.tadhkirati.validator.ui.validator.codescanner;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -24,6 +24,7 @@ import com.google.zxing.Result;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Ticket;
 import com.tadhkirati.validator.ui.login.LoginUtils;
+import com.tadhkirati.validator.ui.validator.ValidatorActivity;
 
 import java.util.Collections;
 

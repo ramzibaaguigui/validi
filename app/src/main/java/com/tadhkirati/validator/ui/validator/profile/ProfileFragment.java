@@ -1,4 +1,4 @@
-package com.tadhkirati.validator.ui.validator;
+package com.tadhkirati.validator.ui.validator.profile;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.User;
+import com.tadhkirati.validator.ui.validator.ValidatorActivity;
 
 public class ProfileFragment extends Fragment {
 

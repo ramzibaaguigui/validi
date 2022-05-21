@@ -1,13 +1,13 @@
-package com.tadhkirati.validator;
+package com.tadhkirati.validator.ui.validator;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.tadhkirati.validator.ui.validator.CodeScannerFragment;
-import com.tadhkirati.validator.ui.validator.ProfileFragment;
-import com.tadhkirati.validator.ui.validator.TravelsFragment;
+import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerFragment;
+import com.tadhkirati.validator.ui.validator.profile.ProfileFragment;
+import com.tadhkirati.validator.ui.validator.travels.TravelsFragment;
 
 public class ValidatorViewPagerFragmentStateAdapter extends FragmentStateAdapter {
     public static final int FRAGMENT_PROFILE = 0;

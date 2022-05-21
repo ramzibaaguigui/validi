@@ -28,7 +28,7 @@
             android:src="@drawable/ic_train" />
 
         <TextView
-            android:id="@+id/text_view_travel_item_arrival_station"
+            android:id="@+id/text_view_travel_departure_station"
             style="@style/ItemViewTextViewStyle"
             tools:text="Departure Station" />
 

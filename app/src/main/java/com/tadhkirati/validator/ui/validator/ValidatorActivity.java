@@ -16,9 +16,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.tadhkirati.validator.R;
-import com.tadhkirati.validator.ValidatorViewPagerFragmentStateAdapter;
 import com.tadhkirati.validator.models.User;
 import com.tadhkirati.validator.ui.login.LoginUtils;
+import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerFragment;
+import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerViewModel;
+import com.tadhkirati.validator.ui.validator.profile.ProfileViewModel;
+import com.tadhkirati.validator.ui.validator.travels.TravelsViewModel;
 
 public class ValidatorActivity extends AppCompatActivity {
 

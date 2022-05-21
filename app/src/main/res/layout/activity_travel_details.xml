@@ -61,12 +61,12 @@
             android:layout_marginStart="10dp"
             android:background="@color/grey_border"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_travel_status"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
+            app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
 
         <TextView
-            android:id="@+id/text_view_passenger_name"
+            android:id="@+id/text_view_travel_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -84,10 +84,10 @@
             android:layout_marginStart="10dp"
             android:background="@color/grey_border"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_travel_status"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/horizontal_divider_first"
-            app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
+            app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
 
         <TextView
             android:id="@+id/text_view_boarding"
@@ -108,7 +108,7 @@
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_passenger_name" />
+            app:layout_constraintTop_toBottomOf="@id/text_view_travel_status" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_tickets"
