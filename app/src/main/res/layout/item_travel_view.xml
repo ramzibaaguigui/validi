@@ -7,10 +7,6 @@
     android:id="@+id/container"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/grey_border" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -19,21 +15,25 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="0"
             android:src="@drawable/ic_train" />
 
         <TextView
-            android:id="@+id/text_view_travel_departure_station"
+            android:layout_marginStart="10dp"
+            android:textAlignment="textStart"
+            android:id="@+id/text_view_travel_item_departure_station"
             style="@style/ItemViewTextViewStyle"
             tools:text="Departure Station" />
 
         <TextView
-            android:id="@+id/text_view_travel_item_boarding_station_name"
+            android:paddingStart="15dp"
+            android:textAlignment="textStart"
+            android:id="@+id/text_view_travel_item_arrival_station_name"
             style="@style/ItemViewTextViewStyle"
             tools:text="Arrival station" />
 
@@ -42,6 +42,6 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         android:background="@color/grey_border" />
 </androidx.appcompat.widget.LinearLayoutCompat>

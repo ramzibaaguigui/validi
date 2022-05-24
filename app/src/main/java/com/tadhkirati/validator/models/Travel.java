@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Travel implements Serializable {
 
@@ -11,7 +12,7 @@ public class Travel implements Serializable {
     String departureStation;
 
     @SerializedName("arrival_station")
-    String arrivalStation;
+    String larrivalStation;
 
     @SerializedName("distance")
     BigDecimal distance;
@@ -25,12 +26,22 @@ public class Travel implements Serializable {
     @SerializedName("status")
     TravelStatus status;
 
+    @SerializedName("stations")
+    List<Station> stations;
+
+    @SerializedName("id")
+    Long id;
+
+
+
+
+
     public String getArrivalStation() {
-        return this.arrivalStation;
+        return this.stations.get(stations.size() - 1).getName();
     }
 
     public String getDepartureStation() {
-        return this.departureStation;
+        return this.stations.get(0).getName();
     }
 
     public static Travel createTravel() {
@@ -43,8 +54,11 @@ public class Travel implements Serializable {
     }
 
     public Travel withArrivalStation(String arrivalStation) {
-        this.arrivalStation = arrivalStation;
         return this;
     }
 
+
+    enum TravelStatus {
+        pending, completed, underway
+    }
 }

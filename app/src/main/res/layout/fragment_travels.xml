@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ProgressBar
         android:layout_width="50dp"
@@ -13,10 +14,51 @@
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/progress_bar"/>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/container_loading_error"
+        android:orientation="vertical">
+        <TextView
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:textColor="@color/red"
+            android:textSize="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_connectivity_error" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/container_connectivity_error">
+
+        <TextView
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:textColor="@color/red"
+            android:textSize="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_loading_error" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_travels_container"
         android:outlineAmbientShadowColor="@color/blue_action"
         app:cardElevation="5dp"
+        app:cardCornerRadius="15dp"
         app:cardUseCompatPadding="true"
         style="@style/ValidatorCardViewComponentStyle"
         android:layout_width="match_parent"
@@ -32,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/nunito_sans_black"
                 android:text="Travels of 14 may 2022"
                 android:textColor="@color/blue_action"
@@ -44,7 +86,7 @@
                 android:id="@+id/vertical_divider_top"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/grey_border"
                 app:layout_constraintTop_toBottomOf="@id/text_view_travel_date" />
 
@@ -53,13 +95,16 @@
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
-                android:background="@color/grey_border"
+                android:background="@drawable/background_rounded"
+                android:backgroundTint="@color/grey_border"
                 app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_departure"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/text_view_departure" />
 
             <TextView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
                 android:id="@+id/text_view_departure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +123,8 @@
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
-                android:background="@color/grey_border"
+                android:background="@drawable/background_rounded"
+                android:backgroundTint="@color/grey_border"
                 app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_arrival"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +132,8 @@
                 app:layout_constraintTop_toTopOf="@id/text_view_arrival" />
 
             <TextView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
                 android:id="@+id/text_view_arrival"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,7 +150,7 @@
                 android:id="@+id/vertical_divider_middle"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/grey_border"
                 app:layout_constraintTop_toBottomOf="@id/text_view_departure" />
@@ -115,6 +163,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/vertical_divider_middle" />
+<!--
 
             <View
                 android:id="@+id/vertical_divider_bottom"
@@ -124,21 +173,38 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/grey_border"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_travels" />
+-->
 
             <TextView
                 android:id="@+id/text_view_travel_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/nunito_sans_extrabold"
-                android:text="5 travels in total"
+                android:text="5"
                 android:textColor="@color/black_text"
                 android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/vertical_divider_bottom" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_travels" />
+
+            <TextView
+                android:id="@+id/text_view_travel_count_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/nunito_sans_extrabold"
+                android:text="travels in total"
+                android:textColor="@color/black_text"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_count"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_travels" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.tadhkirati.validator.ui.validator.travels;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Travel;
 
@@ -33,7 +35,8 @@ public class TravelsRecyclerViewAdapter extends RecyclerView.Adapter<TravelsRecy
 
     @Override
     public void onBindViewHolder(@NonNull TravelViewHolder holder, int position) {
-        final Travel currentTravel = travels.get(position);
+        Travel currentTravel = travels.get(position);
+        Log.i("travel_info", new Gson().toJson(currentTravel));
         holder.arrivalTextView.setText(currentTravel.getArrivalStation());
         holder.departureTextView.setText(currentTravel.getDepartureStation());
 
@@ -66,8 +69,9 @@ public class TravelsRecyclerViewAdapter extends RecyclerView.Adapter<TravelsRecy
         public TravelViewHolder(@NonNull View itemView) {
             super(itemView);
             container = itemView.findViewById(R.id.container);
-            departureTextView = itemView.findViewById(R.id.text_view_departure);
-            arrivalTextView = itemView.findViewById(R.id.text_view_arrival);
+            departureTextView = itemView.findViewById(R.id.text_view_travel_item_departure_station);
+            arrivalTextView = itemView.findViewById(R.id.text_view_travel_item_arrival_station_name);
         }
     }
+
 }

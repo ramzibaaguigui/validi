@@ -53,7 +53,7 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
         public TicketViewHolder(@NonNull View itemView) {
             super(itemView);
             passengerNameTextView = itemView.findViewById(R.id.text_view_ticket_item_passenger_name);
-            boardingStationTextView = itemView.findViewById(R.id.text_view_travel_item_boarding_station_name);
+            boardingStationTextView = itemView.findViewById(R.id.text_view_travel_item_arrival_station_name);
             container = itemView.findViewById(R.id.container_ticket_item);
         }
     }

@@ -85,8 +85,9 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     }
 
     public interface OnTravelActionClickListener {
-        // TODO: add here the action methods that are goint obe available
-        // for the user
+
         void loadTravel(Travel travel);
     }
+
+    //TODO: set the fragment background to transparent
 }

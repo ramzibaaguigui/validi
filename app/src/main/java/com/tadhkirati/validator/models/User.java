@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
+    @SerializedName("id")
+    private Long id;
 
     @SerializedName("phone_number")
     private String phoneNumber;
@@ -22,6 +24,10 @@ public class User implements Serializable {
     @SerializedName("role")
     private String role;
 
+    public static User createUser() {
+        return new User();
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -30,9 +36,9 @@ public class User implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", accountConfirmed=" + accountConfirmed +
                 ", role='" + role + '\'' +
+                ", id='" + id + '\'' +
                 '}';
     }
-
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -46,8 +52,8 @@ public class User implements Serializable {
         return lastName;
     }
 
-    public static User createUser() {
-        return new User();
+    public Long getId() {
+        return this.id;
     }
 
     public User withFirstName(String firstName) {
@@ -60,9 +66,10 @@ public class User implements Serializable {
         return this;
     }
 
-    public User withPhoneNumber (String phoneNumber) {
+    public User withPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
+
 
 }

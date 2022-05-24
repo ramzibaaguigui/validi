@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@android:color/transparent"
     android:layout_height="wrap_content">
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/fragment_head_container"
@@ -49,7 +51,7 @@
         app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
 
     <TextView
-        android:id="@+id/text_view_travel_departure_station"
+        android:id="@+id/text_view_travel_item_departure_station"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/departure_station_string"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,16 +61,16 @@
         android:id="@+id/text_view_travel_departure_station_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:text="SOGRAL"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_departure_station"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_departure_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_departure_station" />
+        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_item_departure_station"
+        app:layout_constraintStart_toEndOf="@id/text_view_travel_item_departure_station"
+        app:layout_constraintTop_toTopOf="@id/text_view_travel_item_departure_station" />
 
     <TextView
         android:id="@+id/text_view_travel_arrival_station"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/arrival_station_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_departure_station" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_travel_item_departure_station" />
 
     <TextView
         android:id="@+id/text_view_travel_arrival_station_value"
@@ -141,6 +143,7 @@
         app:layout_constraintTop_toTopOf="@id/text_view_travel_distance" />
 
     <Button
+        android:background="@color/purple"
         android:id="@+id/button_load_travel_tickets"
         style="@style/ProfileActionButtonStyle"
         android:layout_marginTop="20dp"

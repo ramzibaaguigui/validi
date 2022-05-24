@@ -4,6 +4,7 @@ import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.payload.LoginRequest;
 import com.tadhkirati.validator.api.payload.LoginResponse;
 import com.tadhkirati.validator.api.payload.TicketValidationPayload;
+import com.tadhkirati.validator.api.payload.TodayTravelRequestPayload;
 import com.tadhkirati.validator.models.Ticket;
 import com.tadhkirati.validator.models.Travel;
 import com.tadhkirati.validator.models.User;
@@ -14,12 +15,11 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @POST("/api/login/")
+    @POST("/api/validator/login/")
     Call<ApiResponse<LoginResponse>> login(@Body LoginRequest loginRequest);
 
 
@@ -30,8 +30,11 @@ public interface ApiService {
     Call<ApiResponse<Ticket>> validateTicket(@Body TicketValidationPayload validationPayload, @Header("Authorization") String authHeader);
 
 
-    @GET
-    Call<ApiResponse<List<Travel>>> getTravels();
+    @GET("/api/validator/todayTravels")
+    Call<ApiResponse<List<Travel>>> getTravels(@Header("Authorization") String accessToken);
     // TODO: WE STILL NEED TO ADD METHOD PARAMETERS HERE
+
+
+
 
 }

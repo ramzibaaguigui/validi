@@ -3,12 +3,14 @@ package com.tadhkirati.validator.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -27,11 +29,12 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private View container;
     private LoginViewModel loginViewModel;
+    private ImageButton togglePasswordImageButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login2);
         initViewModel();
         initViews();
         updateViews();
@@ -91,11 +94,17 @@ public class LoginActivity extends AppCompatActivity {
         phoneNumberEditText = findViewById(R.id.edit_text_phone_number);
         passwordEditText = findViewById(R.id.edit_text_password);
         loginButton = findViewById(R.id.button_login);
+        togglePasswordImageButton = findViewById(R.id.image_button_hide_show_password);
 
     }
 
     private void initListeners() {
-        loginButton.setOnClickListener(view -> tryLogin());
+        if (loginViewModel.canPressLoginButton())
+            loginButton.setOnClickListener(view -> tryLogin());
+
+        togglePasswordImageButton.setOnClickListener(view -> {
+            togglePasswordVisibility();
+        });
     }
 
     private void tryLogin() {
@@ -104,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         loginViewModel.login();
-        hideSoftKeyboard();
+        // hideSoftKeyboard();
     }
 
     private void hideSoftKeyboard() {
@@ -134,15 +143,29 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.observeState(
                 this,
                 state -> {
+                    if (state == LoginViewModel.STATE_LOGIN_PROGRESS) {
+                        disableLoginButton();
+                    }
+
                     if (state == LoginViewModel.STATE_LOGIN_SUCCESS) {
                         handleLoginSuccess();
-                        } else if (state == LoginViewModel.STATE_LOGIN_ERROR) {
+                    } else if (state == LoginViewModel.STATE_LOGIN_ERROR) {
                         handleLoginError();
+                        enableLoginButton();
                     } else if (state == LoginViewModel.STATE_CONNECTIVITY_ERROR) {
                         handleConnectivityError();
+                        enableLoginButton();
                     }
                 }
         );
+    }
+
+    private void disableLoginButton() {
+        loginViewModel.setCanPressLogin(false);
+    }
+
+    private void enableLoginButton() {
+        loginViewModel.setCanPressLogin(true);
     }
 
     private void handleLoginSuccess() {
@@ -153,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void displayLoggedUser() {
         User user = loginViewModel.getLoggedUser();
-            Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -177,5 +200,28 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleConnectivityError() {
         Toast.makeText(this, "please verify your network and retry", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showPassword() {
+        loginViewModel.showPassword();
+        togglePasswordImageButton.setImageResource(R.drawable.ic_password_shown);
+        passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        passwordEditText.setSelection(passwordEditText.getText().length());
+    }
+
+    private void hidePassword() {
+        togglePasswordImageButton.setImageResource(R.drawable.ic_password_hidden);
+        loginViewModel.hidePassword();
+        passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        passwordEditText.setSelection(passwordEditText.getText().length());
+
+    }
+
+
+    private void togglePasswordVisibility() {
+        if (loginViewModel.isPasswordShown())
+            hidePassword();
+        else
+            showPassword();
     }
 }

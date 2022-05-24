@@ -24,6 +24,7 @@ public class TicketApiRepository {
                     @Override
                     public void onResponse(Call<ApiResponse<Ticket>> call, Response<ApiResponse<Ticket>> response) {
                         ticketResponseHandler.handleSuccess(response.body());
+
                     }
 
                     @Override

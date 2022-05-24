@@ -1,6 +1,7 @@
 package com.tadhkirati.validator.ui.validator.travels;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,12 +9,14 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.google.gson.Gson;
 import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
 import com.tadhkirati.validator.api.retrofit.TravelApiRepository;
 import com.tadhkirati.validator.models.Travel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TravelsViewModel extends AndroidViewModel {
     public TravelsViewModel(@NonNull Application application) {
@@ -39,15 +42,16 @@ public class TravelsViewModel extends AndroidViewModel {
     }
 
     public void loadTravels(String accessToken) {
-        TravelApiRepository.loadTravels(
+        handleTravelsLoadingProgress();
+
+        TravelApiRepository.loadTodayTravels(
                 accessToken,
                 new ResponseHandler<>() {
                     @Override
                     public void handleSuccess(ApiResponse<List<Travel>> response) {
-                        if (response == null) {
-                            handleConnectivityError();
-                            return;
-                        }
+                        Log.i("API_RESPONSE", String.valueOf(response == null? null : response.isSuccessful()));
+                        Log.i("response", new Gson().toJson(response));
+
                         if (response.isSuccessful()) {
                             handleTravelsLoadedSuccessfully(response.getData());
                             return;
@@ -57,16 +61,23 @@ public class TravelsViewModel extends AndroidViewModel {
 
                     @Override
                     public void handleError() {
+
                         handleConnectivityError();
                     }
                 }
         );
     }
 
+    public List<Travel> getLoadedTravels() {
+        return this.travels.getValue();
+    }
+
+
     public void handleTravelsLoadedSuccessfully(List<Travel> travels) {
         this.travels.setValue(travels);
         currentState.setValue(STATE_LOADED_SUCCESSFULLY);
     }
+
 
     private void handleTravelsLoadingError() {
         currentState.setValue(STATE_LOADING_ERROR);
@@ -74,5 +85,9 @@ public class TravelsViewModel extends AndroidViewModel {
 
     private void handleConnectivityError() {
         currentState.setValue(STATE_LOADING_CONNECTIVITY_ERROR);
+    }
+
+    private void handleTravelsLoadingProgress() {
+        currentState.setValue(STATE_LOADING_TRAVELS);
     }
 }

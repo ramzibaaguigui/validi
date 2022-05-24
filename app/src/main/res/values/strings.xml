@@ -56,4 +56,9 @@
     <string name="duration_string">Duration</string>
     <string name="distance_string">Distance</string>
     <string name="load_tickets_string">Load Tickets</string>
+    <string name="welcome_validator_string">Welcome back validator</string>
+    <string name="fill_in_the_form_string">Fill in the form in order to login</string>
+    <string name="to_your_validator_account_string">to your validator account.</string>
+    <string name="string_connectivity_error">Connectivity error</string>
+    <string name="string_loading_error">Loading Error</string>
 </resources>

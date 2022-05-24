@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 
 public class Station {
     private String name;
@@ -19,7 +20,7 @@ public class Station {
     private String wilaya;
 
     @SerializedName("arrival_time")
-    private Instant arrivalTime;
+    private String arrivalTime;
 
     @SerializedName("firstClass_price")
     private BigDecimal firstClassPrice;
@@ -28,7 +29,7 @@ public class Station {
     private BigDecimal secondClassPrice;
 
 
-    
+
 
     public String getName() {
         return this.name;

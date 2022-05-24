@@ -28,6 +28,9 @@ public class LoginViewModel extends AndroidViewModel {
     private final MutableLiveData<String> password = new MutableLiveData<>("");
     private final MutableLiveData<User> loggedUser = new MutableLiveData<>(null);
     private final MutableLiveData<String> accessToken = new MutableLiveData<>(null);
+    private final MutableLiveData<Boolean> canPressLogin = new MutableLiveData<>(true);
+
+    private final MutableLiveData<Boolean> passwordShown = new MutableLiveData<>(false);
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -54,6 +57,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void login() {
+        setCanPressLogin(false);
         LoginRequest loginRequest = LoginRequest.create()
                 .withPhone(getPhoneNumber())
                 .withPassword(getPassword());
@@ -112,5 +116,23 @@ public class LoginViewModel extends AndroidViewModel {
         return accessToken.getValue();
     }
 
+    public boolean isPasswordShown() {
+        return passwordShown.getValue();
+    }
 
+    public void showPassword() {
+        this.passwordShown.setValue(true);
+    }
+
+    public void hidePassword() {
+        this.passwordShown.setValue(false);
+    }
+
+    public boolean canPressLoginButton() {
+        return this.canPressLogin.getValue();
+    }
+
+    public void setCanPressLogin(boolean canPressLogin) {
+        this.canPressLogin.setValue(canPressLogin);
+    }
 }
