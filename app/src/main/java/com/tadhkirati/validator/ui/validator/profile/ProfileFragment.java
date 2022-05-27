@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.User;
+import com.tadhkirati.validator.ui.login.LoginUtils;
 import com.tadhkirati.validator.ui.validator.ValidatorActivity;
 
 public class ProfileFragment extends Fragment {
@@ -78,6 +79,11 @@ public class ProfileFragment extends Fragment {
         initProfileDetails(view);
         initEditProfile(view);
         initEditPassword(view);
+    }
+
+    private void initListener() {
+        submitEditProfileButton.setOnClickListener(view -> updateUserProfile());
+        submitEditPasswordButton.setOnClickListener(view -> updateUserPassword());
     }
 
     private void initViewModel() {
@@ -205,13 +211,48 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+
     private void handleUserUpdateError() {
         Toast.makeText(getActivity(), R.string.string_update_user_error, Toast.LENGTH_SHORT).show();
     }
 
     private void handleUserUpdateSuccess() {
         displayUserProfile();
-        profileViewModel.setStateInitial();
+    // todo    profileViewModel.setStateInitial();
     }
 
+    private void updateUserProfile() {
+        if (profileIsValid()) {
+            profileViewModel.updateUser(LoginUtils.formTokenHeader(requireActivity()));
+            return;
+        }
+
+        showProfileInvalid();
+    }
+
+    private void showProfileInvalid() {
+
+    }
+
+    private boolean profileIsValid() {
+        return true;
+        // todo: add some verifications here
+    }
+
+    private void updateUserPassword() {
+        if (passwordIsValid()) {
+            String authToken = LoginUtils.formTokenHeader(requireActivity());
+            profileViewModel.updatePassword(authToken);
+            return;
+        }
+        showPasswordInvalid();
+    }
+
+    private boolean passwordIsValid() {
+        return true;
+    }
+
+    private void showPasswordInvalid() {
+
+    }
 }

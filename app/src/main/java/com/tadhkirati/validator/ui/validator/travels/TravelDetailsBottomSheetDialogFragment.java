@@ -9,10 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Travel;
+import com.tadhkirati.validator.models.TravelStatus;
+import com.tadhkirati.validator.ui.traveldetails.TravelStationsRecyclerViewAdapter;
 
 public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -26,9 +30,9 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     private TextView distanceTextView;
     private TextView firstClassLimitTextView;
     private TextView secondClassLimitTextView;
-    private TextView wifiAvailableTextView;
-    private TextView hasRestaurantsTextView;
 
+    private RecyclerView stationsRecyclerView;
+    private TravelStationsRecyclerViewAdapter stationsAdapter;
 
     private Button loadTicketsButton;
 
@@ -36,12 +40,12 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private Travel travel;
 
-    public static TravelDetailsBottomSheetDialogFragment createInstance(Travel travel) {
-        return new TravelDetailsBottomSheetDialogFragment(travel);
-    }
-
     private TravelDetailsBottomSheetDialogFragment(Travel travel) {
         this.travel = travel;
+    }
+
+    public static TravelDetailsBottomSheetDialogFragment createInstance(Travel travel) {
+        return new TravelDetailsBottomSheetDialogFragment(travel);
     }
 
     @Nullable
@@ -57,37 +61,63 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        makeBackgroundTransparent();
         displayTravel();
+        initStationsRecyclerView();
+        initTravelActionListener();
     }
 
-    public void displayTravel() {
-        departureStationTextView.setText(travel.getDepartureStation());
-        arrivalStationTextView.setText(travel.getArrivalStation());
-
+    private void initTravelActionListener() {
         loadTicketsButton.setOnClickListener(view -> {
             if (listener == null)
                 return;
-            listener.loadTravel(travel);
+            listener.onTravelClick(travel);
         });
     }
 
+
+
     private void initViews(View view) {
-        // TODO: note that this is not complete
-        // TODO: there are still a lot of views that are left undefined
         travelNameTextView = view.findViewById(R.id.text_view_travel_information);
+        travelStatusTextView = view.findViewById(R.id.text_view_travel_status_value);
+        departureTimeTextView = view.findViewById(R.id.text_view_travel_departure_time_value);
+        arrivalTimeTextView = view.findViewById(R.id.text_view_travel_arrival_time_value);
+        durationTextView = view.findViewById(R.id.text_view_travel_duration_value);
+        distanceTextView = view.findViewById(R.id.text_view_travel_distance_value);
+        firstClassLimitTextView = view.findViewById(R.id.text_view_first_class_place_limit_value);
+        secondClassLimitTextView = view.findViewById(R.id.text_view_second_class_place_limit_value);
         departureStationTextView = view.findViewById(R.id.text_view_travel_departure_station_value);
         arrivalStationTextView = view.findViewById(R.id.text_view_travel_arrival_station_value);
         loadTicketsButton = view.findViewById(R.id.button_load_travel_tickets);
+        stationsRecyclerView = view.findViewById(R.id.recycler_view_stations);
     }
 
-    public void setOnTravelActionClickListener(OnTravelActionClickListener listener) {
+    private void displayTravel() {
+        travelStatusTextView.setText(TravelStatus.getStringForStatus(requireContext(), travel.status()));
+        departureStationTextView.setText(travel.getDepartureStationName());
+        arrivalStationTextView.setText(travel.getArrivalStationName());
+        departureTimeTextView.setText(travel.getDepartureTime().toString());
+        arrivalTimeTextView.setText(travel.getArrivalTime().toString());
+        durationTextView.setText(String.valueOf(travel.getDuration()));
+        distanceTextView.setText(String.valueOf(travel.getDistance()));
+        firstClassLimitTextView.setText(String.valueOf(travel.getFirstClassLimitPlaces()));
+        secondClassLimitTextView.setText(String.valueOf(travel.getSecondClassLimitPlaces()));
+    }
+
+    private void initStationsRecyclerView() {
+        stationsAdapter = TravelStationsRecyclerViewAdapter.create(travel.getStations());
+        stationsRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        stationsRecyclerView.setNestedScrollingEnabled(true);
+        stationsRecyclerView.setAdapter(stationsAdapter);
+    }
+
+    public void setOnTravelActionListener(OnTravelActionClickListener listener) {
         this.listener = listener;
     }
 
     public interface OnTravelActionClickListener {
 
-        void loadTravel(Travel travel);
+        void onTravelClick(Travel travel);
     }
 
-    //TODO: set the fragment background to transparent
 }

@@ -37,8 +37,8 @@ public class TravelsRecyclerViewAdapter extends RecyclerView.Adapter<TravelsRecy
     public void onBindViewHolder(@NonNull TravelViewHolder holder, int position) {
         Travel currentTravel = travels.get(position);
         Log.i("travel_info", new Gson().toJson(currentTravel));
-        holder.arrivalTextView.setText(currentTravel.getArrivalStation());
-        holder.departureTextView.setText(currentTravel.getDepartureStation());
+        holder.arrivalTextView.setText(currentTravel.getArrivalStationName());
+        holder.departureTextView.setText(currentTravel.getDepartureStationName());
 
         holder.container.setOnClickListener(view -> {
             if (this.listener == null)

@@ -16,10 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Travel;
-import com.tadhkirati.validator.models.User;
-import com.tadhkirati.validator.ui.login.LoginUtils;
 import com.tadhkirati.validator.ui.login.UserLoginSharedPreferences;
 import com.tadhkirati.validator.ui.traveldetails.TravelDetailsActivity;
 import com.tadhkirati.validator.ui.validator.ValidatorActivity;
@@ -73,6 +72,7 @@ public class TravelsFragment extends Fragment {
 
         loadingErrorView = view.findViewById(R.id.container_loading_error);
         connectivityErrorView = view.findViewById(R.id.container_connectivity_error);
+
     }
 
     private void initRecyclerView() {
@@ -92,14 +92,16 @@ public class TravelsFragment extends Fragment {
     private void displayTravelDetailsBottomSheetFragment(Travel travel) {
         var fragment = TravelDetailsBottomSheetDialogFragment
                 .createInstance(travel);
-        fragment.setOnTravelActionClickListener(this::loadTravelTickets);
+        // todo: we still need to set the background of the fragment to transparent
+        fragment.setOnTravelActionListener(this::loadTravelTickets);
         fragment.show(requireActivity().getSupportFragmentManager(), BOTTOM_SHEET_TRAVEL_DETAILS_TAG);
+
     }
 
     private void loadTravelTickets(Travel travel) {
         Intent intent = new Intent(requireActivity(), TravelDetailsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(LOADED_TRAVEL_KEY, travel);
+        bundle.putParcelable(LOADED_TRAVEL_KEY, travel);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -142,6 +144,7 @@ public class TravelsFragment extends Fragment {
     }
 
     private void handleTravelsLoadingConnectivityError() {
+        showToast("connectivity error");
         travelsContainerCardView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         connectivityErrorView.setVisibility(View.VISIBLE);
@@ -149,6 +152,7 @@ public class TravelsFragment extends Fragment {
     }
 
     private void handleTravelsLoadingError() {
+        showToast("loading error");
         travelsContainerCardView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         connectivityErrorView.setVisibility(View.GONE);
@@ -157,6 +161,7 @@ public class TravelsFragment extends Fragment {
 
     private void handleTravelsLoadedSuccess() {
         // hide all the errors views and show the recycler view
+        showToast("loaded with success");
         progressBar.setVisibility(View.GONE);
         connectivityErrorView.setVisibility(View.GONE);
         loadingErrorView.setVisibility(View.GONE);
@@ -171,6 +176,10 @@ public class TravelsFragment extends Fragment {
                 UserLoginSharedPreferences.retrieveStoredAccessToken(requireActivity())
         );
         travelsViewModel.loadTravels(token);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT);
     }
 
 }

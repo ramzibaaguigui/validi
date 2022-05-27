@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    android:layout_height="wrap_content">
-
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/fragment_head_container"
@@ -13,7 +14,10 @@
         android:background="@drawable/background_bottom_fragment_header"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0">
 
         <View
             android:id="@+id/view_draggable"
@@ -35,126 +39,198 @@
             android:textSize="25sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <TextView
-        android:id="@+id/text_view_travel_status"
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/status_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_head_container" />
-
-    <TextView
-        android:id="@+id/text_view_travel_status_value"
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="@string/pending_string"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_status"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_status"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
-
-    <TextView
-        android:id="@+id/text_view_travel_item_departure_station"
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/departure_station_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_status" />
-
-    <TextView
-        android:id="@+id/text_view_travel_departure_station_value"
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="SOGRAL"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_item_departure_station"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_item_departure_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_item_departure_station" />
-
-    <TextView
-        android:id="@+id/text_view_travel_arrival_station"
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/arrival_station_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_item_departure_station" />
-
-    <TextView
-        android:id="@+id/text_view_travel_arrival_station_value"
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="Paris"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_arrival_station"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_arrival_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_arrival_station" />
-
-    <TextView
-        android:id="@+id/text_view_travel_departure_time"
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/departure_time_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_station" />
-
-    <TextView
-        android:id="@+id/text_view_travel_departure_time_value"
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="8:45pm"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_departure_time"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_departure_time"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_departure_time" />
-
-    <TextView
-        android:id="@+id/text_view_travel_arrival_time"
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/arrival_time_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_departure_time" />
-
-    <TextView
-        android:id="@+id/text_view_travel_arrival_time_value"
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="9:18pm"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_arrival_time"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_arrival_time"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_arrival_time" />
-
-
-    <TextView
-        android:id="@+id/text_view_travel_duration"
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/duration_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_time" />
-
-    <TextView
-        android:id="@+id/text_view_travel_duration_value"
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="10 HOURS"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_duration"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_duration"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_duration" />
-
-
-    <TextView
-        android:id="@+id/text_view_travel_distance"
-        style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/distance_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_duration" />
-
-    <TextView
-        android:id="@+id/text_view_travel_distance_value"
-        style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="500km"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_distance"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_distance"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_distance" />
-
-    <Button
-        android:background="@color/purple"
-        android:id="@+id/button_load_travel_tickets"
-        style="@style/ProfileActionButtonStyle"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/nunito_sans_bold"
-        android:text="@string/load_tickets_string"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_distance" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_head_container"
+        app:layout_constraintVertical_weight="1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <TextView
+                android:id="@+id/text_view_travel_status"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/status_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_travel_status_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="@string/pending_string"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_travel_status"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_status"
+                app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
+
+            <TextView
+                android:id="@+id/text_view_travel_item_departure_station"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/departure_station_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_travel_status" />
+
+            <TextView
+                android:id="@+id/text_view_travel_departure_station_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="SOGRAL"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_travel_item_departure_station"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_item_departure_station"
+                app:layout_constraintTop_toTopOf="@id/text_view_travel_item_departure_station" />
+
+            <TextView
+                android:id="@+id/text_view_travel_arrival_station"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/arrival_station_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_travel_item_departure_station" />
+
+            <TextView
+                android:id="@+id/text_view_travel_arrival_station_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="Paris"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_travel_arrival_station"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_arrival_station"
+                app:layout_constraintTop_toTopOf="@id/text_view_travel_arrival_station" />
+
+            <TextView
+                android:id="@+id/text_view_travel_departure_time"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/departure_time_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_station" />
+
+            <TextView
+                android:id="@+id/text_view_travel_departure_time_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="8:45pm"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_travel_departure_time"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_departure_time"
+                app:layout_constraintTop_toTopOf="@id/text_view_travel_departure_time" />
+
+            <TextView
+                android:id="@+id/text_view_travel_arrival_time"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/arrival_time_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_travel_departure_time" />
+
+            <TextView
+                android:id="@+id/text_view_travel_arrival_time_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="9:18pm"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_travel_arrival_time"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_arrival_time"
+                app:layout_constraintTop_toTopOf="@id/text_view_travel_arrival_time" />
+
+
+            <TextView
+                android:id="@+id/text_view_travel_duration"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/duration_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_time" />
+
+            <TextView
+                android:id="@+id/text_view_travel_duration_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="10 HOURS"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_travel_duration"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_duration"
+                app:layout_constraintTop_toTopOf="@id/text_view_travel_duration" />
+
+
+            <TextView
+                android:id="@+id/text_view_travel_distance"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/distance_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_travel_duration" />
+
+            <TextView
+                android:id="@+id/text_view_travel_distance_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="500km"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_travel_distance"
+                app:layout_constraintStart_toEndOf="@id/text_view_travel_distance"
+                app:layout_constraintTop_toTopOf="@id/text_view_travel_distance" />
+
+
+            <TextView
+                android:id="@+id/text_view_first_class_place_limit"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/first_class_limit_places_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_travel_distance_value" />
+
+            <TextView
+                android:id="@+id/text_view_first_class_place_limit_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="350"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_first_class_place_limit"
+                app:layout_constraintStart_toEndOf="@id/text_view_first_class_place_limit"
+                app:layout_constraintTop_toTopOf="@id/text_view_first_class_place_limit" />
+
+            <TextView
+                android:id="@+id/text_view_second_class_place_limit"
+                style="@style/TicketFragmentPropertyNameTextViewStyle"
+                android:text="@string/second_class_limit_places_string"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_first_class_place_limit" />
+
+
+            <TextView
+                android:id="@+id/text_view_second_class_place_limit_value"
+                style="@style/TicketFragmentPropertyValueTextViewStyle"
+                android:text="350"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_second_class_place_limit"
+                app:layout_constraintStart_toEndOf="@id/text_view_second_class_place_limit"
+                app:layout_constraintTop_toTopOf="@id/text_view_second_class_place_limit" />
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_second_class_place_limit">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_stations"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:paddingBottom="150dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_second_class_place_limit"
+                    tools:itemCount="40" />
+            </androidx.core.widget.NestedScrollView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/button_load_travel_tickets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:padding="10dp"
+        android:text="Load tickets"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

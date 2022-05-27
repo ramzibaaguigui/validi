@@ -24,6 +24,10 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ticket_view, parent, false)  );
     }
 
+    private TravelDetailsTicketsRecyclerViewAdapter(List<Ticket> tickets) {
+
+    }
+
     @Override
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
         holder.passengerNameTextView.setText(getItem(position).getPassengerName());
@@ -63,5 +67,9 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
     }
     interface OnTicketItemClickListener {
         void onTicketClick(Ticket ticket);
+    }
+
+    public static TravelDetailsTicketsRecyclerViewAdapter create(List<Ticket> tickets) {
+        return new TravelDetailsTicketsRecyclerViewAdapter(tickets);
     }
 }

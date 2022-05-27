@@ -88,7 +88,7 @@ public class CodeScannerFragment extends Fragment {
         // should be set again white receiving a response from
         // the server
         codeScannerViewModel.setCanScanCode(false);
-        codeScannerViewModel.setTicketToken(result.getText());
+        codeScannerViewModel.setScannedTicketToken(result.getText());
         codeScannerViewModel.validateTicket(LoginUtils.formTokenHeader(requireActivity()));
         // wait for the response from the server and then enable scanning again
     }
@@ -169,7 +169,7 @@ public class CodeScannerFragment extends Fragment {
     private void observeValidationState() {
         codeScannerViewModel.observeValidationState(requireActivity(),
                 state -> {
-                    if (state == CodeScannerViewModel.STATE_VALIDATION_SUCCESS) {
+                    if (state == CodeScannerViewModel.STATE_TICKET_VALIDATION_SUCCESS) {
                         handleTicketValidationSuccess();
                         return;
                     }

@@ -9,17 +9,24 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.tadhkirati.validator.api.payload.ApiResponse;
+import com.tadhkirati.validator.api.payload.UpdatePasswordPayload;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
+import com.tadhkirati.validator.api.retrofit.RetrofitClient;
 import com.tadhkirati.validator.api.retrofit.UpdateUserApiRepository;
 import com.tadhkirati.validator.models.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileViewModel extends AndroidViewModel {
 
 
-    public ProfileViewModel(@NonNull Application application) {
-        super(application);
-    }
-
+    public static final int STATE_INITIAL = 0;
+    public static final int STATE_USER_UPDATE_IN_PROGRESS = 1;
+    public static final int STATE_USER_UPDATE_SUCCESS = 2;
+    public static final int STATE_USER_UPDATE_ERROR = 3;
+    public static final int STATE_CONNECTIVITY_ERROR = 4;
     private final MutableLiveData<User> loggedUser = new MutableLiveData<>();
     private final MutableLiveData<String> currentPassword = new MutableLiveData<>("");
     private final MutableLiveData<String> newPassword = new MutableLiveData<>("");
@@ -28,18 +35,16 @@ public class ProfileViewModel extends AndroidViewModel {
     private final MutableLiveData<String> enteredLastName = new MutableLiveData<>("");
     private final MutableLiveData<String> enteredPhoneNumber = new MutableLiveData<>("");
     private final MutableLiveData<Integer> currentState = new MutableLiveData<>(STATE_INITIAL);
-
-    public static final int STATE_INITIAL = 0;
-    public static final int STATE_USER_UPDATE_IN_PROGRESS = 1;
-    public static final int STATE_USER_UPDATE_SUCCESS = 2;
-    public static final int STATE_USER_UPDATE_ERROR = 3;
-
-    public void setLoggedUser(User user) {
-        loggedUser.setValue(user);
+    public ProfileViewModel(@NonNull Application application) {
+        super(application);
     }
 
     public User getLoggedUser() {
         return loggedUser.getValue();
+    }
+
+    public void setLoggedUser(User user) {
+        loggedUser.setValue(user);
     }
 
     public String getCurrentPassword() {
@@ -104,18 +109,22 @@ public class ProfileViewModel extends AndroidViewModel {
                 }
                 if (response.isSuccessful()) {
                     // TODO; there is still something to finish here
+                    setLoggedUser(response.getData());
+                    setCurrentState(STATE_USER_UPDATE_SUCCESS);
                 }
                 handleUpdateError();
             }
 
             @Override
             public void handleError() {
-                handleConnectivityError();
+                setCurrentState(STATE_CONNECTIVITY_ERROR);
             }
         });
     }
 
-    private void handleConnectivityError() {
+
+    private void setCurrentState(int state) {
+        this.currentState.setValue(state);
 
     }
 
@@ -125,17 +134,28 @@ public class ProfileViewModel extends AndroidViewModel {
         // todo: YOU CAN SEE IF THERE IS ANYTHING TO DO HERE LATER
     }
 
-    private void handleUserUpdated() {
-
-    }
 
     public void observeState(LifecycleOwner owner, Observer<Integer> observer) {
         currentState.observe(owner, observer);
     }
 
-    public void setStateInitial() {
-        this.currentState.setValue(STATE_INITIAL);
+    public void updatePassword(String authToken) {
+        var updatePasswordPayload = UpdatePasswordPayload
+                .create().oldPassword(currentPassword.getValue())
+                .newPassword(newPassword.getValue())
+                .confirmPassword(confirmNewPassword.getValue());
+        RetrofitClient.apiService.updatePassword(authToken, updatePasswordPayload)
+                .enqueue(new Callback<ApiResponse<User>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
 
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+
+                    }
+                });
     }
 
 

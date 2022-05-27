@@ -9,11 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tadhkirati.validator.R;
+import com.tadhkirati.validator.models.Station;
+
+import java.util.List;
 
 public class TravelStationsRecyclerViewAdapter extends RecyclerView.Adapter<TravelStationsRecyclerViewAdapter.TravelViewHolder> {
     private static final int VIEW_TYPE_FIRST = 0;
     private static final int VIEW_TYPE_MIDDLE = 1;
     private static final int VIEW_TYPE_LAST = 2;
+
+    private List<Station> stations;
+
+    public static TravelStationsRecyclerViewAdapter create(List<Station> stations) {
+        return new TravelStationsRecyclerViewAdapter(stations);
+    }
+
+    private TravelStationsRecyclerViewAdapter(List<Station> stations) {
+        this.stations = stations;
+    }
 
     @NonNull
     @Override
@@ -37,12 +50,16 @@ public class TravelStationsRecyclerViewAdapter extends RecyclerView.Adapter<Trav
 
     @Override
     public void onBindViewHolder(@NonNull TravelViewHolder holder, int position) {
-
+        final Station currentStation = stations.get(position);
+        holder.stationLocationTextView.setText(currentStation.getWilaya());
+        holder.stationNameTextView.setText(currentStation.getName());
+        holder.stationTravelPriceTextView.setText(String.valueOf(currentStation.getSecondClassCost()));
+        // holder.stationTravelTimeTextView.setText(currentStation.getArrivalTime());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return stations.size();
     }
 
     @Override

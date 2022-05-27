@@ -8,7 +8,7 @@ public class TicketValidationPayload {
     @SerializedName("qrcode_token")
     String qrCodeToken;
 
-    public static TicketValidationPayload createTicketValidationRequest() {
+    public static TicketValidationPayload createPayload() {
         return new TicketValidationPayload();
     }
 

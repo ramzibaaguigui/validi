@@ -61,4 +61,10 @@
     <string name="to_your_validator_account_string">to your validator account.</string>
     <string name="string_connectivity_error">Connectivity error</string>
     <string name="string_loading_error">Loading Error</string>
+    <string name="underway_string">Underway</string>
+    <string name="completed_string">Completed</string>
+    <string name="none_string" />
+    <string name="first_class_limit_places_string">First class places limit</string>
+    <string name="second_class_limit_places">"Second class places limit"</string>
+    <string name="second_class_limit_places_string">"Second class limit places"</string>
 </resources>

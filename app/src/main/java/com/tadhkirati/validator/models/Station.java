@@ -3,18 +3,17 @@ package com.tadhkirati.validator.models;
 import com.google.gson.annotations.SerializedName;
 
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.Date;
 
 public class Station {
+
+    @SerializedName("name")
     private String name;
 
     @SerializedName("id")
     private Long id;
 
     @SerializedName("distance")
-    private BigDecimal distance;
-
+    private double distance;
 
     @SerializedName("wilaya")
     private String wilaya;
@@ -29,10 +28,24 @@ public class Station {
     private BigDecimal secondClassPrice;
 
 
+    public String getArrivalTime() {
+        return this.arrivalTime;
+    }
 
 
     public String getName() {
         return this.name;
     }
 
+    public String getWilaya() {
+        return this.wilaya;
+    }
+
+    public BigDecimal getFirstClassCost() {
+        return this.firstClassPrice;
+    }
+
+    public BigDecimal getSecondClassCost() {
+        return this.secondClassPrice;
+    }
 }
