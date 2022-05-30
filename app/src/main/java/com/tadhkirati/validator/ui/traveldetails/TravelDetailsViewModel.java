@@ -1,6 +1,7 @@
 package com.tadhkirati.validator.ui.traveldetails;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.tadhkirati.validator.api.payload.ApiResponse;
+import com.tadhkirati.validator.api.payload.TicketValidationPayload;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
 import com.tadhkirati.validator.api.retrofit.TicketApiRepository;
 import com.tadhkirati.validator.models.Ticket;
@@ -40,9 +42,12 @@ public class TravelDetailsViewModel extends AndroidViewModel {
     }
 
     public void loadTickets(Long travelId, String accessToken) {
+        currentState.setValue(STATE_LOADING_PROGRESS);
+
         TicketApiRepository.getTravelTickets(travelId, accessToken, new ResponseHandler<List<Ticket>>() {
             @Override
             public void handleSuccess(ApiResponse<List<Ticket>> response) {
+                Log.i("RESPONSE_TICKETS", String.valueOf(response));
                 if (response == null) {
                     currentState.setValue(STATE_CONNECTIVITY_ERROR);
                     return;
@@ -58,7 +63,23 @@ public class TravelDetailsViewModel extends AndroidViewModel {
 
             @Override
             public void handleError() {
+
+                Log.i("ERROR_HERE", "error here");
                 currentState.setValue(STATE_CONNECTIVITY_ERROR);
+            }
+        });
+    }
+
+    public void validateTicket(String qrCode, String accessToken) {
+        TicketApiRepository.validateTicket(qrCode, accessToken, new ResponseHandler<Ticket>() {
+            @Override
+            public void handleSuccess(ApiResponse<Ticket> response) {
+
+            }
+
+            @Override
+            public void handleError() {
+
             }
         });
     }

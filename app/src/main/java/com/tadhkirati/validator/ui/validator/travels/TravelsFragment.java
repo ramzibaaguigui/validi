@@ -101,7 +101,7 @@ public class TravelsFragment extends Fragment {
     private void loadTravelTickets(Travel travel) {
         Intent intent = new Intent(requireActivity(), TravelDetailsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(LOADED_TRAVEL_KEY, travel);
+        bundle.putLong("LOADED_TRAVEL_ID", travel.getId());
         intent.putExtras(bundle);
         startActivity(intent);
     }

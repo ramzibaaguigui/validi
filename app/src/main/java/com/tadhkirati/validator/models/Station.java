@@ -2,9 +2,10 @@ package com.tadhkirati.validator.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Station {
+public class Station implements Serializable {
 
     @SerializedName("name")
     private String name;

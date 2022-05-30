@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.tadhkirati.validator.R;
+import com.tadhkirati.validator.models.Ticket;
 
 public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -20,7 +21,15 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     private TextView passengerNameTextView;
     private TextView boardingStationTextView;
     private TextView landingStationTextView;
+    private TextView paymentMethodTextView;
+    private TextView travelClassTextView;
+    private TextView ticketIsValidatedTextView;
+    private TextView priceTextView;
+
     private Button validateButton;
+
+    private Ticket currentTicket;
+    private OnValidateTicketListener listener;
 
     @Nullable
     @Override
@@ -33,6 +42,23 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        displayTicket();
+    }
+
+    private void displayTicket() {
+        passengerNameTextView.setText(currentTicket.getPassengerName());
+        boardingStationTextView.setText(currentTicket.getBoardingStationName());
+        landingStationTextView.setText(currentTicket.getLandingStationName());
+        paymentMethodTextView.setText(currentTicket.paymentMethod());
+        travelClassTextView.setText(currentTicket.travelClass());
+        ticketIsValidatedTextView.setText(String.valueOf(currentTicket.isValidated()));
+        priceTextView.setText(String.valueOf(currentTicket.getPrice()));
+
+        validateButton.setOnClickListener(view -> {
+            if (listener == null)
+                return;
+            listener.onValidate(currentTicket);
+        });
     }
 
     private void initViews(View view) {
@@ -42,9 +68,26 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
         boardingStationTextView = view.findViewById(R.id.text_view_travel_departure_station_value);
         landingStationTextView = view.findViewById(R.id.text_view_travel_arrival_station_value);
         validateButton = view.findViewById(R.id.button_load_travel_tickets);
+        paymentMethodTextView = view.findViewById(R.id.text_view_ticket_payment_method_value);
+        priceTextView = view.findViewById(R.id.text_view_ticket_price_value);
+        ticketIsValidatedTextView = view.findViewById(R.id.text_view_ticket_is_validated_value);
+        travelClassTextView = view.findViewById(R.id.text_view_ticket_travel_class_value);
     }
 
-    public interface OnValidateClickListener {
-        void onValidate();
+    public void setOnValidateTicketListener(OnValidateTicketListener listener) {
+        this.listener = listener;
     }
+
+    public interface OnValidateTicketListener {
+        void onValidate(Ticket ticket);
+    }
+
+    private TicketDetailsBottomSheetDialogFragment(Ticket ticket) {
+        this.currentTicket = ticket;
+    }
+
+    public static TicketDetailsBottomSheetDialogFragment create(Ticket ticket) {
+        return new TicketDetailsBottomSheetDialogFragment(ticket);
+    }
+
 }

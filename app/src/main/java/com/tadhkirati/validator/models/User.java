@@ -24,6 +24,9 @@ public class User implements Serializable {
     @SerializedName("role")
     private String role;
 
+    @SerializedName("image")
+    private String image;
+
     public static User createUser() {
         return new User();
     }
@@ -68,6 +71,11 @@ public class User implements Serializable {
 
     public User withPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public User withImage(String image) {
+        this.image = image;
         return this;
     }
 

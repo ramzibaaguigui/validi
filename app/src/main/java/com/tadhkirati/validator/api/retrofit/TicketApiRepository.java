@@ -1,5 +1,7 @@
 package com.tadhkirati.validator.api.retrofit;
 
+import android.util.Log;
+
 import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.payload.TicketValidationPayload;
 import com.tadhkirati.validator.models.Ticket;
@@ -46,6 +48,8 @@ public class TicketApiRepository {
 
                     @Override
                     public void onFailure(Call<ApiResponse<List<Ticket>>> call, Throwable t) {
+                        Log.i("TICKET_ERROR", String.valueOf(t.getMessage()));
+                        Log.i("TIKCET_ERROR", String.valueOf(t.getStackTrace()));
                         handler.handleError();
                     }
                 });
@@ -64,6 +68,8 @@ public class TicketApiRepository {
 
                     @Override
                     public void onFailure(Call<ApiResponse<Ticket>> call, Throwable t) {
+                        Log.e("TICKET_ERROR", t.getMessage());
+                        Log.i("TICKET_ERROR", t.getStackTrace().toString());
                         handler.handleError();
                     }
                 });

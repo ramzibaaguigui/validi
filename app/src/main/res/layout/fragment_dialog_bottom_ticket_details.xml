@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_station" />
 
     <TextView
-        android:id="@+id/text_view_travel_departure_time_value"
+        android:id="@+id/text_view_ticket_travel_class_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:text="Paris"
         app:layout_constraintBottom_toBottomOf="@id/text_view_travel_departure_time"
@@ -101,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_view_travel_departure_time" />
 
     <TextView
-        android:id="@+id/text_view_travel_arrival_time_value"
+        android:id="@+id/text_view_ticket_is_validated_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:text="Paris"
         app:layout_constraintBottom_toBottomOf="@id/text_view_travel_arrival_time"
@@ -117,7 +117,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_time" />
 
     <TextView
-        android:id="@+id/text_view_travel_duration_value"
+        android:id="@+id/text_view_ticket_payment_method_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:text="Paris"
         app:layout_constraintBottom_toBottomOf="@id/text_view_travel_duration"
@@ -133,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_view_travel_duration" />
 
     <TextView
-        android:id="@+id/text_view_travel_distance_value"
+        android:id="@+id/text_view_ticket_price_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:text="Paris"
         app:layout_constraintBottom_toBottomOf="@id/text_view_travel_distance"

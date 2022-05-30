@@ -3,6 +3,7 @@ package com.tadhkirati.validator.api.payload;
 import com.google.gson.annotations.SerializedName;
 
 public class TicketValidationPayload {
+
     Integer travelId;
 
     @SerializedName("qrcode_token")

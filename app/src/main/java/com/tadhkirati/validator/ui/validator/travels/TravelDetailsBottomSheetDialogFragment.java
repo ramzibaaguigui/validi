@@ -93,7 +93,9 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     }
 
     private void displayTravel() {
-        travelStatusTextView.setText(TravelStatus.getStringForStatus(requireContext(), travel.status()));
+//        travelStatusTextView.setText(TravelStatus.getStringForStatus(requireContext(), travel.status()));
+        travelStatusTextView.setText(travel.status());
+
         departureStationTextView.setText(travel.getDepartureStationName());
         arrivalStationTextView.setText(travel.getArrivalStationName());
         departureTimeTextView.setText(travel.getDepartureTime().toString());

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/purple"
-        android:paddingTop="50dp"
+        android:paddingTop="20dp"
         android:paddingBottom="50dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -22,16 +22,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                app:roundPercent="0.7"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_margin="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:src="@mipmap/ic_launcher_round" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_sans_extrabold"
+                android:fontFamily="@font/nunito_sans_bold"
                 android:text="Tadhkirati"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -43,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:fontFamily="@font/nunito_sans_extrabold"
-            android:text="A revolution in train"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/a_revolution_in_train_string"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +57,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans_extrabold"
-            android:text="services"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/services_string"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +149,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
-            android:fontFamily="@font/nunito_sans_extrabold"
+            android:fontFamily="@font/nunito_sans_bold"
             android:hint="@string/phone_number_string"
             android:inputType="phone"
             android:textSize="21sp"
@@ -172,7 +175,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
-            android:fontFamily="@font/nunito_sans_extrabold"
+            android:fontFamily="@font/nunito_sans_bold"
             android:hint="@string/password_string"
             android:inputType="numberPassword"
             android:text="hellow orld"
@@ -195,8 +198,13 @@
 
         <Button
             android:id="@+id/button_login"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white_grey"
             android:background="@drawable/background_login_button"
             android:fontFamily="@font/nunito_sans_extrabold"
             android:text="@string/string_login"

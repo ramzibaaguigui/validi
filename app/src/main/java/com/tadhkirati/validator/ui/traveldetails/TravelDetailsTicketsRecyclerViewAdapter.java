@@ -17,6 +17,8 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
     private OnTicketItemClickListener ticketItemClickListener;
     private List<Ticket> tickets;
 
+
+
     @NonNull
     @Override
     public TicketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -25,7 +27,7 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
     }
 
     private TravelDetailsTicketsRecyclerViewAdapter(List<Ticket> tickets) {
-
+        this.tickets = tickets;
     }
 
     @Override

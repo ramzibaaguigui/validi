@@ -99,12 +99,13 @@ public class ProfileViewModel extends AndroidViewModel {
         User newUser = User.createUser()
                 .withFirstName(enteredFirstName.getValue())
                 .withLastName(enteredLastName.getValue())
-                .withPhoneNumber(enteredPhoneNumber.getValue());
+                .withPhoneNumber(enteredPhoneNumber.getValue())
+                        .withImage(null);
         UpdateUserApiRepository.updateUser(newUser, accessToken, new ResponseHandler<User>() {
             @Override
             public void handleSuccess(ApiResponse<User> response) {
                 if (response == null) {
-                    handleError();
+                    currentState.setValue(STATE_CONNECTIVITY_ERROR);
                     return;
                 }
                 if (response.isSuccessful()) {
@@ -112,7 +113,8 @@ public class ProfileViewModel extends AndroidViewModel {
                     setLoggedUser(response.getData());
                     setCurrentState(STATE_USER_UPDATE_SUCCESS);
                 }
-                handleUpdateError();
+
+                setCurrentState(STATE_USER_UPDATE_ERROR);
             }
 
             @Override
@@ -135,7 +137,7 @@ public class ProfileViewModel extends AndroidViewModel {
     }
 
 
-    public void observeState(LifecycleOwner owner, Observer<Integer> observer) {
+    public void observeUserUpdateState(LifecycleOwner owner, Observer<Integer> observer) {
         currentState.observe(owner, observer);
     }
 

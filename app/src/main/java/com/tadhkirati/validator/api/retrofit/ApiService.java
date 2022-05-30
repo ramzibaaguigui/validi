@@ -25,17 +25,17 @@ public interface ApiService {
     Call<ApiResponse<LoginResponse>> login(@Body LoginRequest loginRequest);
 
     @POST("/api/user/update_infos")
-    Call<ApiResponse<User>> updateUserInfo(User user, @Header(AUTH_HEADER) String token);
+    Call<ApiResponse<User>> updateUserInfo(@Body User user, @Header(AUTH_HEADER) String token);
 
     @POST("/api/validator/validate_ticket")
     Call<ApiResponse<Ticket>> validateTicket(@Body TicketValidationPayload validationPayload,
                                              @Header(AUTH_HEADER) String authHeader);
 
     @GET("/api/validator/todayTravels")
-    Call<ApiResponse<List<Travel>>> getTravels(@Header(AUTH_HEADER) String accessToken);
+    Call<ApiResponse<List<Travel>>> getTodayTravels(@Header(AUTH_HEADER) String accessToken);
     // TODO: WE STILL NEED TO ADD METHOD PARAMETERS HERE
 
-    @GET("/api/tickets/{travelId}")
+    @GET("/api/validator/tickets/{travelId}")
     Call<ApiResponse<List<Ticket>>> getTravelTickets(@Path("travelId") Long travelId,
                                                      @Header(AUTH_HEADER) String accessToken);
 
@@ -43,7 +43,7 @@ public interface ApiService {
     Call<ApiResponse<Ticket>> validateTicket(@Header(AUTH_HEADER) String accessToken, @Body TicketValidationPayload payload);
 
     @POST("/api/user/update_password")
-    Call<ApiResponse<User>> updatePassword(@Header(AUTH_HEADER) String accessToken, @Body UpdatePasswordPayload payload)
+    Call<ApiResponse<User>> updatePassword(@Header(AUTH_HEADER) String accessToken, @Body UpdatePasswordPayload payload);
 
 
 }

@@ -1,8 +1,11 @@
 package com.tadhkirati.validator.ui.traveldetails;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +20,6 @@ import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Ticket;
 import com.tadhkirati.validator.models.Travel;
 import com.tadhkirati.validator.ui.login.LoginUtils;
-import com.tadhkirati.validator.ui.login.UserLoginSharedPreferences;
 import com.tadhkirati.validator.ui.validator.travels.TravelsFragment;
 
 public class TravelDetailsActivity extends AppCompatActivity {
@@ -30,9 +32,14 @@ public class TravelDetailsActivity extends AppCompatActivity {
     private CheckBox showNonValidatedCheckbox;
     private TravelDetailsViewModel travelsViewModel;
 
+    private ProgressBar loadingProgressBar;
+    private View loadingErrorContainer;
+    private View connectivityErrorContainer;
+
     private TravelDetailsTicketsRecyclerViewAdapter ticketsAdapter;
 
     private Travel loadedTravel;
+    private Long travelId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,11 +59,20 @@ public class TravelDetailsActivity extends AppCompatActivity {
         searchTicketsImageButton = findViewById(R.id.image_button_search_tickets);
         showValidatedCheckbox = findViewById(R.id.checkbox_show_validated);
         showNonValidatedCheckbox = findViewById(R.id.checkbox_show_non_validated);
+
+        loadingProgressBar = findViewById(R.id.progress_bar_tickets);
+        loadingErrorContainer = findViewById(R.id.container_loading_error);
+        connectivityErrorContainer = findViewById(R.id.container_connectivity_error);
+
+
     }
 
     private void getLoadedTravel() {
         Bundle bundle = getIntent().getExtras();
-        this.loadedTravel = (Travel) bundle.getParcelable(TravelsFragment.LOADED_TRAVEL_KEY);
+        // Log.i("LOADED_TRAVEL", String.valueOf((Travel) bundle.getSerializable(TravelsFragment.LOADED_TRAVEL_KEY)));
+        Log.i("LOADED_TRAVEL_ID", String.valueOf(bundle.getLong("LOADED_TRAVEL_ID")));
+        this.travelId = bundle.getLong("LOADED_TRAVEL_ID");
+        this.loadedTravel = (Travel) bundle.getSerializable(TravelsFragment.LOADED_TRAVEL_KEY);
     }
 
     private void initViewModel() {
@@ -68,7 +84,7 @@ public class TravelDetailsActivity extends AppCompatActivity {
         ticketsAdapter = TravelDetailsTicketsRecyclerViewAdapter
                 .create(travelsViewModel.getTickets());
         ticketsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-                ticketsAdapter.setOnTicketItemClickListener(new TravelDetailsTicketsRecyclerViewAdapter.OnTicketItemClickListener() {
+        ticketsAdapter.setOnTicketItemClickListener(new TravelDetailsTicketsRecyclerViewAdapter.OnTicketItemClickListener() {
             @Override
             public void onTicketClick(Ticket ticket) {
 
@@ -105,11 +121,28 @@ public class TravelDetailsActivity extends AppCompatActivity {
     }
 
     private void handleTicketsLoadedSuccessfully() {
+        loadingProgressBar.setVisibility(View.GONE);
+        connectivityErrorContainer.setVisibility(View.GONE);
+        ticketsRecyclerView.setVisibility(View.VISIBLE);
+        loadingErrorContainer.setVisibility(View.GONE);
+
         ticketsAdapter = TravelDetailsTicketsRecyclerViewAdapter.create(travelsViewModel.getTickets());
         ticketsAdapter.setOnTicketItemClickListener(new TravelDetailsTicketsRecyclerViewAdapter.OnTicketItemClickListener() {
             @Override
             public void onTicketClick(Ticket ticket) {
+                var ticketFragment = TicketDetailsBottomSheetDialogFragment
+                        .create(ticket);
+                ticketFragment.setOnValidateTicketListener(new TicketDetailsBottomSheetDialogFragment.OnValidateTicketListener() {
+                    @Override
+                    public void onValidate(Ticket ticket) {
+                        Toast.makeText(TravelDetailsActivity.this,
+                                "you have just validated a ticket with token" +
+                                        ticket.getQrCodeToken(),
+                                Toast.LENGTH_SHORT).show();
 
+                    }
+                });
+                ticketFragment.show(getSupportFragmentManager(), "TICKET_DETAILS_FRAGMENT");
             }
         });
         ticketsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -117,21 +150,39 @@ public class TravelDetailsActivity extends AppCompatActivity {
     }
 
     private void handleTicketsLoadingProgress() {
+        loadingProgressBar.setVisibility(View.VISIBLE);
+        connectivityErrorContainer.setVisibility(View.GONE);
+        loadingErrorContainer.setVisibility(View.GONE);
+        ticketsRecyclerView.setVisibility(View.GONE);
+
         Toast.makeText(this, "loading progress", Toast.LENGTH_SHORT).show();
+
     }
 
     private void handleTicketsLoadingError() {
+        loadingProgressBar.setVisibility(View.GONE);
+        connectivityErrorContainer.setVisibility(View.GONE);
+        ticketsRecyclerView.setVisibility(View.GONE);
+        loadingErrorContainer.setVisibility(View.VISIBLE);
+
         Toast.makeText(this, "loading error", Toast.LENGTH_SHORT).show();
     }
 
     private void handleTicketsLoadingConnectivityError() {
+        loadingProgressBar.setVisibility(View.GONE);
+        ticketsRecyclerView.setVisibility(View.GONE);
+        loadingErrorContainer.setVisibility(View.GONE);
+        connectivityErrorContainer.setVisibility(View.VISIBLE);
+
         Toast.makeText(this, "loading connectivity error", Toast.LENGTH_SHORT).show();
 
     }
 
     private void loadTickets() {
-        Long travelId = loadedTravel.getId();
+        Long travelId = this.travelId;
+
         String token = LoginUtils.formTokenHeader(this);
-        travelsViewModel.loadTickets(1L, token);
+        Log.i("TRAVEL_ID", String.valueOf(travelId));
+        travelsViewModel.loadTickets(travelId, token);
     }
 }

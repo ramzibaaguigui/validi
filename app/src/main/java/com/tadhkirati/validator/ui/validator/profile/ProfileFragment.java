@@ -73,6 +73,8 @@ public class ProfileFragment extends Fragment {
         displayUserProfile();
         syncViewModel();
         observeState();
+        initListeners();
+        observeUserUpdateState();
     }
 
     private void initViews(View view) {
@@ -81,7 +83,7 @@ public class ProfileFragment extends Fragment {
         initEditPassword(view);
     }
 
-    private void initListener() {
+    private void initListeners() {
         submitEditProfileButton.setOnClickListener(view -> updateUserProfile());
         submitEditPasswordButton.setOnClickListener(view -> updateUserPassword());
     }
@@ -136,7 +138,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void observeState() {
-        profileViewModel.observeState(this, new Observer<Integer>() {
+        profileViewModel.observeUserUpdateState(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer state) {
                 if (state == ProfileViewModel.STATE_USER_UPDATE_IN_PROGRESS) {
@@ -157,7 +159,7 @@ public class ProfileFragment extends Fragment {
     private void handleUserUpdateInProgress() {
         // TODO: here we will display a progress bar
         // indication that a request has been sent to the server
-
+        Toast.makeText(requireActivity(), "User update Progress", Toast.LENGTH_SHORT).show();
     }
 
     private void syncViewModel() {
@@ -218,6 +220,7 @@ public class ProfileFragment extends Fragment {
 
     private void handleUserUpdateSuccess() {
         displayUserProfile();
+        Toast.makeText(requireActivity(), "User update success", Toast.LENGTH_SHORT).show();
     // todo    profileViewModel.setStateInitial();
     }
 
@@ -231,6 +234,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showProfileInvalid() {
+        Toast.makeText(requireActivity(), "Profile invalid", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -253,6 +257,36 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showPasswordInvalid() {
+        Toast.makeText(requireActivity(), "Password invalid", Toast.LENGTH_SHORT).show();
+    }
 
+    private void observeUserUpdateState() {
+        profileViewModel.observeUserUpdateState(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer state) {
+                if (state == ProfileViewModel.STATE_USER_UPDATE_SUCCESS) {
+                    handleUserUpdateSuccess();
+                    return;
+                }
+                if (state == ProfileViewModel.STATE_USER_UPDATE_ERROR) {
+                    handleUserUpdateError();
+                    return;
+                }
+
+                if (state == ProfileViewModel.STATE_USER_UPDATE_IN_PROGRESS) {
+                    handleUserUpdateInProgress();
+                    return;
+                }
+
+                if (state == ProfileViewModel.STATE_CONNECTIVITY_ERROR) {
+                    handleUserUpdateConnectivityError();
+                }
+            }
+
+        });
+    }
+
+    private void handleUserUpdateConnectivityError() {
+        Toast.makeText(requireActivity(), "User Update Connectivity Error", Toast.LENGTH_SHORT).show();
     }
 }

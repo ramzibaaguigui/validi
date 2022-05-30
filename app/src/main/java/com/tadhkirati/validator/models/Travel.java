@@ -6,10 +6,11 @@ import android.os.Parcelable;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Travel implements Parcelable, Parcelable.Creator<Travel> {
+public class Travel implements Serializable, Parcelable, Parcelable.Creator<Travel> {
 
     // TODO: work on the parcelable interface so that you can received data from the other side without
     // todo: any problems,
@@ -24,16 +25,21 @@ public class Travel implements Parcelable, Parcelable.Creator<Travel> {
             return new Travel[size];
         }
     };
+
     @SerializedName("departure_station")
-    String departureStation;
+    private String departureStation;
     @SerializedName("arrival_station")
-    String arrivalStation;
+    private String arrivalStation;
+
     @SerializedName("distance")
-    BigDecimal distance;
+//    BigDecimal distance;
+    Integer distance;
+
     @SerializedName("description")
     String description;
     @SerializedName("status")
-    TravelStatus status;
+    String status;
+
     @SerializedName("stations")
     List<Station> stations;
     @SerializedName("id")
@@ -43,7 +49,8 @@ public class Travel implements Parcelable, Parcelable.Creator<Travel> {
     @SerializedName("secondClass_limitPlaces")
     Integer secondClassLimitPlaces;
     @SerializedName("estimated_duration")
-    private BigDecimal duration;
+    private Integer duration;
+//    private BigDecimal duration;
 
     protected Travel(Parcel in) {
 
@@ -80,7 +87,7 @@ public class Travel implements Parcelable, Parcelable.Creator<Travel> {
         return this;
     }
 
-    public TravelStatus status() {
+    public String status() {
         return this.status;
     }
 
@@ -93,11 +100,11 @@ public class Travel implements Parcelable, Parcelable.Creator<Travel> {
         return stations.get(stations.size() - 1).getArrivalTime();
     }
 
-    public BigDecimal getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public BigDecimal getDistance() {
+    public Integer getDistance() {
         return this.distance;
     }
 
@@ -129,5 +136,21 @@ public class Travel implements Parcelable, Parcelable.Creator<Travel> {
 
     public Long getId() {
         return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Travel{" +
+                "departureStation='" + departureStation + '\'' +
+                ", arrivalStation='" + arrivalStation + '\'' +
+                ", distance=" + distance +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", stations=" + stations +
+                ", id=" + id +
+                ", firstClassLimitPlaces=" + firstClassLimitPlaces +
+                ", secondClassLimitPlaces=" + secondClassLimitPlaces +
+                ", duration=" + duration +
+                '}';
     }
 }

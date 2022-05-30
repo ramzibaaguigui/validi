@@ -67,4 +67,6 @@
     <string name="first_class_limit_places_string">First class places limit</string>
     <string name="second_class_limit_places">"Second class places limit"</string>
     <string name="second_class_limit_places_string">"Second class limit places"</string>
+    <string name="a_revolution_in_train_string">A revolution in train</string>
+    <string name="services_string">services</string>
 </resources>

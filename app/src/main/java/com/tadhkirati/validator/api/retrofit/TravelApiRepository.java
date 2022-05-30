@@ -3,7 +3,6 @@ package com.tadhkirati.validator.api.retrofit;
 import android.util.Log;
 
 import com.tadhkirati.validator.api.payload.ApiResponse;
-import com.tadhkirati.validator.api.payload.TodayTravelRequestPayload;
 import com.tadhkirati.validator.models.Travel;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class TravelApiRepository {
     public static void loadTodayTravels(@Header("Authorization") String accessToken,
                                         ResponseHandler<List<Travel>> responseHandler) {
 
-        RetrofitClient.apiService.getTravels(accessToken)
+        RetrofitClient.apiService.getTodayTravels(accessToken)
                 .enqueue(new Callback<>() {
                     @Override
                     public void onResponse(Call<ApiResponse<List<Travel>>> call, Response<ApiResponse<List<Travel>>> response) {
