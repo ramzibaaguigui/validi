@@ -37,7 +37,7 @@ public class TravelDetailsActivity extends AppCompatActivity {
     private View connectivityErrorContainer;
 
     private TravelDetailsTicketsRecyclerViewAdapter ticketsAdapter;
-
+    private TicketDetailsBottomSheetDialogFragment ticketBottomFragment;
     private Travel loadedTravel;
     private Long travelId;
 
@@ -87,7 +87,8 @@ public class TravelDetailsActivity extends AppCompatActivity {
         ticketsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ticketsAdapter.setOnTicketItemClickListener(new TravelDetailsTicketsRecyclerViewAdapter.OnTicketItemClickListener() {
             @Override
-            public void onTicketClick(Ticket ticket) {
+            public void onTicketClick(Ticket ticket, int position) {
+
 
             }
         });
@@ -130,19 +131,18 @@ public class TravelDetailsActivity extends AppCompatActivity {
         ticketsAdapter = TravelDetailsTicketsRecyclerViewAdapter.create(travelsViewModel.getTickets());
         ticketsAdapter.setOnTicketItemClickListener(new TravelDetailsTicketsRecyclerViewAdapter.OnTicketItemClickListener() {
             @Override
-            public void onTicketClick(Ticket ticket) {
-                var ticketFragment = TicketDetailsBottomSheetDialogFragment
-                        .create(ticket);
-                ticketFragment.setOnValidateTicketListener(new TicketDetailsBottomSheetDialogFragment.OnValidateTicketListener() {
+            public void onTicketClick(Ticket ticket, int position) {
+                ticketBottomFragment = TicketDetailsBottomSheetDialogFragment
+                        .create(ticket, position);
+                ticketBottomFragment.setOnValidateTicketListener(new TicketDetailsBottomSheetDialogFragment.OnValidateTicketListener() {
                     @Override
-                    public void onValidate(Ticket ticket) {
-
+                    public void onValidate(Ticket ticket, int ticketPosition) {
                         travelsViewModel.validateTicket(
                                 LoginUtils.formTokenHeader(TravelDetailsActivity.this),
-                                ticket.getQrCodeToken(), travelId);
+                                ticket.getQrCodeToken(), travelId, ticketPosition);
                     }
                 });
-                ticketFragment.show(getSupportFragmentManager(), "TICKET_DETAILS_FRAGMENT");
+                ticketBottomFragment.show(getSupportFragmentManager(), "TICKET_DETAILS_FRAGMENT");
             }
         });
         ticketsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -213,6 +213,14 @@ public class TravelDetailsActivity extends AppCompatActivity {
                 // there is something to execute here alongside freeing the last validated ticket
                 // do it hjere
                 Ticket validatedTicket = travelsViewModel.getLastValidatedTicket();
+                // ticketsAdapter.notifyItemChanged(travelsViewModel.getInValidationTicketPosition(), travelsViewModel.getLastValidatedTicket());
+                ticketBottomFragment.updateTicket(validatedTicket);
+                ticketsAdapter.setItem(
+                        travelsViewModel.getInValidationTicketPosition(),
+                        travelsViewModel.getLastValidatedTicket()
+                );
+                ticketsAdapter.notifyItemChanged(travelsViewModel.getInValidationTicketPosition());
+
                 Log.i("VALIDATED_TICKET", String.valueOf(validatedTicket));
                 Toast.makeText(TravelDetailsActivity.this, "validated ticket: " + String.valueOf(validatedTicket), Toast.LENGTH_SHORT).show();
                 travelsViewModel.freeLastValidatedTicket();

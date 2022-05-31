@@ -29,6 +29,7 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     private Button validateButton;
 
     private Ticket currentTicket;
+    private int ticketPosition;
     private OnValidateTicketListener listener;
 
     @Nullable
@@ -54,10 +55,13 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
         ticketIsValidatedTextView.setText(String.valueOf(currentTicket.isValidated()));
         priceTextView.setText(String.valueOf(currentTicket.getPrice()));
 
+        if (currentTicket.isValidated())
+            validateButton.setVisibility(View.GONE);
+
         validateButton.setOnClickListener(view -> {
             if (listener == null)
                 return;
-            listener.onValidate(currentTicket);
+            listener.onValidate(currentTicket, ticketPosition);
         });
     }
 
@@ -78,16 +82,22 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
         this.listener = listener;
     }
 
+    public void updateTicket(Ticket validatedTicket) {
+        this.currentTicket = validatedTicket;
+        displayTicket();
+    }
+
     public interface OnValidateTicketListener {
-        void onValidate(Ticket ticket);
+        void onValidate(Ticket ticket, int position);
     }
 
-    private TicketDetailsBottomSheetDialogFragment(Ticket ticket) {
+    private TicketDetailsBottomSheetDialogFragment(Ticket ticket, int ticketPosition) {
         this.currentTicket = ticket;
+        this.ticketPosition = ticketPosition;
     }
 
-    public static TicketDetailsBottomSheetDialogFragment create(Ticket ticket) {
-        return new TicketDetailsBottomSheetDialogFragment(ticket);
+    public static TicketDetailsBottomSheetDialogFragment create(Ticket ticket, int position) {
+        return new TicketDetailsBottomSheetDialogFragment(ticket, position);
     }
 
 }

@@ -3,6 +3,7 @@ package com.tadhkirati.validator.ui.traveldetails;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,26 +19,36 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
     private List<Ticket> tickets;
 
 
+    private TravelDetailsTicketsRecyclerViewAdapter(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public static TravelDetailsTicketsRecyclerViewAdapter create(List<Ticket> tickets) {
+        return new TravelDetailsTicketsRecyclerViewAdapter(tickets);
+    }
 
     @NonNull
     @Override
     public TicketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new TicketViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ticket_view, parent, false)  );
-    }
-
-    private TravelDetailsTicketsRecyclerViewAdapter(List<Ticket> tickets) {
-        this.tickets = tickets;
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ticket_view, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
-        holder.passengerNameTextView.setText(getItem(position).getPassengerName());
-        holder.boardingStationTextView.setText(getItem(position).getBoardingStationName());
+        final var currentTicket = getItem(position);
+        holder.passengerNameTextView.setText(currentTicket.getPassengerName());
+        holder.boardingStationTextView.setText(currentTicket.getBoardingStationName());
+
+        if (currentTicket.isValidated()) {
+            holder.ticketIsValidatedImageView.setImageResource(R.drawable.ic_validated);
+        } else {
+            holder.ticketIsValidatedImageView.setImageResource(R.drawable.ic_not_validated);
+        }
         holder.container.setOnClickListener(view -> {
             if (ticketItemClickListener == null)
                 return;
-            ticketItemClickListener.onTicketClick(getItem(position));
+            ticketItemClickListener.onTicketClick(getItem(position), position);
         });
     }
 
@@ -50,9 +61,21 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
         return tickets.size();
     }
 
+    public void setOnTicketItemClickListener(OnTicketItemClickListener listener) {
+        this.ticketItemClickListener = listener;
+    }
+
+    public void setItem(int position, Ticket ticket) {
+        this.tickets.set(position, ticket);
+    }
+
+    interface OnTicketItemClickListener {
+        void onTicketClick(Ticket ticket, int position);
+    }
 
     static class TicketViewHolder extends RecyclerView.ViewHolder {
         View container;
+        ImageView ticketIsValidatedImageView;
         TextView passengerNameTextView;
         TextView boardingStationTextView;
 
@@ -61,17 +84,8 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
             passengerNameTextView = itemView.findViewById(R.id.text_view_ticket_item_passenger_name);
             boardingStationTextView = itemView.findViewById(R.id.text_view_travel_item_arrival_station_name);
             container = itemView.findViewById(R.id.container_ticket_item);
+            ticketIsValidatedImageView = itemView.findViewById(R.id.image_view_ticket_is_validated);
         }
     }
 
-    public void setOnTicketItemClickListener(OnTicketItemClickListener listener) {
-        this.ticketItemClickListener = listener;
-    }
-    interface OnTicketItemClickListener {
-        void onTicketClick(Ticket ticket);
-    }
-
-    public static TravelDetailsTicketsRecyclerViewAdapter create(List<Ticket> tickets) {
-        return new TravelDetailsTicketsRecyclerViewAdapter(tickets);
-    }
 }

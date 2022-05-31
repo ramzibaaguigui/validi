@@ -34,6 +34,7 @@ public class TravelDetailsViewModel extends AndroidViewModel {
     private final MutableLiveData<Integer> ticketLoadingState = new MutableLiveData<>(STATE_INITIAL);
     private final MutableLiveData<Integer> ticketValidationState = new MutableLiveData<>(STATE_INITIAL);
     private final MutableLiveData<Ticket> lastValidatedTicket = new MutableLiveData<>(null);
+    private final MutableLiveData<Integer> inValidationTicketPosition = new MutableLiveData<>(null);
 
     public TravelDetailsViewModel(@NonNull Application application) {
         super(application);
@@ -76,20 +77,23 @@ public class TravelDetailsViewModel extends AndroidViewModel {
         });
     }
 
-    public void validateTicket(String accessToken, String qrCode, Long travelId) {
+    public void validateTicket(String accessToken, String qrCode, Long travelId, int ticketPosition) {
         ticketValidationState.setValue(STATE_VALIDATION_PROGRESS);
+        this.inValidationTicketPosition.setValue(ticketPosition);
 
         TicketApiRepository.validateTicket2(accessToken, travelId, qrCode,
                 new ResponseHandler<Ticket>() {
                     @Override
                     public void handleSuccess(ApiResponse<Ticket> response) {
+                        Log.i("VALIDATION", String.valueOf(response));
                         if (response == null) {
+                            Log.i("VALIDATION_SUCCESS", response.toString());
                             ticketValidationState.setValue(STATE_CONNECTIVITY_ERROR);
                             return;
                         }
 
                         if (response.isSuccessful()) {
-
+                            lastValidatedTicket.setValue(response.getData());
                             ticketValidationState.setValue(STATE_VALIDATION_SUCCESS);
                             return;
                         }
@@ -111,6 +115,11 @@ public class TravelDetailsViewModel extends AndroidViewModel {
     public void freeLastValidatedTicket() {
         this.ticketValidationState.setValue(STATE_INITIAL);
         this.lastValidatedTicket.setValue(null);
+        this.inValidationTicketPosition.setValue(null);
+    }
+
+    public int getInValidationTicketPosition() {
+        return this.inValidationTicketPosition.getValue();
     }
 
     public void observeTicketValidationState(LifecycleOwner owner, Observer<Integer> observer) {

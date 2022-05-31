@@ -90,10 +90,12 @@ public class TicketApiRepository {
 
                     @Override
                     public void onFailure(Call<ApiResponse<Ticket>> call, Throwable t) {
+                        Log.i("ERROR_VALIDATION", t.toString());
                         Log.i("ERROR_VALIDATION", t.getLocalizedMessage());
                         Log.i("ERROR_VALIDATION", t.getCause().toString());
                         handler.handleError();
                     }
                 });
+
     }
 }
