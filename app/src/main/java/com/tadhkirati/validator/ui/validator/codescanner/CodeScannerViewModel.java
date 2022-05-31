@@ -104,7 +104,7 @@ public class CodeScannerViewModel extends AndroidViewModel {
 
     public void validateTicket(String accessToken) {
 
-        TicketApiRepository.validateTicket(scannedTicketToken.getValue(), accessToken, new ResponseHandler<Ticket>() {
+        TicketApiRepository.validateTicket(accessToken, scannedTicketToken.getValue(), new ResponseHandler<Ticket>() {
             @Override
             public void handleSuccess(ApiResponse<Ticket> response) {
                 if (response == null) {

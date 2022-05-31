@@ -39,7 +39,7 @@ public interface ApiService {
     Call<ApiResponse<List<Ticket>>> getTravelTickets(@Path("travelId") Long travelId,
                                                      @Header(AUTH_HEADER) String accessToken);
 
-    @POST("/api/tickets/validate")
+    @POST("/api/validator/tickets/validate")
     Call<ApiResponse<Ticket>> validateTicket(@Header(AUTH_HEADER) String accessToken, @Body TicketValidationPayload payload);
 
     @POST("/api/user/update_password")

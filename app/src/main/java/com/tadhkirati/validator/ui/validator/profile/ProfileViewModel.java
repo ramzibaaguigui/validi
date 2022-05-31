@@ -147,7 +147,7 @@ public class ProfileViewModel extends AndroidViewModel {
                 .newPassword(newPassword.getValue())
                 .confirmPassword(confirmNewPassword.getValue());
         RetrofitClient.apiService.updatePassword(authToken, updatePasswordPayload)
-                .enqueue(new Callback<ApiResponse<User>>() {
+                .enqueue(new Callback<>() {
                     @Override
                     public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
 

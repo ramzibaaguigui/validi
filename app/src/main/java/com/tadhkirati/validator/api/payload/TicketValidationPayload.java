@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class TicketValidationPayload {
 
-    Integer travelId;
+    @SerializedName("travelId")
+    Long travelId;
 
     @SerializedName("qrcode_token")
     String qrCodeToken;
@@ -13,7 +14,7 @@ public class TicketValidationPayload {
         return new TicketValidationPayload();
     }
 
-    public TicketValidationPayload withTravelId(Integer travelId)  {
+    public TicketValidationPayload withTravelId(Long travelId)  {
         this.travelId = travelId;
         return this;
     }

@@ -51,6 +51,7 @@ public class TravelDetailsActivity extends AppCompatActivity {
 
         observeTicketsState();
         loadTickets();
+        observeTicketValidationState();
     }
 
     private void initViews() {
@@ -135,11 +136,10 @@ public class TravelDetailsActivity extends AppCompatActivity {
                 ticketFragment.setOnValidateTicketListener(new TicketDetailsBottomSheetDialogFragment.OnValidateTicketListener() {
                     @Override
                     public void onValidate(Ticket ticket) {
-                        Toast.makeText(TravelDetailsActivity.this,
-                                "you have just validated a ticket with token" +
-                                        ticket.getQrCodeToken(),
-                                Toast.LENGTH_SHORT).show();
 
+                        travelsViewModel.validateTicket(
+                                LoginUtils.formTokenHeader(TravelDetailsActivity.this),
+                                ticket.getQrCodeToken(), travelId);
                     }
                 });
                 ticketFragment.show(getSupportFragmentManager(), "TICKET_DETAILS_FRAGMENT");
@@ -184,5 +184,55 @@ public class TravelDetailsActivity extends AppCompatActivity {
         String token = LoginUtils.formTokenHeader(this);
         Log.i("TRAVEL_ID", String.valueOf(travelId));
         travelsViewModel.loadTickets(travelId, token);
+    }
+
+    private void observeTicketValidationState() {
+        travelsViewModel.observeTicketValidationState(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer validationState) {
+                if (validationState == TravelDetailsViewModel.STATE_VALIDATION_SUCCESS) {
+                    handleTicketValidationSuccess();
+                    return;
+                }
+                if (validationState == TravelDetailsViewModel.STATE_VALIDATION_ERROR) {
+                    handleTicketValidationError();
+                    return;
+                }
+
+                if (validationState == TravelDetailsViewModel.STATE_VALIDATION_PROGRESS) {
+                    handleTicketValidationProgress();
+                    return;
+                }
+
+                if (validationState == TravelDetailsViewModel.STATE_CONNECTIVITY_ERROR) {
+                    handleTicketValidationConnectivityError();
+                }
+            }
+
+            public void handleTicketValidationSuccess() {
+                // there is something to execute here alongside freeing the last validated ticket
+                // do it hjere
+                Ticket validatedTicket = travelsViewModel.getLastValidatedTicket();
+                Log.i("VALIDATED_TICKET", String.valueOf(validatedTicket));
+                Toast.makeText(TravelDetailsActivity.this, "validated ticket: " + String.valueOf(validatedTicket), Toast.LENGTH_SHORT).show();
+                travelsViewModel.freeLastValidatedTicket();
+            }
+
+            public void handleTicketValidationProgress() {
+                Toast.makeText(TravelDetailsActivity.this, "ticket validation progress", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            public void handleTicketValidationError() {
+                Toast.makeText(TravelDetailsActivity.this, "ticket validation error", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            public void handleTicketValidationConnectivityError() {
+                Toast.makeText(TravelDetailsActivity.this, "ticket validation connectivity error", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+        });
     }
 }

@@ -22,7 +22,7 @@ public class Ticket {
     String paymentToken;
 
     @SerializedName("validated")
-    private Integer isValidated;
+    private Boolean isValidated;
 
     @SerializedName("boarding_station")
     Station boardingStation;
@@ -61,7 +61,7 @@ public class Ticket {
     }
 
     public boolean isValidated() {
-        return isValidated == 1;
+        return isValidated;
     }
 
     public String paymentMethod() {
@@ -78,5 +78,24 @@ public class Ticket {
 
     public String getQrCodeToken() {
         return this.qrCodeToken;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "travelId=" + travelId +
+                ", passengerName='" + passengerName + '\'' +
+                ", travelClass='" + travelClass + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", paymentToken='" + paymentToken + '\'' +
+                ", isValidated=" + isValidated +
+                ", boardingStation=" + boardingStation +
+                ", landingStation=" + landingStation +
+                ", price=" + price +
+                ", payerName='" + payerName + '\'' +
+                ", qrCodeToken='" + qrCodeToken + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

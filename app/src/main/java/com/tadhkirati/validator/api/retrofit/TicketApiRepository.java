@@ -55,7 +55,7 @@ public class TicketApiRepository {
                 });
     }
 
-    public static void validateTicket(String qrCode, String accessToken,
+    public static void validateTicket(String accessToken, String qrCode,
                                       ResponseHandler<Ticket> handler) {
         var payload = TicketValidationPayload.createPayload()
                 .withQrCode(qrCode);
@@ -70,6 +70,28 @@ public class TicketApiRepository {
                     public void onFailure(Call<ApiResponse<Ticket>> call, Throwable t) {
                         Log.e("TICKET_ERROR", t.getMessage());
                         Log.i("TICKET_ERROR", t.getStackTrace().toString());
+                        handler.handleError();
+                    }
+                });
+    }
+
+    public static void validateTicket2(String accessToken, Long travelId,
+                                       String qrCodeToken, ResponseHandler<Ticket> handler) {
+        var payload = TicketValidationPayload.createPayload()
+                .withTravelId(travelId)
+                .withQrCode(qrCodeToken);
+        RetrofitClient.apiService.validateTicket(accessToken, payload)
+                .enqueue(new Callback<ApiResponse<Ticket>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<Ticket>> call, Response<ApiResponse<Ticket>> response) {
+                        Log.i("TICKET_VALIDATION", String.valueOf(response));
+                        handler.handleSuccess(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<Ticket>> call, Throwable t) {
+                        Log.i("ERROR_VALIDATION", t.getLocalizedMessage());
+                        Log.i("ERROR_VALIDATION", t.getCause().toString());
                         handler.handleError();
                     }
                 });
