@@ -1,5 +1,6 @@
 package com.tadhkirati.validator.ui.validator.travels;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Travel;
@@ -67,6 +69,8 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
         initTravelActionListener();
     }
 
+
+
     private void initTravelActionListener() {
         loadTicketsButton.setOnClickListener(view -> {
             if (listener == null)
@@ -75,7 +79,11 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
         });
     }
 
-
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        return new BottomSheetDialog(getContext(), R.style.BottomSheetDialogTheme);
+    }
 
     private void initViews(View view) {
         travelNameTextView = view.findViewById(R.id.text_view_travel_information);
@@ -95,7 +103,6 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     private void displayTravel() {
 //        travelStatusTextView.setText(TravelStatus.getStringForStatus(requireContext(), travel.status()));
         travelStatusTextView.setText(travel.status());
-
         departureStationTextView.setText(travel.getDepartureStationName());
         arrivalStationTextView.setText(travel.getArrivalStationName());
         departureTimeTextView.setText(travel.getDepartureTime().toString());

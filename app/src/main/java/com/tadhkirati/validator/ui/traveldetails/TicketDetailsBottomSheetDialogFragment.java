@@ -1,5 +1,6 @@
 package com.tadhkirati.validator.ui.traveldetails;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Ticket;
@@ -44,6 +46,13 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         displayTicket();
+    }
+
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        return new BottomSheetDialog(getContext(), R.style.BottomSheetDialogTheme);
     }
 
     private void displayTicket() {

@@ -28,4 +28,13 @@
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
     </style>
 
+    <style name="TransparentBottomSheetDialogTheme" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/TransparentBottomSheetDialogTheme</item>
+    </style>
+
 </resources>
