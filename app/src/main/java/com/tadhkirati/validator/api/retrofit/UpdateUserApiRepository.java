@@ -1,5 +1,7 @@
 package com.tadhkirati.validator.api.retrofit;
 
+import android.util.Log;
+
 import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.models.User;
 
@@ -19,6 +21,8 @@ public class UpdateUserApiRepository {
 
                     @Override
                     public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+                        Log.i("USER_UPDATE_ERROR", t.getLocalizedMessage());
+                        Log.i("USER_UPDATE_ERROR", t.getStackTrace().toString());
                         handler.handleError();
                     }
                 });

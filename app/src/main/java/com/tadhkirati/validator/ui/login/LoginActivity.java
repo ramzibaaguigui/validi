@@ -185,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("LOGGED_USER_INTENT", loginViewModel.getLoggedUser().getFirstName());
         intent.putExtras(LoginUtils.bundleLoggedUser(loginViewModel.getLoggedUser()));
         startActivity(intent);
+        finish();
     }
 
     private void storeCredentials() {

@@ -2,10 +2,12 @@ package com.tadhkirati.validator.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.User;
 import com.tadhkirati.validator.ui.login.LoginActivity;
 import com.tadhkirati.validator.ui.login.LoginUtils;
@@ -14,11 +16,20 @@ import com.tadhkirati.validator.ui.validator.ValidatorActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int SPLASH_DELAY_MILLIS = 1000;
     private User loggedUser;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handleUserLogging();
+        setContentView(R.layout.activity_splash);
+        new Handler().postDelayed(this::handleUserLogging, SPLASH_DELAY_MILLIS);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 
     private boolean isUserLoggedIn() {
@@ -34,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ValidatorActivity.class);
         // here we are going to put some information related to the user
         intent.putExtras(LoginUtils.bundleLoggedUser(this.loggedUser));
+        startActivity(intent);
     }
 
     private void goLoginActivity() {

@@ -43,4 +43,11 @@ public class UserLoginSharedPreferences {
     private static SharedPreferences sharedPreferences(Context context) {
         return context.getSharedPreferences(USER_LOGIN_SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
+
+    public static void deleteLoggedUser(Context context) {
+        context.getSharedPreferences(USER_LOGIN_SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+                .edit().remove(LOGGED_USER_KEY)
+                .remove(ACCESS_TOKEN_KEY)
+                .commit();
+    }
 }

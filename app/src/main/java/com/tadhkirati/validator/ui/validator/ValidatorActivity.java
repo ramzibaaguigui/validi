@@ -17,7 +17,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.User;
+import com.tadhkirati.validator.ui.login.LoginActivity;
 import com.tadhkirati.validator.ui.login.LoginUtils;
+import com.tadhkirati.validator.ui.login.UserLoginSharedPreferences;
 import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerFragment;
 import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerViewModel;
 import com.tadhkirati.validator.ui.validator.profile.ProfileViewModel;
@@ -116,7 +118,21 @@ public class ValidatorActivity extends AppCompatActivity {
     }
 
     private void logout() {
+        UserLoginSharedPreferences.deleteLoggedUser(this);
         Toast.makeText(this, "logging out ", Toast.LENGTH_SHORT).show();
+        goLoginActivity();
+    }
+
+    private void goLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 
     private void selectProfile() {
