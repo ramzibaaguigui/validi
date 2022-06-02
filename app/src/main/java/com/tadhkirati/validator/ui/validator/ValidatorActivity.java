@@ -132,7 +132,6 @@ public class ValidatorActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        finish();
     }
 
     private void selectProfile() {
