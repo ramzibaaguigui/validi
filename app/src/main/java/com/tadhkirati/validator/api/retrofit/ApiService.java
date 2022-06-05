@@ -5,6 +5,7 @@ import com.tadhkirati.validator.api.payload.LoginRequest;
 import com.tadhkirati.validator.api.payload.LoginResponse;
 import com.tadhkirati.validator.api.payload.TicketValidationPayload;
 import com.tadhkirati.validator.api.payload.UpdatePasswordPayload;
+import com.tadhkirati.validator.api.payload.UpdateValidatorInfoPayload;
 import com.tadhkirati.validator.models.Ticket;
 import com.tadhkirati.validator.models.Travel;
 import com.tadhkirati.validator.models.User;
@@ -24,8 +25,8 @@ public interface ApiService {
     @POST("/api/validator/login/")
     Call<ApiResponse<LoginResponse>> login(@Body LoginRequest loginRequest);
 
-    @POST("/api/user/update_infos")
-    Call<ApiResponse<User>> updateUserInfo(@Body User user, @Header(AUTH_HEADER) String token);
+    @POST("/api/validator/update_infos")
+    Call<ApiResponse<User>> updateUserInfo(@Body UpdateValidatorInfoPayload payload, @Header(AUTH_HEADER) String token);
 
     @POST("/api/validator/validate_ticket")
     Call<ApiResponse<Ticket>> validateTicket(@Body TicketValidationPayload validationPayload,
@@ -44,6 +45,7 @@ public interface ApiService {
 
     @POST("/api/user/update_password")
     Call<ApiResponse<User>> updatePassword(@Header(AUTH_HEADER) String accessToken, @Body UpdatePasswordPayload payload);
+
 
 
 }

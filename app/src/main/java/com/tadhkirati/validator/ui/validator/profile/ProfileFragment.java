@@ -72,7 +72,7 @@ public class ProfileFragment extends Fragment {
         initViewModel();
         displayUserProfile();
         syncViewModel();
-        observeState();
+        // observeState();
         initListeners();
         observeUserUpdateState();
     }

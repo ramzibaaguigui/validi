@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 
 import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.payload.UpdatePasswordPayload;
+import com.tadhkirati.validator.api.payload.UpdateValidatorInfoPayload;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
 import com.tadhkirati.validator.api.retrofit.RetrofitClient;
 import com.tadhkirati.validator.api.retrofit.UpdateUserApiRepository;
@@ -96,12 +97,12 @@ public class ProfileViewModel extends AndroidViewModel {
     }
 
     public void updateUser(String accessToken) {
-        User newUser = User.createUser()
+        UpdateValidatorInfoPayload userUpdatePayload = UpdateValidatorInfoPayload.create()
                 .withFirstName(enteredFirstName.getValue())
                 .withLastName(enteredLastName.getValue())
-                .withPhoneNumber(enteredPhoneNumber.getValue())
-                        .withImage(null);
-        UpdateUserApiRepository.updateUser(newUser, accessToken, new ResponseHandler<User>() {
+                .withPhoneNumber(enteredPhoneNumber.getValue());
+
+        UpdateUserApiRepository.updateUser(userUpdatePayload, accessToken, new ResponseHandler<User>() {
             @Override
             public void handleSuccess(ApiResponse<User> response) {
                 if (response == null) {
