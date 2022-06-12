@@ -30,7 +30,7 @@ public class TravelsViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void observeState(LifecycleOwner owner, Observer<Integer> observer) {
+    public void observeTravelLoadingState(LifecycleOwner owner, Observer<Integer> observer) {
         currentState.observe(owner, observer);
     }
 
@@ -39,7 +39,8 @@ public class TravelsViewModel extends AndroidViewModel {
     }
 
     public void loadTravels(String accessToken) {
-        handleTravelsLoadingProgress();
+
+        currentState.setValue(STATE_LOADING_TRAVELS);
 
         TravelApiRepository.loadTodayTravels(
                 accessToken,
@@ -50,21 +51,22 @@ public class TravelsViewModel extends AndroidViewModel {
                         Log.i("response", new Gson().toJson(response));
 
                         if (response == null) {
-                            handleTravelsLoadingError();
+                            currentState.setValue(STATE_LOADING_CONNECTIVITY_ERROR);
                             return;
                         }
 
                         if (response.isSuccessful()) {
-                            handleTravelsLoadedSuccessfully(response.getData());
+                            travels.setValue(response.getData());
+                            currentState.setValue(STATE_LOADED_SUCCESSFULLY);
                             return;
                         }
-                        handleTravelsLoadingError();
+
+                        currentState.setValue(STATE_LOADING_ERROR);
                     }
 
                     @Override
                     public void handleError() {
-
-                        handleConnectivityError();
+                        currentState.setValue(STATE_LOADING_CONNECTIVITY_ERROR);
                     }
                 }
         );
@@ -75,21 +77,4 @@ public class TravelsViewModel extends AndroidViewModel {
     }
 
 
-    public void handleTravelsLoadedSuccessfully(List<Travel> travels) {
-        this.travels.setValue(travels);
-        currentState.setValue(STATE_LOADED_SUCCESSFULLY);
-    }
-
-
-    private void handleTravelsLoadingError() {
-        currentState.setValue(STATE_LOADING_ERROR);
-    }
-
-    private void handleConnectivityError() {
-        currentState.setValue(STATE_LOADING_CONNECTIVITY_ERROR);
-    }
-
-    private void handleTravelsLoadingProgress() {
-        currentState.setValue(STATE_LOADING_TRAVELS);
-    }
 }

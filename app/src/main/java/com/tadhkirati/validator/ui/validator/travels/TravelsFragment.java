@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Travel;
 import com.tadhkirati.validator.ui.login.UserLoginSharedPreferences;
@@ -107,9 +106,10 @@ public class TravelsFragment extends Fragment {
     }
 
     private void observeTravelsLoadingState() {
-        travelsViewModel.observeState(this, state -> {
+        travelsViewModel.observeTravelLoadingState(this, state -> {
             // handle the states one by one here
             if (state == TravelsViewModel.STATE_LOADED_SUCCESSFULLY) {
+
                 handleTravelsLoadedSuccess();
                 return;
             }
@@ -179,7 +179,7 @@ public class TravelsFragment extends Fragment {
     }
 
     private void showToast(String message) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT);
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
 }

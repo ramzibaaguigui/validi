@@ -35,6 +35,8 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,13 +46,11 @@
         android:id="@+id/container_connectivity_error">
 
         <TextView
-            android:visibility="gone"
-            tools:visibility="visible"
             android:textColor="@color/red"
             android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/string_loading_error" />
+            android:text="@string/string_connectivity_error" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
