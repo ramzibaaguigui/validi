@@ -72,4 +72,5 @@
     <string name="services_string">services</string>
     <string name="cannot_show_code_scanner_string">Cannot show code scanner</string>
     <string name="retry_string">Retry</string>
+    <string name="today_travels_string">Today Travels</string>
 </resources>

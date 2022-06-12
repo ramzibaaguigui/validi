@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/divider_top">
 
-            <include layout="@layout/fragment_filter_tickets_options" />
+            <include android:visibility="gone" layout="@layout/fragment_filter_tickets_options" />
 
         </FrameLayout>
 

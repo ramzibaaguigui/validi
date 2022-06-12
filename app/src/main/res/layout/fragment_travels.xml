@@ -84,7 +84,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/nunito_sans_black"
-                android:text="Travels of 14 may 2022"
+                android:text="@string/today_travels_string"
                 android:textColor="@color/blue_action"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"

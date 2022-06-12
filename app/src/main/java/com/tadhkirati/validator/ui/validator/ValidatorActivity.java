@@ -56,7 +56,7 @@ public class ValidatorActivity extends AppCompatActivity implements CodeScannerV
         initViews();
         initListeners();
         initViewPager();
-        showLoggedUser();
+        // showLoggedUser();
     }
 
     private void initViews() {
@@ -64,7 +64,7 @@ public class ValidatorActivity extends AppCompatActivity implements CodeScannerV
         openDrawerButton = findViewById(R.id.image_button_show_drawer);
         logoutImageButton = findViewById(R.id.image_button_logout);
 
-        // initting the view of drawer layout
+        // initiating the view of drawer layout
         closeDrawerImageButton = findViewById(R.id.image_button_close_drawer);
         selectProfileContainer = findViewById(R.id.container_profile_select);
         selectTravelsContainer = findViewById(R.id.container_travels_select);
