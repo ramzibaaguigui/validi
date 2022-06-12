@@ -14,30 +14,6 @@ import retrofit2.Response;
 
 public class TicketApiRepository {
 
-  /*  public static void validateTicket(Integer travelId,
-                                      String ticketToken,
-                                      String authHeader,
-                                      ResponseHandler<Ticket> ticketResponseHandler) {
-        TicketValidationPayload payload = TicketValidationPayload
-                .createPayload()
-                .withTravelId(travelId)
-                .withQrCode(ticketToken);
-
-        RetrofitClient.apiService.validateTicket(payload, authHeader)
-                .enqueue(new Callback<>() {
-                    @Override
-                    public void onResponse(Call<ApiResponse<Ticket>> call, Response<ApiResponse<Ticket>> response) {
-                        ticketResponseHandler.handleSuccess(response.body());
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiResponse<Ticket>> call, Throwable t) {
-                        ticketResponseHandler.handleError();
-                    }
-                });
-    }*/
-
     public static void getTravelTickets(Long travelId, String accessToken, ResponseHandler<List<Ticket>> handler) {
         RetrofitClient.apiService.getTravelTickets(travelId, accessToken)
                 .enqueue(new Callback<ApiResponse<List<Ticket>>>() {
@@ -49,16 +25,17 @@ public class TicketApiRepository {
                     @Override
                     public void onFailure(Call<ApiResponse<List<Ticket>>> call, Throwable t) {
                         Log.i("TICKET_ERROR", String.valueOf(t.getMessage()));
-                        Log.i("TIKCET_ERROR", String.valueOf(t.getStackTrace()));
+                        Log.i("TICKET_ERROR", String.valueOf(t.getStackTrace()));
                         handler.handleError();
                     }
                 });
     }
 
-    public static void validateTicket(String accessToken, String qrCode,
+    public static void validateTicket(String accessToken, Long travelId, String qrCode,
                                       ResponseHandler<Ticket> handler) {
         var payload = TicketValidationPayload.createPayload()
-                .withQrCode(qrCode);
+                .withQrCode(qrCode)
+                .withTravelId(travelId);
         RetrofitClient.apiService.validateTicket(accessToken, payload)
                 .enqueue(new Callback<ApiResponse<Ticket>>() {
                     @Override

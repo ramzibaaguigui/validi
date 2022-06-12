@@ -3,6 +3,7 @@ package com.tadhkirati.validator.ui.validator.profile;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.tadhkirati.validator.ui.login.LoginUtils;
 import com.tadhkirati.validator.ui.validator.ValidatorActivity;
 
 public class ProfileFragment extends Fragment {
+
+    private static final int MIN_PASSWORD_LENGTH = 8;
 
     private ImageFilterView profileImageFilterView;
     private TextView firstNameTextView;
@@ -53,6 +56,7 @@ public class ProfileFragment extends Fragment {
     private Button submitEditPasswordButton;
 
     private ProfileViewModel profileViewModel;
+    private UpdatePasswordViewModel updatePasswordViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +73,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        initViewModel();
+        initViewModels();
         displayUserProfile();
         syncViewModel();
         // observeState();
@@ -88,10 +92,11 @@ public class ProfileFragment extends Fragment {
         submitEditPasswordButton.setOnClickListener(view -> updateUserPassword());
     }
 
-    private void initViewModel() {
+    private void initViewModels() {
         if (getActivity() == null)
             return;
         profileViewModel = ((ValidatorActivity) getActivity()).getProfileViewModel();
+        updatePasswordViewModel = ((ValidatorActivity) getActivity()).getUpdatePasswordViewModel();
     }
 
     private void displayUserProfile() {
@@ -102,8 +107,8 @@ public class ProfileFragment extends Fragment {
         lastNameTextView.setText(loggedUser.getLastName());
         lastNameEditText.setText(loggedUser.getLastName());
 
-        phoneNumberTextView.setText(loggedUser.getPhoneNumber());
-        phoneNumberEditText.setText(loggedUser.getPhoneNumber());
+        phoneNumberTextView.setText(loggedUser.getPhone_number());
+        phoneNumberEditText.setText(loggedUser.getPhone_number());
     }
 
     private void initProfileDetails(View view) {
@@ -221,7 +226,7 @@ public class ProfileFragment extends Fragment {
     private void handleUserUpdateSuccess() {
         displayUserProfile();
         Toast.makeText(requireActivity(), "User update success", Toast.LENGTH_SHORT).show();
-    // todo    profileViewModel.setStateInitial();
+        // todo    profileViewModel.setStateInitial();
     }
 
     private void updateUserProfile() {
@@ -244,16 +249,65 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateUserPassword() {
+        Toast.makeText(requireActivity(), "password update hit", Toast.LENGTH_SHORT).show();
         if (passwordIsValid()) {
+
             String authToken = LoginUtils.formTokenHeader(requireActivity());
-            profileViewModel.updatePassword(authToken);
+            Log.i("token", "token is " + authToken);
+            // TODO: use UpdatePasswordViewModel instead of ProfileViewModel
+            updatePasswordViewModel.updatePassword(authToken);
             return;
         }
         showPasswordInvalid();
     }
 
+    private void observeUpdatePasswordState() {
+        updatePasswordViewModel.observePasswordUpdateState(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer state) {
+                if (state == UpdatePasswordViewModel.STATE_UPDATE_PASSWORD_SUCCESS) {
+                    handlePasswordUpdateSuccess();
+                    return;
+                }
+
+                if (state == UpdatePasswordViewModel.STATE_UPDATE_PASSWORD_PROGRESS) {
+                    handlePasswordUpdateProgress();
+                    return;
+                }
+
+                if (state == UpdatePasswordViewModel.STATE_UPDATE_PASSWORD_ERROR) {
+                    handlePasswordUpdateError();
+                    return;
+                }
+
+                if (state == UpdatePasswordViewModel.STATE_UPDATE_PASSWORD_CONNECTIVITY_ERROR) {
+                    handlePasswordUpdateConnectivityError();
+                    return;
+                }
+            }
+
+            public void handlePasswordUpdateSuccess() {
+
+            }
+
+            public void handlePasswordUpdateProgress() {
+
+            }
+
+            public void handlePasswordUpdateError() {
+
+            }
+
+            public void handlePasswordUpdateConnectivityError() {
+
+            }
+        });
+    }
+
     private boolean passwordIsValid() {
-        return true;
+        return newPasswordEditText.getText().toString()
+                .equals(confirmNewPasswordEditText.getText().toString())
+                && currentPasswordEditText.getText().length() >= MIN_PASSWORD_LENGTH;
     }
 
     private void showPasswordInvalid() {

@@ -2,7 +2,9 @@ package com.tadhkirati.validator.api.payload;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TicketValidationPayload {
+import java.io.Serializable;
+
+public class TicketValidationPayload implements Serializable {
 
     @SerializedName("travelId")
     Long travelId;

@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/text_view_travel_status"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
-        android:text="@string/passenger_name_string"
+        android:text="@string/passenger_name_colon_string"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_head_container" />
 
@@ -146,8 +146,9 @@
     <Button
         android:id="@+id/button_load_travel_tickets"
         style="@style/ProfileActionButtonStyle"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/nunito_sans_bold"
         android:text="@string/validate_string"
         android:textSize="21sp"

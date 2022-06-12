@@ -85,7 +85,7 @@ public class TravelsFragment extends Fragment {
 
     private void initTravelCountView() {
         int travelCount = travelsViewModel.getLoadedTravels().size();
-
+        travelCountTextView.setText(String.valueOf(travelCount));
     }
 
 

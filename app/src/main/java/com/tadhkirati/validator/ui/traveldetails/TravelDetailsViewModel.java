@@ -35,11 +35,15 @@ public class TravelDetailsViewModel extends AndroidViewModel {
     private final MutableLiveData<Integer> ticketValidationState = new MutableLiveData<>(STATE_INITIAL);
     private final MutableLiveData<Ticket> lastValidatedTicket = new MutableLiveData<>(null);
     private final MutableLiveData<Integer> inValidationTicketPosition = new MutableLiveData<>(null);
+    private final MutableLiveData<Long> travelId = new MutableLiveData<>();
 
     public TravelDetailsViewModel(@NonNull Application application) {
         super(application);
     }
 
+    public int getTicketsLoadingState() {
+        return this.ticketLoadingState.getValue();
+    }
     public void observeState(LifecycleOwner owner, Observer<Integer> observer) {
         this.ticketLoadingState.observe(owner, observer);
     }
@@ -87,7 +91,7 @@ public class TravelDetailsViewModel extends AndroidViewModel {
                     public void handleSuccess(ApiResponse<Ticket> response) {
                         Log.i("VALIDATION", String.valueOf(response));
                         if (response == null) {
-                            Log.i("VALIDATION_SUCCESS", response.toString());
+                            Log.i("VALIDATION_ERROR", "Validation Connectivity Error");
                             ticketValidationState.setValue(STATE_CONNECTIVITY_ERROR);
                             return;
                         }
@@ -126,4 +130,16 @@ public class TravelDetailsViewModel extends AndroidViewModel {
         this.ticketValidationState.observe(owner, observer);
     }
 
+    public int getTicketPosition(String token) {
+        var iterator = loadedTickets.getValue().listIterator();
+        while (iterator.hasNext()) {
+            int nextPosition = iterator.nextIndex();
+            Ticket next = iterator.next();
+            if (next.getQrCodeToken().equals(token)) {
+                return nextPosition;
+            }
+        }
+        return 0;
+
+    }
 }

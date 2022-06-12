@@ -9,16 +9,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.tadhkirati.validator.api.payload.ApiResponse;
-import com.tadhkirati.validator.api.payload.UpdatePasswordPayload;
 import com.tadhkirati.validator.api.payload.UpdateValidatorInfoPayload;
 import com.tadhkirati.validator.api.retrofit.ResponseHandler;
-import com.tadhkirati.validator.api.retrofit.RetrofitClient;
 import com.tadhkirati.validator.api.retrofit.UpdateUserApiRepository;
 import com.tadhkirati.validator.models.User;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ProfileViewModel extends AndroidViewModel {
 
@@ -36,6 +30,8 @@ public class ProfileViewModel extends AndroidViewModel {
     private final MutableLiveData<String> enteredLastName = new MutableLiveData<>("");
     private final MutableLiveData<String> enteredPhoneNumber = new MutableLiveData<>("");
     private final MutableLiveData<Integer> currentState = new MutableLiveData<>(STATE_INITIAL);
+
+
     public ProfileViewModel(@NonNull Application application) {
         super(application);
     }
@@ -141,7 +137,7 @@ public class ProfileViewModel extends AndroidViewModel {
     public void observeUserUpdateState(LifecycleOwner owner, Observer<Integer> observer) {
         currentState.observe(owner, observer);
     }
-
+/*
     public void updatePassword(String authToken) {
         var updatePasswordPayload = UpdatePasswordPayload
                 .create().oldPassword(currentPassword.getValue())
@@ -152,6 +148,7 @@ public class ProfileViewModel extends AndroidViewModel {
                     @Override
                     public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
 
+
                     }
 
                     @Override
@@ -160,6 +157,6 @@ public class ProfileViewModel extends AndroidViewModel {
                     }
                 });
     }
-
+*/
 
 }

@@ -1,7 +1,9 @@
 package com.tadhkirati.validator.api.payload;
 
 
-public class ApiResponse<T> {
+import java.io.Serializable;
+
+public class ApiResponse<T> implements Serializable {
     Boolean success;
     String message;
     T data;

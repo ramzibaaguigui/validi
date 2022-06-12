@@ -17,7 +17,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Travel;
-import com.tadhkirati.validator.models.TravelStatus;
 import com.tadhkirati.validator.ui.traveldetails.TravelStationsRecyclerViewAdapter;
 
 public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFragment {
@@ -42,8 +41,12 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private Travel travel;
 
-    private TravelDetailsBottomSheetDialogFragment(Travel travel) {
+
+    public TravelDetailsBottomSheetDialogFragment(Travel travel) {
         this.travel = travel;
+    }
+
+    public TravelDetailsBottomSheetDialogFragment() {
     }
 
     public static TravelDetailsBottomSheetDialogFragment createInstance(Travel travel) {
@@ -68,7 +71,6 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
         initStationsRecyclerView();
         initTravelActionListener();
     }
-
 
 
     private void initTravelActionListener() {

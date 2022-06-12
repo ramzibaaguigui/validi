@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
@@ -24,7 +25,9 @@ import com.google.zxing.Result;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Ticket;
 import com.tadhkirati.validator.ui.login.LoginUtils;
-import com.tadhkirati.validator.ui.validator.ValidatorActivity;
+import com.tadhkirati.validator.ui.traveldetails.TravelDetailsActivity;
+import com.tadhkirati.validator.ui.traveldetails.TravelDetailsView;
+import com.tadhkirati.validator.ui.traveldetails.TravelDetailsViewModel;
 
 import java.util.Collections;
 
@@ -33,7 +36,18 @@ public class CodeScannerFragment extends Fragment {
     private CodeScannerView codeScannerView;
     private CodeScanner codeScanner;
 
+    private TicketPositionPasser positionPasser;
+
     private CodeScannerViewModel codeScannerViewModel;
+    private TravelDetailsViewModel travelDetailsViewModel;
+
+    private CodeScannerFragment(TicketPositionPasser passer) {
+        this.positionPasser = passer;
+    }
+
+    public static CodeScannerFragment newInstance(TicketPositionPasser passer) {
+        return new CodeScannerFragment(passer);
+    }
 
     @Nullable
     @Override
@@ -57,14 +71,18 @@ public class CodeScannerFragment extends Fragment {
     }
 
     private void initViewModel() {
-        codeScannerViewModel = ((ValidatorActivity) requireActivity()).getCodeScannerViewModel();
+        codeScannerViewModel = ((TravelDetailsActivity) requireActivity()).getCodeScannerViewModel();
+        codeScannerViewModel.setTravelId(((TravelDetailsActivity) requireActivity()).getTravelId());
+        if (requireActivity() instanceof TravelDetailsView) {
+            travelDetailsViewModel = ((TravelDetailsView) requireActivity()).getTravelDetailsViewModel();
+        }
     }
 
     private void configureCodeScanner() {
         codeScanner = new CodeScanner(requireActivity(), codeScannerView);
         codeScanner.setScanMode(ScanMode.CONTINUOUS);
         codeScanner.setFormats(Collections.singletonList(BarcodeFormat.QR_CODE));
-        codeScanner.setDecodeCallback(result -> requireActivity().runOnUiThread(() -> handleDecodedResult(result)));
+        codeScanner.setDecodeCallback(result -> requireActivity().runOnUiThread(() -> handleDecodedQrCodeResult(result)));
     }
 
     @Override
@@ -80,7 +98,7 @@ public class CodeScannerFragment extends Fragment {
         codeScanner.releaseResources();
     }
 
-    private void handleDecodedResult(Result result) {
+    private void handleDecodedQrCodeResult(Result result) {
         if (!codeScannerViewModel.getCanScanCode()) {
             return;
         }
@@ -89,7 +107,21 @@ public class CodeScannerFragment extends Fragment {
         // the server
         codeScannerViewModel.setCanScanCode(false);
         codeScannerViewModel.setScannedTicketToken(result.getText());
-        codeScannerViewModel.validateTicket(LoginUtils.formTokenHeader(requireActivity()));
+        /*codeScannerViewModel.validateTicket(
+                codeScannerViewModel.getTravelId(),
+                LoginUtils.formTokenHeader(requireActivity()));*/
+
+        Log.i("Travel_id", String.valueOf(codeScannerViewModel.getTravelId()));
+        travelDetailsViewModel.validateTicket(
+                LoginUtils.formTokenHeader(requireActivity()),
+                result.getText(), ((TravelDetailsActivity) requireActivity()).getTravelId(), positionPasser.getTicketPosition(result.getText()));
+        /*
+        codeScannerViewModel.validateTicket(
+                LoginUtils.formTokenHeader(requireActivity()),
+                codeScannerViewModel.getScannedTicketToken(),
+                codeScannerViewModel.getTravelId(),
+                getInValidationTicketPosition(result.getText())
+        );*/
         // wait for the response from the server and then enable scanning again
     }
 
@@ -125,13 +157,13 @@ public class CodeScannerFragment extends Fragment {
         requireActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
     }
 
-
     private boolean hasAlreadyCameraPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             return ContextCompat.checkSelfPermission(requireActivity(),
                     Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
         return false;
     }
+
 
     private boolean canRequestCameraPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -141,66 +173,83 @@ public class CodeScannerFragment extends Fragment {
     }
 
 
-    private void handleTicketValidationSuccess() {
-
-        // TODO: we are still neeeding to reenable scanning again;
-        VibrationUtils.vibrateSuccess(requireActivity());
-        Ticket ticket = codeScannerViewModel.getValidatedTicket();
-        // TODO: THERE IS STILL SOMETHING TO DO WITH THIS DATA
-        Toast.makeText(requireActivity(), "could validation ticket with token: " + ticket.getToken(), Toast.LENGTH_SHORT).show();
-
-    }
-
-    private void handleTicketValidationError() {
-        // Toast.makeText(requireActivity(), "ticket validation error", Toast.LENGTH_SHORT).show();
-        VibrationUtils.vibrateFailed(requireActivity());
-        VibrationUtils.vibrateFailed(requireActivity());
-        CodeScannerNotificationUtils.displayValidationError(requireActivity(),
-                (ViewGroup) getView().getRootView());
-
-    }
-
-    private void handleTicketValidationConnectivityError() {
-        CodeScannerNotificationUtils.displayValidationError(requireActivity(), (ViewGroup) getView().getRootView());
-        Toast.makeText(requireActivity(), "ticket validation CONNECTIVITY error", Toast.LENGTH_SHORT).show();
-        VibrationUtils.vibrateFailed(requireActivity());
-    }
-
     private void observeValidationState() {
         codeScannerViewModel.observeValidationState(requireActivity(),
-                state -> {
-                    if (state == CodeScannerViewModel.STATE_TICKET_VALIDATION_SUCCESS) {
-                        handleTicketValidationSuccess();
-                        return;
-                    }
-                    if (state == CodeScannerViewModel.STATE_VALIDATION_ERROR) {
-                        handleTicketValidationError();
-                        return;
+                new Observer<>() {
+                    @Override
+                    public void onChanged(Integer state) {
+                        if (state == CodeScannerViewModel.STATE_TICKET_VALIDATION_SUCCESS) {
+                            handleTicketValidationSuccess();
+                            return;
+                        }
+                        if (state == CodeScannerViewModel.STATE_VALIDATION_ERROR) {
+                            handleTicketValidationError();
+                            return;
+                        }
+
+                        if (state == CodeScannerViewModel.STATE_CONNECTIVITY_ERROR) {
+                            handleTicketValidationConnectivityError();
+                            return;
+                        }
+
+                        if (state == CodeScannerViewModel.STATE_VALIDATION_IN_PROGRESS) {
+                            handleTicketValidationInProgress();
+                            return;
+                        }
+
+                        if (state == CodeScannerViewModel.STATE_INITIAL) {
+                            handleStateInitial();
+                        }
+
                     }
 
-                    if (state == CodeScannerViewModel.STATE_CONNECTIVITY_ERROR) {
-                        handleTicketValidationConnectivityError();
-                        return;
+                    private void handleTicketValidationInProgress() {
+
                     }
 
-                    if (state == CodeScannerViewModel.STATE_VALIDATION_IN_PROGRESS) {
-                        handleTicketValidationInProgress();
-                        return;
+                    private void handleStateInitial() {
+
                     }
 
-                    if (state == CodeScannerViewModel.STATE_INITIAL) {
-                        handleStateInitial();
+
+                    private void handleTicketValidationError() {
+                        // Toast.makeText(requireActivity(), "ticket validation error", Toast.LENGTH_SHORT).show();
+                        VibrationUtils.vibrateFailed(requireActivity());
+                        VibrationUtils.vibrateFailed(requireActivity());
+                        // CodeScannerNotificationUtils.displayValidationError(requireActivity(),
+                        // (ViewGroup) getView().getRootView());
+                        Toast.makeText(requireActivity(), "TICKET VALIDATION ERROR", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    private void handleTicketValidationConnectivityError() {
+                        // CodeScannerNotificationUtils.displayValidationError(requireActivity(), (ViewGroup) getView().getRootView());
+                        Toast.makeText(requireActivity(), "ticket validation CONNECTIVITY error", Toast.LENGTH_SHORT).show();
+                        VibrationUtils.vibrateFailed(requireActivity());
+
+                    }
+
+
+                    private void handleTicketValidationSuccess() {
+
+                        // TODO: we are still neeeding to reenable scanning again;
+                        VibrationUtils.vibrateSuccess(requireActivity());
+
+                        Ticket ticket = codeScannerViewModel.getValidatedTicket();
+                        // TODO: THERE IS STILL SOMETHING TO DO WITH THIS DATA
+                        Toast.makeText(requireActivity(), "could validation ticket with token: " + ticket.getToken(), Toast.LENGTH_SHORT).show();
+
                     }
 
                 });
-    }
-
-    private void handleTicketValidationInProgress() {
 
     }
 
-    private void handleStateInitial() {
-
+    private int getInValidationTicketPosition(String token) {
+        return positionPasser.getTicketPosition(token);
     }
 
+    public interface TicketPositionPasser {
+        int getTicketPosition(String token);
+    }
 }

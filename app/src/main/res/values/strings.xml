@@ -16,7 +16,8 @@
     <string name="profile_string">Profile</string>
     <string name="tadhkirati_string">Ticketus</string>
     <string name="my_travels_string">My Travels</string>
-    <string name="passenger_name_string">Passenger name:</string>
+    <string name="passenger_name_colon_string">Passenger name:</string>
+    <string name="passenger_name_string">Passenger name</string>
     <string name="boarding_station_string">Boarding station:</string>
     <string name="landing_station_string">Landing station:</string>
     <string name="validate_string">Validate:</string>
@@ -69,4 +70,5 @@
     <string name="second_class_limit_places_string">"Second class limit places"</string>
     <string name="a_revolution_in_train_string">A revolution in train</string>
     <string name="services_string">services</string>
+    <string name="cannot_show_code_scanner_string">Cannot show code scanner</string>
 </resources>

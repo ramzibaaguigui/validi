@@ -2,7 +2,9 @@ package com.tadhkirati.validator.api.payload;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UpdatePasswordPayload {
+import java.io.Serializable;
+
+public class UpdatePasswordPayload implements Serializable {
     @SerializedName("current_password")
     private String oldPassword;
 

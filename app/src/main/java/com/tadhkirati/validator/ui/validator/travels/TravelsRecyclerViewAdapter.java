@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,11 @@ public class TravelsRecyclerViewAdapter extends RecyclerView.Adapter<TravelsRecy
                 return;
             listener.onClickTravel(currentTravel);
         });
+
+        holder.container.startAnimation(
+                AnimationUtils.loadAnimation(
+                        holder.container.getContext(),
+                        R.anim.start_to_end_animation));
     }
 
     @Override

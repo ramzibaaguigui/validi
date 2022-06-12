@@ -171,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
     private void handleLoginSuccess() {
         storeCredentials();
         loginSuccessWithUser();
-        displayLoggedUser();
+        // displayLoggedUser();
     }
 
     private void displayLoggedUser() {

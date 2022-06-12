@@ -1,5 +1,6 @@
 package com.tadhkirati.validator.api.payload;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -26,7 +27,13 @@ public class LoginRequest implements Serializable {
 
 
     public static LoginRequest create() {
+
         return new LoginRequest();
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }
 

@@ -20,12 +20,15 @@ import com.tadhkirati.validator.models.User;
 import com.tadhkirati.validator.ui.login.LoginActivity;
 import com.tadhkirati.validator.ui.login.LoginUtils;
 import com.tadhkirati.validator.ui.login.UserLoginSharedPreferences;
+import com.tadhkirati.validator.ui.traveldetails.CodeScannerView;
+import com.tadhkirati.validator.ui.traveldetails.TravelDetailsView;
 import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerFragment;
 import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerViewModel;
 import com.tadhkirati.validator.ui.validator.profile.ProfileViewModel;
+import com.tadhkirati.validator.ui.validator.profile.UpdatePasswordViewModel;
 import com.tadhkirati.validator.ui.validator.travels.TravelsViewModel;
 
-public class ValidatorActivity extends AppCompatActivity {
+public class ValidatorActivity extends AppCompatActivity implements CodeScannerView {
 
     private ImageButton openDrawerButton;
     private ImageButton logoutImageButton;
@@ -43,6 +46,7 @@ public class ValidatorActivity extends AppCompatActivity {
     private ProfileViewModel profileViewModel;
     private TravelsViewModel travelsViewModel;
     private CodeScannerViewModel codeScannerViewModel;
+    private UpdatePasswordViewModel updatePasswordViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,10 +98,10 @@ public class ValidatorActivity extends AppCompatActivity {
             closeDrawer();
         });
 
-        selectCodeScannerContainer.setOnClickListener(view -> {
+        /*selectCodeScannerContainer.setOnClickListener(view -> {
             selectCodeScanner();
             closeDrawer();
-        });
+        });*/
     }
 
     private void initViewPager() {
@@ -148,7 +152,7 @@ public class ValidatorActivity extends AppCompatActivity {
 
     private void selectCodeScanner() {
         Toast.makeText(this, "selecting code scanner", Toast.LENGTH_SHORT).show();
-        viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_CODE_SCANNER);
+        // viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_CODE_SCANNER);
         selectedFragmentTitleTextView.setText(R.string.qr_code_scanner_string);
     }
 
@@ -167,6 +171,8 @@ public class ValidatorActivity extends AppCompatActivity {
 
         codeScannerViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
                 .create(CodeScannerViewModel.class);
+        updatePasswordViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
+                .create(UpdatePasswordViewModel.class);
     }
 
     public ProfileViewModel getProfileViewModel() {
@@ -179,6 +185,10 @@ public class ValidatorActivity extends AppCompatActivity {
 
     public CodeScannerViewModel getCodeScannerViewModel() {
         return this.codeScannerViewModel;
+    }
+
+    public UpdatePasswordViewModel getUpdatePasswordViewModel() {
+        return this.updatePasswordViewModel;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.tadhkirati.validator.models;
 
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -10,8 +9,10 @@ public class User implements Serializable {
     @SerializedName("id")
     private Long id;
 
-    @SerializedName("phone_number")
-    private String phoneNumber;
+
+//    @SerializedName("phone_number")
+
+    private String phone_number;
 
     @SerializedName("first_name")
     private String firstName;
@@ -19,14 +20,14 @@ public class User implements Serializable {
     @SerializedName("last_name")
     private String lastName;
 
-    @SerializedName("")
+  /*  @SerializedName("acount_confirmed")
     private Boolean accountConfirmed;
 
     @SerializedName("role")
-    private String role;
-
-    @SerializedName("image")
-    private String image;
+    private String role;*/
+/*
+    @SerializedName("profile_img")
+    private String image;*/
 
     public static User createUser() {
         return new User();
@@ -35,17 +36,17 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "phoneNumber='" + phoneNumber + '\'' +
+                "phoneNumber='" + phone_number + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", accountConfirmed=" + accountConfirmed +
-                ", role='" + role + '\'' +
+               //  ", accountConfirmed=" + accountConfirmed +
+               //  ", role='" + role + '\'' +
                 ", id='" + id + '\'' +
                 '}';
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
     public String getFirstName() {
@@ -71,12 +72,12 @@ public class User implements Serializable {
     }
 
     public User withPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phoneNumber;
         return this;
     }
 
     public User withImage(String image) {
-        this.image = image;
+        // this.image = image;
         return this;
     }
 

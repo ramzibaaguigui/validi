@@ -1,8 +1,11 @@
 package com.tadhkirati.validator.api.payload;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-public class UpdateValidatorInfoPayload {
+import java.io.Serializable;
+
+public class UpdateValidatorInfoPayload implements Serializable {
 
     @SerializedName("first_name")
     private String firstName;
@@ -32,4 +35,9 @@ public class UpdateValidatorInfoPayload {
         return this;
     }
 
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

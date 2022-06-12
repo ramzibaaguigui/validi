@@ -2,7 +2,9 @@ package com.tadhkirati.validator.api.payload;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TodayTravelRequestPayload {
+import java.io.Serializable;
+
+public class TodayTravelRequestPayload implements Serializable {
     @SerializedName("validator_id")
     private Long validatorId;
 

@@ -5,6 +5,7 @@
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/text_view_scan_instruction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +26,7 @@
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/code_scanner_view"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:frameCornersRadius="25dp"

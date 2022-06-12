@@ -2,7 +2,9 @@ package com.tadhkirati.validator.api.payload;
 
 import com.tadhkirati.validator.models.User;
 
-public class LoginResponse {
+import java.io.Serializable;
+
+public class LoginResponse implements Serializable {
     private User user;
     private String token;
 

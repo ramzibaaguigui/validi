@@ -2,7 +2,9 @@ package com.tadhkirati.validator.api.payload;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RegisterRequest {
+import java.io.Serializable;
+
+public class RegisterRequest implements Serializable {
     @SerializedName("first_name")
     String firstName;
     @SerializedName("last_name")

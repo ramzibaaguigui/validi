@@ -3,6 +3,7 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/ValidatorCardViewComponentStyle"
     app:cardCornerRadius="15dp">
 
@@ -85,6 +86,8 @@
             android:text="@string/first_name_string" />
 
         <TextView
+            android:visibility="gone"
+            tools:visibility="visible"
             android:id="@+id/text_view_first_name_required"
             style="@style/ProfilePropertyRequiredTextViewStyle"
             android:text="@string/required_string" />
@@ -100,6 +103,7 @@
             android:text="@string/last_name_string" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/text_view_last_name_required"
             style="@style/ProfilePropertyRequiredTextViewStyle"
             android:text="@string/required_string" />
@@ -115,6 +119,7 @@
             android:text="@string/phone_number_string" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/text_view_phone_number_required"
             style="@style/ProfilePropertyRequiredTextViewStyle"
             android:text="@string/required_string" />

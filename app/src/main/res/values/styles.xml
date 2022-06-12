@@ -175,6 +175,9 @@
         <item name="android:textSize">30sp</item>
     </style>
 
+    <style name="FullscreenDialogTheme" parent="Theme.AppCompat.DayNight.DialogWhenLarge">
+        <item name="windowNoTitle">true</item>
+    </style>
 
 
 </resources>

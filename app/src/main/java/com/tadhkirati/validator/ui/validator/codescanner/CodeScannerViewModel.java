@@ -2,6 +2,7 @@ package com.tadhkirati.validator.ui.validator.codescanner;
 
 import android.app.Application;
 import android.os.CountDownTimer;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -25,7 +26,8 @@ public class CodeScannerViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> canScanCode = new MutableLiveData<>(true);
     private final MutableLiveData<String> scannedTicketToken = new MutableLiveData<>();
     private final MutableLiveData<Ticket> validatedTicket = new MutableLiveData<>();
-
+    private final MutableLiveData<Long> travelId = new MutableLiveData<>();
+    private final MutableLiveData<Integer> inValidationTicketPosition = new MutableLiveData<>();
     public CodeScannerViewModel(@NonNull Application application) {
         super(application);
     }
@@ -102,29 +104,74 @@ public class CodeScannerViewModel extends AndroidViewModel {
     }
 */
 
-    public void validateTicket(String accessToken) {
+/*
+    public void validateTicket(Long travelId, String accessToken) {
 
-        TicketApiRepository.validateTicket(accessToken, scannedTicketToken.getValue(), new ResponseHandler<Ticket>() {
+        TicketApiRepository.validateTicket(accessToken, travelId, scannedTicketToken.getValue(), new ResponseHandler<Ticket>() {
             @Override
             public void handleSuccess(ApiResponse<Ticket> response) {
                 if (response == null) {
                     currentState.setValue(STATE_CONNECTIVITY_ERROR);
+                    enableScanningAfterTwoSeconds();
                     return;
                 }
 
                 if (response.isSuccessful()) {
                     currentState.setValue(STATE_TICKET_VALIDATION_SUCCESS);
+                    validatedTicket.setValue(response.getData());
+                    enableScanningAfterTwoSeconds();
                     return;
                 }
-                currentState.setValue(STATE_VALIDATION_ERROR);
+
+                handleStateValidationError();
             }
 
             @Override
             public void handleError() {
                 currentState.setValue(STATE_CONNECTIVITY_ERROR);
+                enableScanningAfterTwoSeconds();
+            }
+
+            public void handleStateValidationError() {
+                currentState.setValue(STATE_VALIDATION_ERROR);
+                enableScanningAfterTwoSeconds();
             }
         });
+    }*/
+
+    public void validateTicket(String accessToken, String qrCode, Long travelId, int ticketPosition) {
+        currentState.setValue(STATE_VALIDATION_IN_PROGRESS);
+        this.inValidationTicketPosition.setValue(ticketPosition);
+
+        TicketApiRepository.validateTicket2(accessToken, travelId, qrCode,
+                new ResponseHandler<Ticket>() {
+                    @Override
+                    public void handleSuccess(ApiResponse<Ticket> response) {
+                        Log.i("VALIDATION", String.valueOf(response));
+                        enableScanningAfterTwoSeconds();
+                        if (response == null) {
+                            Log.i("VALIDATION_ERROR", "VALIDATION ERROR");
+                            currentState.setValue(STATE_CONNECTIVITY_ERROR);
+                            return;
+                        }
+
+                        if (response.isSuccessful()) {
+                            Log.i("VALIDATION_SUCCESS", response.getData().toString());
+                            validatedTicket.setValue(response.getData());
+                            currentState.setValue(STATE_TICKET_VALIDATION_SUCCESS);
+                            return;
+                        }
+
+                        currentState.setValue(STATE_VALIDATION_ERROR);
+                    }
+
+                    @Override
+                    public void handleError() {
+                        currentState.setValue(STATE_CONNECTIVITY_ERROR);
+                    }
+                });
     }
+
 
     public void observeValidationState(LifecycleOwner owner, Observer<Integer> observer) {
         this.currentState.observe(owner, observer);
@@ -132,6 +179,18 @@ public class CodeScannerViewModel extends AndroidViewModel {
 
     public void setScannedTicketToken(String scannedTicketToken) {
         this.scannedTicketToken.postValue(scannedTicketToken);
+    }
+
+    public String getScannedTicketToken() {
+        return this.scannedTicketToken.getValue();
+    }
+
+    public void setTravelId(Long travelId) {
+        this.travelId.setValue(travelId);
+    }
+
+    public Long getTravelId() {
+        return this.travelId.getValue();
     }
 
 

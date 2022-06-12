@@ -3,6 +3,7 @@ package com.tadhkirati.validator.ui.traveldetails;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Ticket;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapter<TravelDetailsTicketsRecyclerViewAdapter.TicketViewHolder> {
     private OnTicketItemClickListener ticketItemClickListener;
@@ -50,6 +53,12 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
                 return;
             ticketItemClickListener.onTicketClick(getItem(position), position);
         });
+
+
+        // Animating the view upon start
+        holder.container.startAnimation(
+                AnimationUtils.loadAnimation(holder.container.getContext(), R.anim.bottom_to_top_animation)
+        );
     }
 
     public Ticket getItem(int position) {
@@ -67,6 +76,19 @@ public class TravelDetailsTicketsRecyclerViewAdapter extends RecyclerView.Adapte
 
     public void setItem(int position, Ticket ticket) {
         this.tickets.set(position, ticket);
+    }
+
+    public void setItem(Ticket ticket) {
+        ListIterator<Ticket> iterator = tickets.listIterator();
+        while (iterator.hasNext()) {
+            int currentIndex = iterator.nextIndex();
+            Ticket current = iterator.next();
+            if (current.getQrCodeToken().equals(ticket.getQrCodeToken())) {
+                iterator.set(ticket);
+                notifyItemChanged(currentIndex);
+                return;
+            }
+        }
     }
 
     interface OnTicketItemClickListener {

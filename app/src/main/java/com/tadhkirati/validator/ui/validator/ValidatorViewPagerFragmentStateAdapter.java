@@ -12,7 +12,7 @@ import com.tadhkirati.validator.ui.validator.travels.TravelsFragment;
 public class ValidatorViewPagerFragmentStateAdapter extends FragmentStateAdapter {
     public static final int FRAGMENT_PROFILE = 0;
     public static final int FRAGMENT_TRAVELS = 1;
-    public static final int FRAGMENT_CODE_SCANNER = 2;
+    // public static final int FRAGMENT_CODE_SCANNER = 2;
 
 
     public ValidatorViewPagerFragmentStateAdapter(@NonNull FragmentActivity fragmentActivity) {
@@ -24,15 +24,13 @@ public class ValidatorViewPagerFragmentStateAdapter extends FragmentStateAdapter
     public Fragment createFragment(int position) {
         if (position == 0) {
             return new ProfileFragment();
-        } else if (position == 1) {
-            return new TravelsFragment();
         } else {
-            return new CodeScannerFragment();
+            return new TravelsFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 }
