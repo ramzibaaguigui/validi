@@ -71,4 +71,5 @@
     <string name="a_revolution_in_train_string">A revolution in train</string>
     <string name="services_string">services</string>
     <string name="cannot_show_code_scanner_string">Cannot show code scanner</string>
+    <string name="retry_string">Retry</string>
 </resources>

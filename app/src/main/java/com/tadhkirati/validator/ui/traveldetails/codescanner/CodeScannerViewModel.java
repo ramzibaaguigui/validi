@@ -1,4 +1,4 @@
-package com.tadhkirati.validator.ui.validator.codescanner;
+package com.tadhkirati.validator.ui.traveldetails.codescanner;
 
 import android.app.Application;
 import android.os.CountDownTimer;
@@ -10,9 +10,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.tadhkirati.validator.api.payload.ApiResponse;
-import com.tadhkirati.validator.api.retrofit.ResponseHandler;
-import com.tadhkirati.validator.api.retrofit.TicketApiRepository;
 import com.tadhkirati.validator.models.Ticket;
 
 public class CodeScannerViewModel extends AndroidViewModel {
@@ -28,6 +25,7 @@ public class CodeScannerViewModel extends AndroidViewModel {
     private final MutableLiveData<Ticket> validatedTicket = new MutableLiveData<>();
     private final MutableLiveData<Long> travelId = new MutableLiveData<>();
     private final MutableLiveData<Integer> inValidationTicketPosition = new MutableLiveData<>();
+
     public CodeScannerViewModel(@NonNull Application application) {
         super(application);
     }
@@ -45,6 +43,7 @@ public class CodeScannerViewModel extends AndroidViewModel {
     }
 
     public void enableScanningAfterTwoSeconds() {
+        Log.i("COUNTDOWN_TIMER", "STARTED COUNTER");
         CountDownTimer timer = new CountDownTimer(2000, 500) {
             @Override
             public void onTick(long l) {
@@ -53,7 +52,10 @@ public class CodeScannerViewModel extends AndroidViewModel {
 
             @Override
             public void onFinish() {
-                canScanCode.postValue(true);
+                Log.i("COUNTDOWN", "TIMER FINISHED");
+                canScanCode.setValue(true);
+                Log.i("SCAN_CODE:", String.valueOf(canScanCode.getValue()));
+                Log.i("SCANNER_TIME", String.valueOf(canScanCode.getValue()));
             }
         };
         timer.start();
@@ -138,6 +140,7 @@ public class CodeScannerViewModel extends AndroidViewModel {
             }
         });
     }*/
+/*
 
     public void validateTicket(String accessToken, String qrCode, Long travelId, int ticketPosition) {
         currentState.setValue(STATE_VALIDATION_IN_PROGRESS);
@@ -168,29 +171,31 @@ public class CodeScannerViewModel extends AndroidViewModel {
                     @Override
                     public void handleError() {
                         currentState.setValue(STATE_CONNECTIVITY_ERROR);
+                        enableScanningAfterTwoSeconds();
                     }
                 });
     }
+*/
 
 
     public void observeValidationState(LifecycleOwner owner, Observer<Integer> observer) {
         this.currentState.observe(owner, observer);
     }
 
-    public void setScannedTicketToken(String scannedTicketToken) {
-        this.scannedTicketToken.postValue(scannedTicketToken);
-    }
-
     public String getScannedTicketToken() {
         return this.scannedTicketToken.getValue();
     }
 
-    public void setTravelId(Long travelId) {
-        this.travelId.setValue(travelId);
+    public void setScannedTicketToken(String scannedTicketToken) {
+        this.scannedTicketToken.postValue(scannedTicketToken);
     }
 
     public Long getTravelId() {
         return this.travelId.getValue();
+    }
+
+    public void setTravelId(Long travelId) {
+        this.travelId.setValue(travelId);
     }
 
 

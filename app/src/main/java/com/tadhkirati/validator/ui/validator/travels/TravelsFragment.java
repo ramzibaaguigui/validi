@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,7 @@ public class TravelsFragment extends Fragment {
     private TravelsRecyclerViewAdapter travelsAdapter;
     private ProgressBar progressBar;
     private View travelsContainerCardView;
-
+    private Button retryButton;
 
     private View loadingErrorView;
     private View connectivityErrorView;
@@ -46,6 +47,7 @@ public class TravelsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_travels, container, false);
         initViews(view);
+        initListeners();
         return view;
     }
 
@@ -71,9 +73,13 @@ public class TravelsFragment extends Fragment {
 
         loadingErrorView = view.findViewById(R.id.container_loading_error);
         connectivityErrorView = view.findViewById(R.id.container_connectivity_error);
-
+        retryButton = view.findViewById(R.id.button_retry);
     }
 
+
+    private void initListeners() {
+        retryButton.setOnClickListener(view -> loadTravels());
+    }
     private void initRecyclerView() {
         travelsAdapter = new TravelsRecyclerViewAdapter(travelsViewModel.getLoadedTravels());
         travelsRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));

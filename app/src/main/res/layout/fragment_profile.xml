@@ -14,9 +14,9 @@
 
         <include layout="@layout/fragment_profile_details" />
 
-        <include layout="@layout/fragment_edit_profile" />
+        <include layout="@layout/fragment_update_profile" />
 
-        <include layout="@layout/fragment_edit_password" />
+        <include layout="@layout/fragment_update_password" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
 

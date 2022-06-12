@@ -1,4 +1,4 @@
-package com.tadhkirati.validator.ui.validator.codescanner;
+package com.tadhkirati.validator.ui.traveldetails.codescanner;
 
 import android.content.Context;
 import android.os.Build;

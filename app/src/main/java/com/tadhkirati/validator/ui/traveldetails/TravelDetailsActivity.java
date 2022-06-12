@@ -24,8 +24,8 @@ import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.Ticket;
 import com.tadhkirati.validator.models.Travel;
 import com.tadhkirati.validator.ui.login.LoginUtils;
-import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerFragment;
-import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerViewModel;
+import com.tadhkirati.validator.ui.traveldetails.codescanner.CodeScannerFragment;
+import com.tadhkirati.validator.ui.traveldetails.codescanner.CodeScannerViewModel;
 import com.tadhkirati.validator.ui.validator.travels.TravelsFragment;
 
 public class TravelDetailsActivity extends AppCompatActivity implements CodeScannerView, TravelDetailsView {

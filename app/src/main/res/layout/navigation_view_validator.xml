@@ -99,32 +99,5 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/container_code_scanner_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:paddingStart="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/image_filter_view_app_icon"
-        app:layout_constraintTop_toBottomOf="@id/container_travels_select">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_qr_code"
-            app:tint="@color/white" />
-
-        <TextView
-            style="@style/ValidatorNavigationViewSelectTextViewStyle"
-            android:text="@string/qr_code_scanner_string" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

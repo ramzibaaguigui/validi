@@ -21,9 +21,8 @@ import com.tadhkirati.validator.ui.login.LoginActivity;
 import com.tadhkirati.validator.ui.login.LoginUtils;
 import com.tadhkirati.validator.ui.login.UserLoginSharedPreferences;
 import com.tadhkirati.validator.ui.traveldetails.CodeScannerView;
-import com.tadhkirati.validator.ui.traveldetails.TravelDetailsView;
-import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerFragment;
-import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerViewModel;
+import com.tadhkirati.validator.ui.traveldetails.codescanner.CodeScannerFragment;
+import com.tadhkirati.validator.ui.traveldetails.codescanner.CodeScannerViewModel;
 import com.tadhkirati.validator.ui.validator.profile.ProfileViewModel;
 import com.tadhkirati.validator.ui.validator.profile.UpdatePasswordViewModel;
 import com.tadhkirati.validator.ui.validator.travels.TravelsViewModel;
@@ -37,7 +36,7 @@ public class ValidatorActivity extends AppCompatActivity implements CodeScannerV
 
     private LinearLayoutCompat selectProfileContainer;
     private LinearLayoutCompat selectTravelsContainer;
-    private LinearLayoutCompat selectCodeScannerContainer;
+//    private LinearLayoutCompat selectCodeScannerContainer;
 
     ViewPager2 viewPager;
     ValidatorViewPagerFragmentStateAdapter viewPagerAdapter;
@@ -69,7 +68,6 @@ public class ValidatorActivity extends AppCompatActivity implements CodeScannerV
         closeDrawerImageButton = findViewById(R.id.image_button_close_drawer);
         selectProfileContainer = findViewById(R.id.container_profile_select);
         selectTravelsContainer = findViewById(R.id.container_travels_select);
-        selectCodeScannerContainer = findViewById(R.id.container_code_scanner_select);
 
         selectedFragmentTitleTextView = findViewById(R.id.text_view_selected_fragment_title);
 

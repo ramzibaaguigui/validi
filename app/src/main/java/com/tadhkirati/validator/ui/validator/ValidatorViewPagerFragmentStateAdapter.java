@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.tadhkirati.validator.ui.validator.codescanner.CodeScannerFragment;
 import com.tadhkirati.validator.ui.validator.profile.ProfileFragment;
 import com.tadhkirati.validator.ui.validator.travels.TravelsFragment;
 

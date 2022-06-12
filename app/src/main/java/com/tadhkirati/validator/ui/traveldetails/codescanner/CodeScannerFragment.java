@@ -1,4 +1,4 @@
-package com.tadhkirati.validator.ui.validator.codescanner;
+package com.tadhkirati.validator.ui.traveldetails.codescanner;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -100,6 +100,8 @@ public class CodeScannerFragment extends Fragment {
 
     private void handleDecodedQrCodeResult(Result result) {
         if (!codeScannerViewModel.getCanScanCode()) {
+            codeScannerViewModel.enableScanningAfterTwoSeconds();
+            Log.i("SCAN_CODE", "IMPOSSIBLE TO SCAN");
             return;
         }
         Log.i("CODE_SCANNER", result.getText());
@@ -178,6 +180,11 @@ public class CodeScannerFragment extends Fragment {
                 new Observer<>() {
                     @Override
                     public void onChanged(Integer state) {
+                        if (state == CodeScannerViewModel.STATE_VALIDATION_IN_PROGRESS) {
+                            handleTicketValidationInProgress();
+                            return;
+                        }
+
                         if (state == CodeScannerViewModel.STATE_TICKET_VALIDATION_SUCCESS) {
                             handleTicketValidationSuccess();
                             return;
@@ -192,10 +199,7 @@ public class CodeScannerFragment extends Fragment {
                             return;
                         }
 
-                        if (state == CodeScannerViewModel.STATE_VALIDATION_IN_PROGRESS) {
-                            handleTicketValidationInProgress();
-                            return;
-                        }
+
 
                         if (state == CodeScannerViewModel.STATE_INITIAL) {
                             handleStateInitial();
@@ -226,7 +230,6 @@ public class CodeScannerFragment extends Fragment {
                         // CodeScannerNotificationUtils.displayValidationError(requireActivity(), (ViewGroup) getView().getRootView());
                         Toast.makeText(requireActivity(), "ticket validation CONNECTIVITY error", Toast.LENGTH_SHORT).show();
                         VibrationUtils.vibrateFailed(requireActivity());
-
                     }
 
 
@@ -238,7 +241,6 @@ public class CodeScannerFragment extends Fragment {
                         Ticket ticket = codeScannerViewModel.getValidatedTicket();
                         // TODO: THERE IS STILL SOMETHING TO DO WITH THIS DATA
                         Toast.makeText(requireActivity(), "could validation ticket with token: " + ticket.getToken(), Toast.LENGTH_SHORT).show();
-
                     }
 
                 });
