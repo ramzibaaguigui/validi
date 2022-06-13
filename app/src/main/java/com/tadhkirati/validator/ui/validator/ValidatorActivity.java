@@ -198,4 +198,13 @@ public class ValidatorActivity extends AppCompatActivity implements CodeScannerV
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (viewPager.getCurrentItem() == ValidatorViewPagerFragmentStateAdapter.FRAGMENT_TRAVELS) {
+            selectProfile();
+            return;
+        }
+        super.onBackPressed();
+    }
 }

@@ -14,13 +14,13 @@
     <string name="confirm_new_password_string">Confirm new password</string>
     <string name="submit_text">Submit</string>
     <string name="profile_string">Profile</string>
-    <string name="tadhkirati_string">Ticketus</string>
+    <string name="tadhkirati_string">Tadhkirati</string>
     <string name="my_travels_string">My Travels</string>
     <string name="passenger_name_colon_string">Passenger name:</string>
     <string name="passenger_name_string">Passenger name</string>
     <string name="boarding_station_string">Boarding station:</string>
     <string name="landing_station_string">Landing station:</string>
-    <string name="validate_string">Validate:</string>
+    <string name="validate_string">Validate</string>
     <string name="travel_class_string">Travel class:</string>
     <string name="Validated_string">Validated:</string>
     <string name="payment_method_string">Payment method:</string>
@@ -93,4 +93,6 @@
     <string name="password_length_range_string">Password should be at least 8 characters long</string>
     <string name="new_password_mismatch_string">The password confirmation should match the new entered password</string>
     <string name="update_password_invalid_string">"Make sure that the entered passwords are valid "</string>
+    <string name="ticket_details_for">"Ticket Details for "</string>
+    <string name="ticket_details_string">Ticket Details</string>
 </resources>

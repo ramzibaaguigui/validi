@@ -86,6 +86,7 @@ public class ProfileFragment extends Fragment {
         initListeners();
         observeUserUpdateState();
         observeUpdatePasswordState();
+        initUpdateProfileViewModel();
     }
 
     private void initViews(View view) {
@@ -114,8 +115,8 @@ public class ProfileFragment extends Fragment {
         lastNameTextView.setText(loggedUser.getLastName());
         lastNameEditText.setText(loggedUser.getLastName());
 
-        phoneNumberTextView.setText(loggedUser.getPhone_number());
-        phoneNumberEditText.setText(loggedUser.getPhone_number());
+        phoneNumberTextView.setText(loggedUser.getPhoneNumber());
+        phoneNumberEditText.setText(loggedUser.getPhoneNumber());
     }
 
     private void initProfileDetails(View view) {
@@ -174,6 +175,10 @@ public class ProfileFragment extends Fragment {
         Toast.makeText(requireActivity(), "User update Progress", Toast.LENGTH_SHORT).show();
     }
 
+    private void initUpdateProfileViewModel() {
+        profileViewModel.initEnteredValues();
+    }
+
     private void syncEditProfileViewModel() {
         firstNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -228,6 +233,9 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+
+
 
     private void syncUpdatePasswordViewModel() {
         currentPasswordEditText.addTextChangedListener(new TextWatcher() {
@@ -463,6 +471,8 @@ public class ProfileFragment extends Fragment {
         UserPasswordUpdateUtils.handlePasswordInvalid(requireActivity());
 //        Toast.makeText(requireActivity(), "Password invalid", Toast1.LENGTH_SHORT).show();
     }
+
+
 
     private void observeUserUpdateState() {
         profileViewModel.observeUserUpdateState(this, new Observer<Integer>() {

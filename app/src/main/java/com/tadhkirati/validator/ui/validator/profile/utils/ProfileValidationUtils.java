@@ -7,7 +7,7 @@ import com.tadhkirati.validator.R;
 public class ProfileValidationUtils {
     private static final int MIN_NAME_LENGTH = 4;
     private static final int MAX_NAME_LENGTH = 10;
-    private static final String CONTAINS_NUMERICAL_CHARACTERS_REGEX = "";
+    private static final String CONTAINS_NUMERICAL_CHARACTERS_REGEX = "\\d";
     private static final String CONTAINS_ALPHABETIC_CHARACTERS_REGEX = "";
 
 

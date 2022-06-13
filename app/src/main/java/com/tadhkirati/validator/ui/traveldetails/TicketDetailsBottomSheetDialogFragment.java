@@ -78,9 +78,10 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
         });
     }
 
+
     private void initViews(View view) {
         draggableView = view.findViewById(R.id.view_draggable);
-        ticketInformationTextView = view.findViewById(R.id.text_view_travel_information);
+        ticketInformationTextView = view.findViewById(R.id.text_view_ticket_information);
         passengerNameTextView = view.findViewById(R.id.text_view_passenger_name_value);
         boardingStationTextView = view.findViewById(R.id.text_view_travel_departure_station_value);
         landingStationTextView = view.findViewById(R.id.text_view_travel_arrival_station_value);

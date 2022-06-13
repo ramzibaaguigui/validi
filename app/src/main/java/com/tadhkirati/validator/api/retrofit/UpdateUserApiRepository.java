@@ -24,9 +24,6 @@ public class UpdateUserApiRepository {
 
                     @Override
                     public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
-
-                        Log.i("USER_UPDATE_ERROR", t.getCause().toString());
-                        Log.i("USER_UPDATE_ERROR", t.getStackTrace().toString());
                         handler.handleError();
                     }
                 });

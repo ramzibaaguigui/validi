@@ -143,6 +143,12 @@ public class ProfileViewModel extends AndroidViewModel {
 
 
     }
+
+    public void initEnteredValues() {
+        enteredFirstName.setValue(getLoggedUser().getFirstName());
+        enteredLastName.setValue(getLoggedUser().getLastName());
+        enteredPhoneNumber.setValue(getLoggedUser().getPhoneNumber());
+    }
 /*
     public void updatePassword(String authToken) {
         var updatePasswordPayload = UpdatePasswordPayload

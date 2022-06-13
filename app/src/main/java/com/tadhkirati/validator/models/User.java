@@ -45,7 +45,7 @@ public class User implements Serializable {
                 '}';
     }
 
-    public String getPhone_number() {
+    public String getPhoneNumber() {
         return phone_number;
     }
 

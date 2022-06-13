@@ -88,7 +88,7 @@ public class TravelDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     }
 
     private void initViews(View view) {
-        travelNameTextView = view.findViewById(R.id.text_view_travel_information);
+        travelNameTextView = view.findViewById(R.id.text_view_ticket_information);
         travelStatusTextView = view.findViewById(R.id.text_view_passenger_name_value);
         departureTimeTextView = view.findViewById(R.id.text_view_travel_departure_time_value);
         arrivalTimeTextView = view.findViewById(R.id.text_view_travel_arrival_time_value);
