@@ -288,6 +288,7 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
                 Log.i("VALIDATED_TICKET", String.valueOf(validatedTicket));
                 Toast.makeText(TravelDetailsActivity.this, "validated ticket: " + String.valueOf(validatedTicket), Toast.LENGTH_SHORT).show();
                 travelDetailsViewModel.freeLastValidatedTicket();
+                travelDetailsViewModel.enableScanningAfterTwoSeconds();
             }
 
             public void handleTicketValidationProgress() {
@@ -298,11 +299,13 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
             public void handleTicketValidationError() {
                 Toast.makeText(TravelDetailsActivity.this, "ticket validation error", Toast.LENGTH_SHORT)
                         .show();
+                travelDetailsViewModel.enableScanningAfterTwoSeconds();
             }
 
             public void handleTicketValidationConnectivityError() {
                 Toast.makeText(TravelDetailsActivity.this, "ticket validation connectivity error", Toast.LENGTH_SHORT)
                         .show();
+                travelDetailsViewModel.enableScanningAfterTwoSeconds();
             }
 
         });

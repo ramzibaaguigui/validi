@@ -1,6 +1,7 @@
 package com.tadhkirati.validator.ui.traveldetails;
 
 import android.app.Application;
+import android.os.CountDownTimer;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,8 @@ public class TravelDetailsViewModel extends AndroidViewModel {
     private final MutableLiveData<Ticket> lastValidatedTicket = new MutableLiveData<>(null);
     private final MutableLiveData<Integer> inValidationTicketPosition = new MutableLiveData<>(null);
     private final MutableLiveData<Long> travelId = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> canScanCode = new MutableLiveData<>(true);
+
 
     public TravelDetailsViewModel(@NonNull Application application) {
         super(application);
@@ -82,6 +85,9 @@ public class TravelDetailsViewModel extends AndroidViewModel {
     }
 
     public void validateTicket(String accessToken, String qrCode, Long travelId, int ticketPosition) {
+        /*if (!canScanCode.getValue()) {
+            return;
+        }*/
         ticketValidationState.setValue(STATE_VALIDATION_PROGRESS);
         this.inValidationTicketPosition.setValue(ticketPosition);
 
@@ -142,4 +148,34 @@ public class TravelDetailsViewModel extends AndroidViewModel {
         return 0;
 
     }
+
+    public boolean getCanScanCode() {
+        return canScanCode.getValue();
+    }
+
+    public void setCanScanCode(boolean canScan) {
+        this.canScanCode.setValue(canScan);
+    }
+
+
+
+    public void enableScanningAfterTwoSeconds() {
+        Log.i("COUNTDOWN_TIMER", "STARTED COUNTER");
+        CountDownTimer timer = new CountDownTimer(2000, 500) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                Log.i("COUNTDOWN", "TIMER FINISHED");
+                canScanCode.setValue(true);
+                Log.i("SCAN_CODE:", String.valueOf(canScanCode.getValue()));
+                Log.i("SCANNER_TIME", String.valueOf(canScanCode.getValue()));
+            }
+        };
+        timer.start();
+    }
+
 }

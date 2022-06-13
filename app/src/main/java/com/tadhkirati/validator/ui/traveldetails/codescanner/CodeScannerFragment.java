@@ -99,32 +99,21 @@ public class CodeScannerFragment extends Fragment {
     }
 
     private void handleDecodedQrCodeResult(Result result) {
-        if (!codeScannerViewModel.getCanScanCode()) {
-            codeScannerViewModel.enableScanningAfterTwoSeconds();
+        if (!travelDetailsViewModel.getCanScanCode()) {
             Log.i("SCAN_CODE", "IMPOSSIBLE TO SCAN");
             return;
         }
         Log.i("CODE_SCANNER", result.getText());
         // should be set again white receiving a response from
         // the server
-        codeScannerViewModel.setCanScanCode(false);
+        travelDetailsViewModel.setCanScanCode(false);
         codeScannerViewModel.setScannedTicketToken(result.getText());
-        /*codeScannerViewModel.validateTicket(
-                codeScannerViewModel.getTravelId(),
-                LoginUtils.formTokenHeader(requireActivity()));*/
 
         Log.i("Travel_id", String.valueOf(codeScannerViewModel.getTravelId()));
         travelDetailsViewModel.validateTicket(
                 LoginUtils.formTokenHeader(requireActivity()),
                 result.getText(), ((TravelDetailsActivity) requireActivity()).getTravelId(), positionPasser.getTicketPosition(result.getText()));
-        /*
-        codeScannerViewModel.validateTicket(
-                LoginUtils.formTokenHeader(requireActivity()),
-                codeScannerViewModel.getScannedTicketToken(),
-                codeScannerViewModel.getTravelId(),
-                getInValidationTicketPosition(result.getText())
-        );*/
-        // wait for the response from the server and then enable scanning again
+
     }
 
     private void observeCameraPermissionState() {
@@ -218,6 +207,7 @@ public class CodeScannerFragment extends Fragment {
 
                     private void handleTicketValidationError() {
                         // Toast.makeText(requireActivity(), "ticket validation error", Toast.LENGTH_SHORT).show();
+                        Log.i("VAL_ERROR", "TIKCET VALIDATION ERROR");
                         VibrationUtils.vibrateFailed(requireActivity());
                         VibrationUtils.vibrateFailed(requireActivity());
                         // CodeScannerNotificationUtils.displayValidationError(requireActivity(),
@@ -234,14 +224,15 @@ public class CodeScannerFragment extends Fragment {
 
 
                     private void handleTicketValidationSuccess() {
-
                         // TODO: we are still neeeding to reenable scanning again;
                         VibrationUtils.vibrateSuccess(requireActivity());
 
                         Ticket ticket = codeScannerViewModel.getValidatedTicket();
                         // TODO: THERE IS STILL SOMETHING TO DO WITH THIS DATA
-                        Toast.makeText(requireActivity(), "could validation ticket with token: " + ticket.getToken(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(requireActivity(), "could validation ticket with token: " + ticket.getToken(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), R.string.ticket_validated_successfully_string, Toast.LENGTH_SHORT).show();
                     }
+
 
                 });
 
