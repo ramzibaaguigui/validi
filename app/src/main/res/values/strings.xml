@@ -73,5 +73,8 @@
     <string name="cannot_show_code_scanner_string">Cannot show code scanner</string>
     <string name="retry_string">Retry</string>
     <string name="today_travels_string">Today Travels</string>
-    <string name="ticket_validated_successfully_string">Ticket Validated Successfully</string>
+    <string name="ticket_validated_successfully_string">Ticket validated successfully</string>
+    <string name="ticket_not_validated_string">Ticket could not be validated</string>
+    <string name="travel_details_string">Travel Details</string>
+    <string name="ticket_validated_for_string">"Ticket validated successfully for "</string>
 </resources>

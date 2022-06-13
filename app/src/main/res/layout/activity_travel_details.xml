@@ -19,20 +19,33 @@
             android:text="Tickets for travel"
             android:textColor="@color/blue_action"
             android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/image_button_show_code_scanner"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/image_button_show_code_scanner" />
 
         <ImageButton
-            android:layout_margin="5dp"
             android:id="@+id/image_button_show_code_scanner"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_margin="5dp"
             android:background="@drawable/background_button_search"
             android:foreground="?attr/selectableItemBackground"
             android:src="@drawable/ic_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progress_bar_ticket_validation_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:padding="5dp"
+            app:layout_constrainedHeight="true"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/image_button_show_code_scanner"
+            app:layout_constraintEnd_toStartOf="@id/image_button_show_code_scanner"
+            app:layout_constraintTop_toTopOf="@id/image_button_show_code_scanner" />
 
         <View
             android:id="@+id/divider_top"
@@ -50,7 +63,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/divider_top">
 
-            <include android:visibility="gone" layout="@layout/fragment_filter_tickets_options" />
+            <include
+                layout="@layout/fragment_filter_tickets_options"
+                android:visibility="gone" />
 
         </FrameLayout>
 
@@ -62,12 +77,12 @@
             android:layout_marginStart="10dp"
             android:background="@color/grey_border"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toBottomOf="@id/text_view_travel_status"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
+            app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
 
         <TextView
-            android:id="@+id/text_view_travel_status"
+            android:id="@+id/text_view_passenger_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -85,10 +100,10 @@
             android:layout_marginStart="10dp"
             android:background="@color/grey_border"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toBottomOf="@id/text_view_travel_status"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/horizontal_divider_first"
-            app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
+            app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
 
         <TextView
             android:id="@+id/text_view_boarding"
@@ -109,32 +124,32 @@
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_travel_status" />
+            app:layout_constraintTop_toBottomOf="@id/text_view_passenger_name" />
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/divider_bottom">
 
 
             <androidx.recyclerview.widget.RecyclerView
-                tools:visibility="visible"
-                android:visibility="gone"
                 android:id="@+id/recycler_view_tickets"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <FrameLayout
-                android:visibility="gone"
+                android:id="@+id/container_code_scanner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:id="@+id/container_code_scanner">
+                android:visibility="gone">
 
             </FrameLayout>
 
@@ -142,52 +157,59 @@
 
 
         <ProgressBar
-            android:visibility="gone"
-            tools:visibility="visible"
             android:id="@+id/progress_bar_tickets"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:visibility="gone"
-            android:orientation="vertical"
             android:id="@+id/container_connectivity_error"
-            android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@android:drawable/stat_notify_error"
-                app:tint="@color/red" />
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/ic_server_error" />
+
 
             <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/nunito_sans_bold"
                 android:text="@string/string_connectivity_error"
                 android:textColor="@color/red"
-                android:fontFamily="@font/nunito_sans_bold"
                 android:textSize="23sp" />
+
+            <Button
+                android:id="@+id/button_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retry_string" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:visibility="gone"
-            android:orientation="vertical"
             android:id="@+id/container_loading_error"
-            android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -200,12 +222,12 @@
                 app:tint="@color/red" />
 
             <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/nunito_sans_bold"
                 android:text="@string/string_loading_error"
                 android:textColor="@color/red"
-                android:fontFamily="@font/nunito_sans_bold"
                 android:textSize="23sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>

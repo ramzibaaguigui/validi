@@ -57,8 +57,12 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
 
     private void displayTicket() {
         passengerNameTextView.setText(currentTicket.getPassengerName());
-        boardingStationTextView.setText(currentTicket.getBoardingStationName());
+
         landingStationTextView.setText(currentTicket.getLandingStationName());
+        landingStationTextView.setSelected(true);
+
+        boardingStationTextView.setSelected(true);
+        boardingStationTextView.setText(currentTicket.getBoardingStationName());
         paymentMethodTextView.setText(currentTicket.paymentMethod());
         travelClassTextView.setText(currentTicket.travelClass());
         ticketIsValidatedTextView.setText(String.valueOf(currentTicket.isValidated()));
@@ -77,7 +81,7 @@ public class TicketDetailsBottomSheetDialogFragment extends BottomSheetDialogFra
     private void initViews(View view) {
         draggableView = view.findViewById(R.id.view_draggable);
         ticketInformationTextView = view.findViewById(R.id.text_view_travel_information);
-        passengerNameTextView = view.findViewById(R.id.text_view_travel_status_value);
+        passengerNameTextView = view.findViewById(R.id.text_view_passenger_name_value);
         boardingStationTextView = view.findViewById(R.id.text_view_travel_departure_station_value);
         landingStationTextView = view.findViewById(R.id.text_view_travel_arrival_station_value);
         validateButton = view.findViewById(R.id.button_load_travel_tickets);

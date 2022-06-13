@@ -37,56 +37,69 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
-        android:id="@+id/text_view_travel_status"
+        android:id="@+id/text_view_passenger_name"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/passenger_name_colon_string"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_head_container" />
 
     <TextView
-        android:id="@+id/text_view_travel_status_value"
+        android:id="@+id/text_view_passenger_name_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
         android:text="Ilyas Benhammadi"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_status"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_status"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_status" />
+        app:layout_constraintBottom_toBottomOf="@id/text_view_passenger_name"
+        app:layout_constraintStart_toEndOf="@id/text_view_passenger_name"
+        app:layout_constraintTop_toTopOf="@id/text_view_passenger_name" />
 
     <TextView
         android:id="@+id/text_view_travel_item_departure_station"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/boarding_station_string"
+        app:layout_constraintTop_toTopOf="@id/text_view_travel_departure_station_value"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_status" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_passenger_name" />
 
     <TextView
         android:id="@+id/text_view_travel_departure_station_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="SOGRAL"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_item_departure_station"
-        app:layout_constraintStart_toEndOf="@id/text_view_travel_item_departure_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_item_departure_station" />
+        android:text="Gare de l'university de telemcen "
+        android:ellipsize="marquee"
+        android:layout_width="match_parent"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="textStart"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintTop_toBottomOf="@id/text_view_passenger_name_value"
+        app:layout_constraintStart_toEndOf="@id/text_view_travel_item_departure_station" />
 
     <TextView
         android:id="@+id/text_view_travel_arrival_station"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/landing_station_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_item_departure_station" />
+        app:layout_constraintTop_toTopOf="@id/text_view_travel_arrival_station_value" />
+
 
     <TextView
+        app:layout_constrainedWidth="true"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:id="@+id/text_view_travel_arrival_station_value"
         style="@style/TicketFragmentPropertyValueTextViewStyle"
-        android:text="Paris"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_travel_arrival_station"
+        android:text="jdjsflkjldskjfljksdlfjafls;aj f;d;jf;dsj"
         app:layout_constraintStart_toEndOf="@id/text_view_travel_arrival_station"
-        app:layout_constraintTop_toTopOf="@id/text_view_travel_arrival_station" />
-
+        app:layout_constraintTop_toBottomOf="@id/text_view_travel_departure_station_value"
+        />
     <TextView
         android:id="@+id/text_view_travel_departure_time"
         style="@style/TicketFragmentPropertyNameTextViewStyle"
         android:text="@string/travel_class_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_station" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_travel_arrival_station_value" />
 
     <TextView
         android:id="@+id/text_view_ticket_travel_class_value"

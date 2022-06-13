@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -26,6 +27,8 @@ import com.tadhkirati.validator.models.Travel;
 import com.tadhkirati.validator.ui.login.LoginUtils;
 import com.tadhkirati.validator.ui.traveldetails.codescanner.CodeScannerFragment;
 import com.tadhkirati.validator.ui.traveldetails.codescanner.CodeScannerViewModel;
+import com.tadhkirati.validator.ui.traveldetails.codescanner.VibrationUtils;
+import com.tadhkirati.validator.ui.traveldetails.validation.ValidationUtils;
 import com.tadhkirati.validator.ui.validator.travels.TravelsFragment;
 
 public class TravelDetailsActivity extends AppCompatActivity implements CodeScannerView, TravelDetailsView {
@@ -43,6 +46,9 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
     private View connectivityErrorContainer;
 
     private FrameLayout codeScannerContainer;
+    private Button retryButton;
+    private ProgressBar ticketValidationProgressBar;
+
 
     private TravelDetailsTicketsRecyclerViewAdapter ticketsAdapter;
     private TicketDetailsBottomSheetDialogFragment ticketBottomFragment;
@@ -80,6 +86,8 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
         connectivityErrorContainer = findViewById(R.id.container_connectivity_error);
 
         codeScannerContainer = findViewById(R.id.container_code_scanner);
+        retryButton = findViewById(R.id.button_retry);
+        ticketValidationProgressBar = findViewById(R.id.progress_bar_ticket_validation_progress);
     }
 
     private void initListeners() {
@@ -91,7 +99,17 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
             }
             hideCodeScanner();
         });
+        retryButton.setOnClickListener(view -> loadTickets());
     }
+
+    private void hideValidationProgress() {
+        this.ticketValidationProgressBar.setVisibility(View.GONE);
+    }
+
+    private void showValidationProgress() {
+        this.ticketValidationProgressBar.setVisibility(View.VISIBLE);
+    }
+
 
     private void showCodeScanner() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.bottom_to_top_animation);
@@ -251,20 +269,24 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
             @Override
             public void onChanged(Integer validationState) {
                 if (validationState == TravelDetailsViewModel.STATE_VALIDATION_SUCCESS) {
+                    hideValidationProgress();
                     handleTicketValidationSuccess();
                     return;
                 }
                 if (validationState == TravelDetailsViewModel.STATE_VALIDATION_ERROR) {
+                    hideValidationProgress();
                     handleTicketValidationError();
                     return;
                 }
 
                 if (validationState == TravelDetailsViewModel.STATE_VALIDATION_PROGRESS) {
+                    showValidationProgress();
                     handleTicketValidationProgress();
                     return;
                 }
 
                 if (validationState == TravelDetailsViewModel.STATE_CONNECTIVITY_ERROR) {
+                    hideValidationProgress();
                     handleTicketValidationConnectivityError();
                 }
             }
@@ -272,6 +294,7 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
             public void handleTicketValidationSuccess() {
                 // there is something to execute here alongside freeing the last validated ticket
                 // do it here
+                VibrationUtils.vibrateSuccess(TravelDetailsActivity.this);
                 Ticket validatedTicket = travelDetailsViewModel.getLastValidatedTicket();
                 // ticketsAdapter.notifyItemChanged(travelsViewModel.getInValidationTicketPosition(), travelsViewModel.getLastValidatedTicket());
                 // if the ticket was validated from the bottom sheet dialog fragment
@@ -286,25 +309,29 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
                 ticketsAdapter.notifyItemChanged(travelDetailsViewModel.getInValidationTicketPosition());
 
                 Log.i("VALIDATED_TICKET", String.valueOf(validatedTicket));
-                Toast.makeText(TravelDetailsActivity.this, "validated ticket: " + String.valueOf(validatedTicket), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(TravelDetailsActivity.this, "validated ticket: " + String.valueOf(validatedTicket), Toast.LENGTH_SHORT).show();
+                ValidationUtils.handleTicketValidationSuccess(TravelDetailsActivity.this, validatedTicket);
                 travelDetailsViewModel.freeLastValidatedTicket();
                 travelDetailsViewModel.enableScanningAfterTwoSeconds();
             }
 
             public void handleTicketValidationProgress() {
-                Toast.makeText(TravelDetailsActivity.this, "ticket validation progress", Toast.LENGTH_SHORT)
-                        .show();
+                showValidationProgress();
             }
 
             public void handleTicketValidationError() {
-                Toast.makeText(TravelDetailsActivity.this, "ticket validation error", Toast.LENGTH_SHORT)
-                        .show();
+                /*Toast.makeText(TravelDetailsActivity.this, "ticket validation error", Toast.LENGTH_SHORT)
+                        .show();*/
+                ValidationUtils.handleTicketValidationError(TravelDetailsActivity.this);
+                VibrationUtils.vibrateFailed(TravelDetailsActivity.this);
                 travelDetailsViewModel.enableScanningAfterTwoSeconds();
+
             }
 
             public void handleTicketValidationConnectivityError() {
-                Toast.makeText(TravelDetailsActivity.this, "ticket validation connectivity error", Toast.LENGTH_SHORT)
-                        .show();
+                ValidationUtils.handleTicketValidationError(TravelDetailsActivity.this);
+                VibrationUtils.vibrateFailed(TravelDetailsActivity.this);
+
                 travelDetailsViewModel.enableScanningAfterTwoSeconds();
             }
 

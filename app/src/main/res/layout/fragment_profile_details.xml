@@ -27,6 +27,8 @@
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/image_view_profile"
+            android:src="@drawable/ic_validator_avatar"
+            android:scaleType="centerCrop"
             style="@style/ProfileDetailsImageFilterViewStyle"
             app:roundPercent="1" />
 
