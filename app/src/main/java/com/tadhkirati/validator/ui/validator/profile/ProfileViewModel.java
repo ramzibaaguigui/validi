@@ -84,7 +84,7 @@ public class ProfileViewModel extends AndroidViewModel {
         this.enteredLastName.setValue(lastName);
     }
 
-    public String getPhoneNumber() {
+    public String getEnteredPhoneNumber() {
         return this.enteredPhoneNumber.getValue();
     }
 
@@ -109,6 +109,7 @@ public class ProfileViewModel extends AndroidViewModel {
                     // TODO; there is still something to finish here
                     setLoggedUser(response.getData());
                     setCurrentState(STATE_USER_UPDATE_SUCCESS);
+                    return;
                 }
 
                 setCurrentState(STATE_USER_UPDATE_ERROR);
@@ -136,6 +137,11 @@ public class ProfileViewModel extends AndroidViewModel {
 
     public void observeUserUpdateState(LifecycleOwner owner, Observer<Integer> observer) {
         currentState.observe(owner, observer);
+    }
+
+    public void setUserUpdateStateInitial() {
+
+
     }
 /*
     public void updatePassword(String authToken) {

@@ -14,11 +14,12 @@
         android:src="@drawable/ic_validation_success" />
 
     <TextView
-        android:id="@+id/text_view_ticket_details"
+        android:id="@+id/text_view_toast_success"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_margin="3dp"
         android:fontFamily="@font/nunito_sans_extrabold"
+        android:textAlignment="center"
         android:textColor="@color/white_grey"
         android:textSize="17sp"
         tools:text="dddd" />

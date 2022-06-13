@@ -13,6 +13,8 @@ import retrofit2.Response;
 public class UpdateUserApiRepository {
 
     public static void updateUser(UpdateValidatorInfoPayload payload, String accessToken, ResponseHandler<User> handler) {
+        Log.i("USER_UPDATE_REQUEST", accessToken);
+        Log.i("USER_UPDATE_REQUEST", payload.toString());
         RetrofitClient.apiService.updateUserInfo(payload, accessToken)
                 .enqueue(new Callback<ApiResponse<User>>() {
                     @Override
@@ -22,7 +24,8 @@ public class UpdateUserApiRepository {
 
                     @Override
                     public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
-                        Log.i("USER_UPDATE_ERROR", t.getLocalizedMessage());
+
+                        Log.i("USER_UPDATE_ERROR", t.getCause().toString());
                         Log.i("USER_UPDATE_ERROR", t.getStackTrace().toString());
                         handler.handleError();
                     }

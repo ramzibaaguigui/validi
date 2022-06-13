@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background_validation_toast"
@@ -14,12 +13,14 @@
         android:src="@drawable/ic_validation_error" />
 
     <TextView
+        android:id="@+id/text_view_toast_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:fontFamily="@font/nunito_sans_extrabold"
+        android:text="@string/ticket_not_validated_string"
+        android:textAlignment="center"
         android:textColor="@color/white_grey"
-        android:textSize="17sp"
-        android:text="@string/ticket_not_validated_string" />
+        android:textSize="17sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

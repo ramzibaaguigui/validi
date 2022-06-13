@@ -22,6 +22,11 @@ import com.tadhkirati.validator.R;
 import com.tadhkirati.validator.models.User;
 import com.tadhkirati.validator.ui.login.LoginUtils;
 import com.tadhkirati.validator.ui.validator.ValidatorActivity;
+import com.tadhkirati.validator.ui.validator.profile.utils.PasswordValidationUtils;
+import com.tadhkirati.validator.ui.validator.profile.utils.ProfileAnimationUtils;
+import com.tadhkirati.validator.ui.validator.profile.utils.ProfileValidationUtils;
+import com.tadhkirati.validator.ui.validator.profile.utils.UserPasswordUpdateUtils;
+import com.tadhkirati.validator.ui.validator.profile.utils.UserProfileUpdateUtils;
 
 public class ProfileFragment extends Fragment {
 
@@ -75,10 +80,12 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         initViewModels();
         displayUserProfile();
-        syncViewModel();
+        syncEditProfileViewModel();
+        syncUpdatePasswordViewModel();
         // observeState();
         initListeners();
         observeUserUpdateState();
+        observeUpdatePasswordState();
     }
 
     private void initViews(View view) {
@@ -167,7 +174,7 @@ public class ProfileFragment extends Fragment {
         Toast.makeText(requireActivity(), "User update Progress", Toast.LENGTH_SHORT).show();
     }
 
-    private void syncViewModel() {
+    private void syncEditProfileViewModel() {
         firstNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -181,7 +188,9 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.i("TEXT_CHANGED", "updating first name to : " + editable.toString());
                 profileViewModel.setEnteredFirstName(editable.toString());
+                validateFirstName();
             }
         });
         lastNameEditText.addTextChangedListener(new TextWatcher() {
@@ -198,6 +207,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 profileViewModel.setEnteredLastName(editable.toString());
+                validateLastName();
             }
         });
         phoneNumberEditText.addTextChangedListener(new TextWatcher() {
@@ -214,10 +224,74 @@ public class ProfileFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 profileViewModel.setEnteredPhoneNumber(editable.toString());
+                validatePhoneNumber();
             }
         });
     }
 
+    private void syncUpdatePasswordViewModel() {
+        currentPasswordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                updatePasswordViewModel.updateEnteredCurrentPassword(editable.toString());
+                validatePasswords();
+            }
+        });
+
+        newPasswordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                updatePasswordViewModel.updateEnteredNewPassword(editable.toString());
+                validatePasswords();
+            }
+        });
+
+        confirmNewPasswordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                updatePasswordViewModel.updateEnteredNewPasswordConfirm(editable.toString());
+                validatePasswords();
+            }
+
+        });
+    }
+
+
+    private void validatePasswords() {
+        validateCurrentPassword();
+        validateNewPassword();
+        validateNewPasswordConfirm();
+    }
 
     private void handleUserUpdateError() {
         Toast.makeText(getActivity(), R.string.string_update_user_error, Toast.LENGTH_SHORT).show();
@@ -225,8 +299,9 @@ public class ProfileFragment extends Fragment {
 
     private void handleUserUpdateSuccess() {
         displayUserProfile();
-        Toast.makeText(requireActivity(), "User update success", Toast.LENGTH_SHORT).show();
-        // todo    profileViewModel.setStateInitial();
+        UserProfileUpdateUtils
+                .handleUserUpdatedSuccessfully(requireActivity());
+        profileViewModel.setUserUpdateStateInitial();
     }
 
     private void updateUserProfile() {
@@ -239,17 +314,90 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showProfileInvalid() {
-        Toast.makeText(requireActivity(), "Profile invalid", Toast.LENGTH_SHORT).show();
+        UserProfileUpdateUtils.handleUserProfileInvalid(requireActivity());
 
     }
 
     private boolean profileIsValid() {
-        return true;
-        // todo: add some verifications here
+        return validateFirstName() &&
+                validateLastName() &&
+                validatePhoneNumber();
+    }
+
+    private boolean validateFirstName() {
+        String firstNameValidationMessage = ProfileValidationUtils
+                .validateFirstName(requireActivity(), profileViewModel.getEnteredFirstName());
+        firstNameRequiredTextView.setText(firstNameValidationMessage);
+        firstNameRequiredTextView.setVisibility(firstNameValidationMessage == null ? View.GONE : View.VISIBLE);
+        ProfileAnimationUtils.flashViewIfVisible(firstNameRequiredTextView);
+        return firstNameValidationMessage == null;
+    }
+
+    private boolean validateLastName() {
+        String lastNameValidationMessage = ProfileValidationUtils
+                .validateLastName(requireActivity(), profileViewModel.getEnteredLastName());
+        lastNameRequiredTextView.setText(lastNameValidationMessage);
+        lastNameRequiredTextView.setVisibility(lastNameValidationMessage == null ? View.GONE : View.VISIBLE);
+        ProfileAnimationUtils.flashViewIfVisible(lastNameRequiredTextView);
+        return lastNameValidationMessage == null;
+    }
+
+    private boolean validatePhoneNumber() {
+        String phoneNumberValidationMessage = ProfileValidationUtils
+                .validatePhoneNumber(requireActivity(), profileViewModel.getEnteredPhoneNumber());
+        phoneNumberRequiredTextView.setText(phoneNumberValidationMessage);
+        phoneNumberRequiredTextView.setVisibility(phoneNumberValidationMessage == null ? View.GONE : View.VISIBLE);
+        ProfileAnimationUtils.flashViewIfVisible(phoneNumberRequiredTextView);
+        return phoneNumberValidationMessage == null;
+    }
+
+    private boolean validateCurrentPassword() {
+        String message = PasswordValidationUtils
+                .validatePassword(requireActivity(), updatePasswordViewModel.getEnteredCurrentPassword());
+        if (message == null) {
+            currentPasswordRequiredTextView.setVisibility(View.GONE);
+            return true;
+        }
+
+        currentPasswordRequiredTextView.setText(message);
+        currentPasswordRequiredTextView.setVisibility(View.VISIBLE);
+        ProfileAnimationUtils.flashViewIfVisible(currentPasswordRequiredTextView);
+        return false;
+    }
+
+    private boolean validateNewPassword() {
+        String message = PasswordValidationUtils
+                .validatePassword(requireActivity(), updatePasswordViewModel.getEnteredNewPassword());
+        if (message == null) {
+            newPasswordRequiredTextView.setVisibility(View.GONE);
+            return true;
+        }
+
+        newPasswordRequiredTextView.setText(message);
+        newPasswordRequiredTextView.setVisibility(View.VISIBLE);
+        ProfileAnimationUtils.flashView(newPasswordRequiredTextView);
+        return false;
+    }
+
+    private boolean validateNewPasswordConfirm() {
+        String message = PasswordValidationUtils
+                .validateNewPasswordConfirm(requireActivity(),
+                        updatePasswordViewModel.getEnteredNewPassword(),
+                        updatePasswordViewModel.getEnteredNewPasswordConfirm());
+
+        if (message == null ) {
+            confirmNewPasswordRequiredTextView.setVisibility(View.GONE);
+            return true;
+        }
+
+        confirmNewPasswordRequiredTextView.setText(message);
+        confirmNewPasswordRequiredTextView.setVisibility(View.VISIBLE);
+        ProfileAnimationUtils.flashView(confirmNewPasswordRequiredTextView);
+        return false;
     }
 
     private void updateUserPassword() {
-        Toast.makeText(requireActivity(), "password update hit", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(requireActivity(), "password update hit", Toast.LENGTH_SHORT).show();
         if (passwordIsValid()) {
 
             String authToken = LoginUtils.formTokenHeader(requireActivity());
@@ -287,7 +435,7 @@ public class ProfileFragment extends Fragment {
             }
 
             public void handlePasswordUpdateSuccess() {
-
+                UserPasswordUpdateUtils.handlePasswordUpdateSuccess(requireActivity());
             }
 
             public void handlePasswordUpdateProgress() {
@@ -295,11 +443,11 @@ public class ProfileFragment extends Fragment {
             }
 
             public void handlePasswordUpdateError() {
-
+                UserPasswordUpdateUtils.handlePasswordUpdateError(requireActivity());
             }
 
             public void handlePasswordUpdateConnectivityError() {
-
+                UserPasswordUpdateUtils.handlePasswordUpdateError(requireActivity());
             }
         });
     }
@@ -311,7 +459,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showPasswordInvalid() {
-        Toast.makeText(requireActivity(), "Password invalid", Toast.LENGTH_SHORT).show();
+
+        UserPasswordUpdateUtils.handlePasswordInvalid(requireActivity());
+//        Toast.makeText(requireActivity(), "Password invalid", Toast1.LENGTH_SHORT).show();
     }
 
     private void observeUserUpdateState() {
@@ -341,6 +491,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void handleUserUpdateConnectivityError() {
-        Toast.makeText(requireActivity(), "User Update Connectivity Error", Toast.LENGTH_SHORT).show();
+        UserProfileUpdateUtils.handleUserUpdatedError(requireActivity());
     }
 }

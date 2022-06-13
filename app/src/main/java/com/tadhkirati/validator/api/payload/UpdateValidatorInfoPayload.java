@@ -38,6 +38,10 @@ public class UpdateValidatorInfoPayload implements Serializable {
 
     @Override
     public String toString() {
-        return new Gson().toJson(this);
+        return "{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

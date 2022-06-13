@@ -77,4 +77,20 @@
     <string name="ticket_not_validated_string">Ticket could not be validated</string>
     <string name="travel_details_string">Travel Details</string>
     <string name="ticket_validated_for_string">"Ticket validated successfully for "</string>
+    <string name="password_updated_successfully_string">Password updated successfully</string>
+    <string name="password_update_failure_string">Password update failed</string>
+    <string name="user_profile_update_error">Could not update the user profile</string>
+    <string name="user_profile_updated_successfully_string">"User profile updated successfully "</string>
+    <string name="first_name_length_range_string">First name should be between 4 and 10 characters long</string>
+    <string name="last_name_length_range_string">Last name should be between 4 and 10 characters long</string>
+    <string name="first_name_required_string">First name required</string>
+    <string name="last_name_required_string">Last name is required</string>
+    <string name="first_name_alphabetic_only_string">First name should contain alphabetic characters only</string>
+    <string name="last_name_alphabetic_only_string">"Last name should contain alphabetic characters only "</string>
+    <string name="phone_number_numeric_only_string">Phone number should contain numerical characters only</string>
+    <string name="phone_number_required_string">Phone number is required</string>
+    <string name="verify_entered_profile_information_string">Make sure that the entered profile information is valid</string>
+    <string name="password_length_range_string">Password should be at least 8 characters long</string>
+    <string name="new_password_mismatch_string">The password confirmation should match the new entered password</string>
+    <string name="update_password_invalid_string">"Make sure that the entered passwords are valid "</string>
 </resources>

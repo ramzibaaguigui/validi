@@ -26,7 +26,8 @@ public interface ApiService {
     Call<ApiResponse<LoginResponse>> login(@Body LoginRequest loginRequest);
 
     @POST("/api/validator/update_infos")
-    Call<ApiResponse<User>> updateUserInfo(@Body UpdateValidatorInfoPayload payload, @Header(AUTH_HEADER) String token);
+    Call<ApiResponse<User>>
+    updateUserInfo(@Body UpdateValidatorInfoPayload payload, @Header(AUTH_HEADER) String token);
 
     @POST("/api/validator/validate_ticket")
     Call<ApiResponse<Ticket>> validateTicket(@Body TicketValidationPayload validationPayload,

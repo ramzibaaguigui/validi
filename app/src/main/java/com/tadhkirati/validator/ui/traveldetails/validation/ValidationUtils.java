@@ -15,7 +15,7 @@ public class ValidationUtils {
     public static void handleTicketValidationError(Context context) {
         Toast toast = new Toast(context);
         toast.setView(LayoutInflater.from(context)
-                .inflate(R.layout.view_validation_error_toast, (ViewGroup) toast.getView(), false));
+                .inflate(R.layout.view_toast_error, (ViewGroup) toast.getView(), false));
         toast.setDuration(Toast.LENGTH_LONG);
         toast.show();
     }
@@ -24,8 +24,8 @@ public class ValidationUtils {
         Toast toast = new Toast(context);
 
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.view_validation_success_toast, (ViewGroup) toast.getView(), false);
-        TextView detailsTextView = view.findViewById(R.id.text_view_ticket_details);
+                .inflate(R.layout.view_toast_success, (ViewGroup) toast.getView(), false);
+        TextView detailsTextView = view.findViewById(R.id.text_view_toast_success);
         detailsTextView.setText(formValidationDetailsForTicket(ticket, context));
         toast.setView(view);
         toast.setDuration(Toast.LENGTH_LONG);

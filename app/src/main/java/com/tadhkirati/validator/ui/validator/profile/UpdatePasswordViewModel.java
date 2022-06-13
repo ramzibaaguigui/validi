@@ -1,6 +1,7 @@
 package com.tadhkirati.validator.ui.validator.profile;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,6 +9,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.google.gson.Gson;
 import com.tadhkirati.validator.api.payload.ApiResponse;
 import com.tadhkirati.validator.api.payload.UpdatePasswordPayload;
 import com.tadhkirati.validator.api.retrofit.RetrofitClient;
@@ -45,6 +47,8 @@ public class UpdatePasswordViewModel extends AndroidViewModel {
                 .create().oldPassword(currentPassword.getValue())
                 .newPassword(newPassword.getValue())
                 .confirmPassword(confirmNewPassword.getValue());
+        Log.i("PASSWORD_PAYLOAD", new Gson().toJson(updatePasswordPayload));
+
         RetrofitClient.apiService.updatePassword(authToken, updatePasswordPayload)
                 .enqueue(new Callback<>() {
                     @Override
@@ -55,14 +59,16 @@ public class UpdatePasswordViewModel extends AndroidViewModel {
                         }
 
                         if (response.isSuccessful()) {
+                            Log.i("UPDATE_PASSWORD", response.body().toString());
                             passwordUpdateState.setValue(STATE_UPDATE_PASSWORD_SUCCESS);
+                            return;
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
-
+                        passwordUpdateState.setValue(STATE_UPDATE_PASSWORD_CONNECTIVITY_ERROR);
                     }
                 });
     }
@@ -77,6 +83,18 @@ public class UpdatePasswordViewModel extends AndroidViewModel {
 
     public void updateEnteredNewPasswordConfirm(String value) {
         this.confirmNewPassword.setValue(value);
+    }
+
+    public String getEnteredCurrentPassword() {
+        return this.currentPassword.getValue();
+    }
+
+    public String getEnteredNewPassword() {
+        return newPassword.getValue();
+    }
+
+    public String getEnteredNewPasswordConfirm() {
+        return confirmNewPassword.getValue();
     }
 
 
