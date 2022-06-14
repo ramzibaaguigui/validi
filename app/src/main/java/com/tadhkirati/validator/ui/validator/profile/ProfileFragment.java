@@ -1,6 +1,10 @@
 package com.tadhkirati.validator.ui.validator.profile;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.utils.widget.ImageFilterView;
@@ -31,6 +37,7 @@ import com.tadhkirati.validator.ui.validator.profile.utils.UserProfileUpdateUtil
 public class ProfileFragment extends Fragment {
 
     private static final int MIN_PASSWORD_LENGTH = 8;
+    private static final int REQUEST_CODE_CHOOSE_PROFILE_PICTURE = 132;
 
     private ImageFilterView profileImageFilterView;
     private TextView firstNameTextView;
@@ -98,6 +105,8 @@ public class ProfileFragment extends Fragment {
     private void initListeners() {
         submitEditProfileButton.setOnClickListener(view -> updateUserProfile());
         submitEditPasswordButton.setOnClickListener(view -> updateUserPassword());
+        // uploadedPictureImageFilterView.setOnClickListener(view -> chooseProfilePicture());
+        uploadProfilePictureButton.setOnClickListener(view -> uploadedChosenProfilePicture());
     }
 
     private void initViewModels() {
@@ -233,8 +242,6 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-
-
 
 
     private void syncUpdatePasswordViewModel() {
@@ -393,7 +400,7 @@ public class ProfileFragment extends Fragment {
                         updatePasswordViewModel.getEnteredNewPassword(),
                         updatePasswordViewModel.getEnteredNewPasswordConfirm());
 
-        if (message == null ) {
+        if (message == null) {
             confirmNewPasswordRequiredTextView.setVisibility(View.GONE);
             return true;
         }
@@ -473,7 +480,6 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
     private void observeUserUpdateState() {
         profileViewModel.observeUserUpdateState(this, new Observer<Integer>() {
             @Override
@@ -502,5 +508,9 @@ public class ProfileFragment extends Fragment {
 
     private void handleUserUpdateConnectivityError() {
         UserProfileUpdateUtils.handleUserUpdatedError(requireActivity());
+    }
+
+    private void uploadedChosenProfilePicture() {
+
     }
 }
