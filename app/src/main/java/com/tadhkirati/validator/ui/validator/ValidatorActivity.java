@@ -137,19 +137,19 @@ public class ValidatorActivity extends AppCompatActivity implements CodeScannerV
     }
 
     private void selectProfile() {
-        Toast.makeText(this, "selecting profile", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "selecting profile", Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_PROFILE);
         selectedFragmentTitleTextView.setText(R.string.profile_string);
     }
 
     private void selectTravels() {
-        Toast.makeText(this, "selecting travels", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "selecting travels", Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_TRAVELS);
         selectedFragmentTitleTextView.setText(R.string.my_travels_string);
     }
 
     private void selectCodeScanner() {
-        Toast.makeText(this, "selecting code scanner", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "selecting code scanner", Toast.LENGTH_SHORT).show();
         // viewPager.setCurrentItem(ValidatorViewPagerFragmentStateAdapter.FRAGMENT_CODE_SCANNER);
         selectedFragmentTitleTextView.setText(R.string.qr_code_scanner_string);
     }

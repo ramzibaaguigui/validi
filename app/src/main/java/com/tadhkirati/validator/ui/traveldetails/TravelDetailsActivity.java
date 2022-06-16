@@ -233,7 +233,7 @@ public class TravelDetailsActivity extends AppCompatActivity implements CodeScan
         loadingErrorContainer.setVisibility(View.GONE);
         ticketsRecyclerView.setVisibility(View.GONE);
 
-        Toast.makeText(this, "loading progress", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "loading progress", Toast.LENGTH_SHORT).show();
 
     }
 

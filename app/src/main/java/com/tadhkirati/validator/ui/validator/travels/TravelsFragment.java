@@ -167,7 +167,7 @@ public class TravelsFragment extends Fragment {
 
     private void handleTravelsLoadedSuccess() {
         // hide all the errors views and show the recycler view
-        showToast("loaded with success");
+//        showToast("loaded with success");
         progressBar.setVisibility(View.GONE);
         connectivityErrorView.setVisibility(View.GONE);
         loadingErrorView.setVisibility(View.GONE);
